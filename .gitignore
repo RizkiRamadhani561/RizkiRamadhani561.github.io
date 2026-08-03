@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local junk / temp artifacts
+$null
+cv_content.txt
+*.docx
+build.log
+deployment_checklist.py
+migrate.bat
+migrate.sh
+check-deployment.sh

@@ -1,168 +1,178 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import ScrambledText from '@/blocks/TextAnimations/ScrambledText/ScrambledText';
-// Removed unused import
-// import { comma } from 'postcss/lib/list';
+import React from 'react';
+import { motion } from 'framer-motion';
+import NeubrutalismCard, { type NbColor } from './NeubrutalismCard';
 
-const experiences = [
-  // ... your experiences array - Keep this array as is
+type Exp = {
+  period: string;
+  title: string;
+  company: string;
+  desc: string;
+  side: 'left' | 'right';
+  color: NbColor;
+};
+
+const experiences: Exp[] = [
   {
-    id: 1,
-    title: 'Bachelor of Information Systems',
-    company: 'Politeknik LP3I',
-    year: '2024 - Present',
-    description:
-      'Started my academic journey at Politeknik LP3I, majoring in Information Systems. This program has provided me with a strong foundation in technology, system development, and digital solutions that address real-world problems.',
-    logo: '/exp_logos/LP3I-logo.png',
+    period: 'Feb 2026 – May 2026',
+    title: 'Outlet Service Crew',
+    company: 'Geprekin Aja — South Tangerang',
+    desc: 'Delivered 150+ daily orders with speed and precision. Achieved 20% increase in average transaction value through upselling. Operated POS with 100% cash accuracy. Maintained 90%+ customer satisfaction score.',
+    side: 'left',
+    color: 'pink',
   },
   {
-    id: 2,
-    title: 'Administrative Staff',
-    company: "D'Bewok Laundry & Dry Clean",
-    year: '2024',
-    description:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    logo: '/exp_logos/bewok-logo.png',
+    period: 'Jan 2025 – Present',
+    title: 'Data Entry Specialist',
+    company: 'Freelance — Remote',
+    desc: 'Built multi-layer verification workflows achieving near-zero error rates. Produced daily/weekly analytical reports using Advanced Excel, Google Sheets, and SQL. Restructured disorganized spreadsheets, cutting analysis time from hours to minutes.',
+    side: 'right',
+    color: 'cyan',
   },
   {
-    id: 3,
-    title: 'IT Support Intern',
-    company: 'Kejaksaan Negeri Jakarta Barat',
-    year: '2024 - Present',
-    description: `lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-    logo: '/exp_logos/kejaksaan-logo.png',
+    period: 'Jul 2024 – Dec 2024',
+    title: 'Human Resources Intern',
+    company: 'Solid Gold — Jakarta',
+    desc: 'Achieved 100% regulatory compliance in personnel data protection. Facilitated 20+ internship placements. Boosted D&I participation by 35%. Mediated 15+ employee disputes. Digitized HR administrative processes.',
+    side: 'left',
+    color: 'yellow',
+  },
+  {
+    period: 'Jan 2024 – Jun 2024',
+    title: 'Admin & Operations Support Officer',
+    company: 'J&T Express — Indonesia',
+    desc: 'Managed 500+ daily data entries with 99.5% inventory accuracy. Accelerated data entry speed by 30%. Resolved 50+ daily communication challenges as primary operational liaison. Recognized for highest task completion rate.',
+    side: 'right',
+    color: 'purple',
+  },
+  {
+    period: 'Jan 2024 – Jun 2024',
+    title: 'Service & Sales Consultant',
+    company: 'WAKI Indonesia — Tangerang',
+    desc: 'Drove 25% increase in team sales conversion through consultative selling. Transformed 30+ complaints into loyal repeat buyers. Mentored 5+ new hires. Earned highest service rating in branch.',
+    side: 'left',
+    color: 'lime',
+  },
+  {
+    period: 'Jul 2023 – Dec 2023',
+    title: 'F&B Service Associate',
+    company: 'Summarecon Serpong Mall — Tangerang',
+    desc: 'Delivered memorable dining experiences to 100+ guests daily. Achieved 15% increase in average check value through upselling. Operated POS with 100% accuracy. Collaborated seamlessly with kitchen and bar teams.',
+    side: 'right',
+    color: 'orange',
   },
 ];
 
+const timelineColors: NbColor[] = ['pink', 'cyan', 'yellow', 'purple', 'lime', 'orange'];
+const connectorColors = [
+  'bg-nb-pink',
+  'bg-nb-cyan',
+  'bg-nb-yellow',
+  'bg-nb-purple',
+  'bg-nb-lime',
+  'bg-nb-orange',
+];
+
 const ExperienceTimeline: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'], // Adjust offset as needed
-  });
-
-  // Smooth the scroll progress value for the line and dot
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    // Increased restDelta slightly. This means the spring animation
-    // will consider itself 'at rest' sooner, potentially reducing
-    // updates when the dot reaches the end of the scroll.
-    restDelta: 0.01,
-  });
-
-  // Create a motion value for the dot's top position, based on the *sprung* scaleY value
-  // We map the scaleY value (which goes from 0 to 1) to the full height of the container (0% to 100%)
-  const dotTop = useTransform(scaleY, [0, 1], ['0%', '100%']);
-
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full max-w-5xl mx-auto py-16 px-4 sm:px-6 lg:px-8 mt-10"
-    >
-      {/* Central Timeline Line */}
-      {/* Framer Motion automatically promotes transform properties for hardware acceleration */}
-      <motion.div
-        className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 via-cyan-600 to-cyan-800 transform -translate-x-1/2"
-        style={{ scaleY: scaleY, transformOrigin: 'top' }}
-      />
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative">
+        {/* center line */}
+        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[3px] bg-nb-black" />
 
-      {/* Glowing Dot */}
-      {/* Framer Motion handles the 'top' style updates efficiently */}
-      <motion.div
-        className="absolute left-1/2 w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_15px_5px_rgba(0,255,255,0.5)] transform -translate-x-1/2"
-        // Use the dotTop motion value (derived from the sprung scaleY) for the top style
-        style={{ top: dotTop }}
-        // Optional: Add will-change property as a hint to the browser (use with caution)
-        // className="absolute left-1/2 w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_15px_5px_rgba(0,255,255,0.5)] transform -translate-x-1/2 will-change-top"
-      />
+        {experiences.map((exp, i) => {
+          const colorKey = timelineColors[i % timelineColors.length];
+          const isLeft = exp.side === 'left';
 
-      <div className="relative space-y-24">
-        {experiences.map((exp, index) => (
-          // Changed grid to 2 columns, removed the 'auto' middle column
-          <div
-            key={exp.id}
-            className="relative grid grid-cols-1 md:grid-cols-2 items-start gap-x-20 bg-black rounded-2xl p-6 shadow-lg md:bg-transparent"
-          >
-            {/* Side 1: Title, Company, Year, Logo - Conditional Alignment */}
-            {/* Side 1: Title, Company, Year, Logo */}
-            <div
-              className={`flex flex-col ${
-                index % 2 === 0
-                  ? 'md:items-end md:text-right'
-                  : 'md:items-start md:text-left'
-              } ${index % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+              className="relative flex items-start mb-12 last:mb-0"
             >
-              <h3 className="font-bold text-gray-100">
-                <ScrambledText
-                  className="text-[clamp(18px,2vw,24px)] leading-tight"
-                  radius={70}
-                  duration={1.2}
-                  speed={0.5}
-                  scrambleChars=".:"
-                >
-                  {exp.title}
-                </ScrambledText>
-              </h3>
-
-              <div className="mb-1">
-                <ScrambledText
-                  className="text-[clamp(14px,1.6vw,18px)] text-cyan-400"
-                  radius={50}
-                  duration={1}
-                  speed={0.4}
-                  scrambleChars=".:"
-                >
-                  {exp.company}
-                </ScrambledText>
-              </div>
-
-              <span className="mb-2" style={{ letterSpacing: '0.4em' }}>
-                <ScrambledText
-                  className="text-[clamp(12px,1.5vw,18px)] text-gray-400"
-                  radius={40}
-                  duration={1}
-                  speed={0.4}
-                  scrambleChars=".:"
-                >
-                  {exp.year}
-                </ScrambledText>
-              </span>
-
-              <div className="w-10 h-10 relative flex items-center justify-center md:my-0 my-5">
-                <Image
-                  src={exp.logo}
-                  alt={`${exp.company} logo`}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  unoptimized
+              {/* timeline dot — visible on md+ */}
+              <div className="hidden md:flex absolute left-1/2 top-6 -translate-x-1/2 z-10 w-5 h-5 rounded-full border-[3px] border-nb-black bg-nb-cream items-center justify-center">
+                <div
+                  className={`w-2 h-2 rounded-full ${connectorColors[i % connectorColors.length]}`}
                 />
               </div>
-            </div>
 
-            {/* Side 2: Description */}
-            <div
-              className={`text-gray-300 ${
-                index % 2 !== 0 ? 'md:text-right' : 'text-left'
-              } ${index % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}
-            >
-              <ScrambledText
-                className="text-[clamp(12px,1.8vw,18px)] leading-relaxed"
-                radius={70}
-                duration={1.2}
-                speed={0.5}
-                scrambleChars=".:"
-              >
-                {exp.description}
-              </ScrambledText>
-            </div>
-          </div>
-        ))}
+              {/* content row */}
+              <div className="w-full md:w-1/2 flex">
+                {/* left side content */}
+                {isLeft && (
+                  <div className="w-full md:pr-12">
+                    <NeubrutalismCard color={colorKey} className="w-full">
+                      <PeriodBadge period={exp.period} color={colorKey} />
+                      <h3 className="text-xl font-black uppercase leading-tight">{exp.title}</h3>
+                      <p className="text-sm font-bold mt-1 opacity-70">{exp.company}</p>
+                      <p className="text-sm font-medium mt-3 leading-relaxed opacity-80">
+                        {exp.desc}
+                      </p>
+                    </NeubrutalismCard>
+                  </div>
+                )}
+
+                {/* right side content */}
+                {!isLeft && <div className="hidden md:block w-full" />}
+              </div>
+
+              <div className="hidden md:block w-1/2" />
+
+              {/* right side */}
+              {!isLeft && (
+                <div className="w-full md:w-1/2 md:pl-12 -ml-0 md:ml-0">
+                  <NeubrutalismCard color={colorKey} className="w-full">
+                    <PeriodBadge period={exp.period} color={colorKey} />
+                    <h3 className="text-xl font-black uppercase leading-tight">{exp.title}</h3>
+                    <p className="text-sm font-bold mt-1 opacity-70">{exp.company}</p>
+                    <p className="text-sm font-medium mt-3 leading-relaxed opacity-80">
+                      {exp.desc}
+                    </p>
+                  </NeubrutalismCard>
+                </div>
+              )}
+
+              {/* mobile fallback */}
+              {isLeft && (
+                <div className="block md:hidden w-full -ml-0 mt-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div
+                      className={`w-3 h-3 rounded-full ${connectorColors[i % connectorColors.length]}`}
+                    />
+                    <span className="text-xs font-bold font-mono">{exp.period}</span>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
       </div>
     </div>
+  );
+};
+
+const PeriodBadge: React.FC<{ period: string; color: NbColor }> = ({ period, color }) => {
+  const badgeBorderMap: Record<NbColor, string> = {
+    pink: 'border-nb-pink',
+    cyan: 'border-nb-cyan',
+    yellow: 'border-nb-yellow',
+    lime: 'border-nb-lime',
+    purple: 'border-nb-purple',
+    orange: 'border-nb-orange',
+    black: 'border-nb-black',
+  };
+
+  return (
+    <span
+      className={`inline-block text-xs font-black font-mono uppercase tracking-wider mb-3 border-b-[3px] pb-1 ${badgeBorderMap[color] || 'border-nb-black'}`}
+    >
+      {period}
+    </span>
   );
 };
 

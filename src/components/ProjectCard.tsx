@@ -1,6 +1,11 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import NeubrutalismCard, { type NbColor } from './NeubrutalismCard';
+
+const cardColors: NbColor[] = ['pink', 'cyan', 'yellow', 'lime', 'purple'];
 
 interface ProjectCardProps {
   project: {
@@ -9,125 +14,81 @@ interface ProjectCardProps {
     title: string;
     description: string;
     techstack: string[];
-    imageSrc: string; 
-    link: string; 
+    imageSrc: string;
+    link: string;
   };
-  index: number; 
+  index: number;
 }
 
-// --- Optimization 1: Use React.memo ---
-// Wrap the component with React.memo. This prevents the component from re-rendering
-// if its props (project and index) have not shallowly changed.
-const ProjectCard: React.FC<ProjectCardProps> = React.memo(({ project, index }) => {
-  // Determine the layout pattern based on the index (0, 1, 2, 3 repeats)
-  const pattern = index % 4;
+const ProjectCard: React.FC<ProjectCardProps> = React.memo(
+  ({ project, index }) => {
+    const colorKey = cardColors[index % cardColors.length];
 
-  // Define classes for positioning the large project number absolutely
-  let numberPositionClasses = '';
-  // Define classes for text alignment of the content block
-  let contentAlignmentClasses = '';
-  // Define order classes for the image and text blocks
-  let imageOrderClass = '';
-  let textOrderClass = '';
+    const handleClick = () => {
+      if (project.link) window.open(project.link, '_blank');
+    };
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleClick();
+      }
+    };
 
-  switch (pattern) {
-    case 0: // Pattern 1: Number Top-Left, Text Top-Right, Image Below Text
-      numberPositionClasses = 'top-4 left-4'; // Added padding from edge
-      contentAlignmentClasses = 'text-right items-end'; // Align text to the right
-      textOrderClass = 'order-1'; // Text comes first
-      imageOrderClass = 'order-2'; // Image comes second
-      break;
-    case 1: // Pattern 2: Number Bottom-Left, Text Top-Right, Image Above Text
-      numberPositionClasses = 'bottom-4 left-4'; // Added padding from edge
-      contentAlignmentClasses = 'text-right items-end'; // Align text to the right
-      textOrderClass = 'order-2'; // Text comes second
-      imageOrderClass = 'order-1'; // Image comes first
-      break;
-    case 2: // Pattern 3: Number Top-Right, Text Top-Left, Image Below Text
-      numberPositionClasses = 'top-4 right-4'; // Added padding from edge
-      contentAlignmentClasses = 'text-left items-start'; // Align text to the left
-      textOrderClass = 'order-1'; // Text comes first
-      imageOrderClass = 'order-2'; // Image comes second
-      break;
-    case 3: // Pattern 4: Number Bottom-Right, Text Top-Left, Image Above Text
-      numberPositionClasses = 'bottom-4 right-4'; // Added padding from edge
-      contentAlignmentClasses = 'text-left items-start'; // Align text to the left
-      textOrderClass = 'order-2'; // Text comes second
-      imageOrderClass = 'order-1'; // Image comes first
-      break;
-  }
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: index * 0.1 }}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        role="link"
+        tabIndex={0}
+        aria-label={`${project.title} — open project in new tab`}
+        className="cursor-pointer"
+      >
+        <NeubrutalismCard color={colorKey} className="flex flex-col h-full">
+          {/* Project number badge */}
+          <div className="inline-block self-start bg-nb-black text-nb-white font-black text-sm px-3 py-1 -mt-2 -ml-2 mb-3">
+            {project.number}
+          </div>
 
-  // Handle click to redirect
-  const handleImageClick = () => {
-    if (project.link) {
-      window.open(project.link, '_blank'); // Open link in a new tab
-    }
-  };
+          <h3 className="text-lg font-black uppercase leading-tight">
+            {project.title}
+          </h3>
+          <p className="text-sm font-medium mt-1 opacity-70">
+            {project.description}
+          </p>
 
-  return (
-    // Use motion.div for potential future animations (like fade-in on scroll)
-    // Add a thin white border and transparent background
-    // Use 'relative' for positioning context for the absolute number
-    // Use flex-col to stack content vertically, justify-between to space text and image
-    // Removed aspect-square to allow height to be determined by content
-    <motion.div
-      className="relative flex flex-col justify-between py-6 px-15 md:m-0 m-5 border border-white border-opacity-20 bg-transparent overflow-hidden h-full"
-      // Optional: Add Framer Motion initial/animate/whileHover props here (for the whole card)
-      // For example: initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-    >
-      {/* Large Project Number - Absolutely Positioned */}
-      <div className={`absolute md:text-6xl text-3xl p-6 font-bold text-white text-opacity-10 ${numberPositionClasses}`}>
-        {project.number}
-      </div>
-
-      {/* Content Area (Text Block and Image Block) */}
-      <div className="flex flex-col justify-between h-full">
-
-        {/* Text Content Block (Title, Category, Description) */}
-        <div className={`flex flex-col ${contentAlignmentClasses} ${textOrderClass} z-10 p-6`}>
-            {/* Title and Category */}
-            <div>
-              <h3 className="md:text-xl text-md font-semibold text-white">{project.title}</h3>
-              <p className="md:text-sm text-xs text-gray-400">{project.description}</p>
-            </div>
-            {/* Description */}
-            <div className="mt-2">
-              {/* make the techstack mapped as images */}
-              <div className="flex space-x-2">
-                {project.techstack.map((icon, index) => (
-                  <Image key={index} src={icon} alt={`Tech stack icon ${index}`} width={24} height={24} />
-                ))}
-              </div>
-            </div>
-        </div>
-
-        {/* Project Image Block - Now a motion.div to handle animations and clicks */}
-        {/* Added flex-grow to help manage space within the flex container */}
-        {/* Added initial opacity, hover effects, transition, and onClick handler */}
-        <motion.div
-            className={`relative w-full flex-grow rounded-xl overflow-hidden z-10 ${imageOrderClass}`} // Added cursor-pointer
-            initial={{ opacity: 0.7 }} // Changed initial opacity to 70%
-            whileHover={{ opacity: 1, scale: 1.05 }} // Hover effects: opacity 100%, scale 10% (1.05 is 5%)
-            transition={{ duration: 0.3 }} // Smooth transition for hover effects
-            onClick={handleImageClick} // Handle click to redirect
-        >
-            {/* Use the Image component here - Using explicit width/height */}
-            {/* Make sure these width/height are representative of the display size */}
-            {/* Also, ensure your source images are reasonably sized, not huge files */}
+          {/* Image */}
+          <div className="relative w-full aspect-video mt-4 border-[3px] border-nb-black overflow-hidden">
             <Image
               src={project.imageSrc}
-              alt={`${project.title} image`}
-              width={500} // Using the explicit width
-              height={500} // Using the explicit height
+              alt={project.title}
+              fill
+              style={{ objectFit: 'cover' }}
             />
-        </motion.div>
+          </div>
 
-      </div> {/* End Content Area */}
-    </motion.div>
-  );
-}); // End of React.memo wrap
+          {/* Tech stack */}
+          <div className="flex flex-wrap gap-2 mt-4">
+            {project.techstack.map((icon, i) => (
+              <Image
+                key={i}
+                src={icon}
+                alt=""
+                width={24}
+                height={24}
+                className="border-2 border-[#1a1a1a] p-1"
+              />
+            ))}
+          </div>
+        </NeubrutalismCard>
+      </motion.div>
+    );
+  }
+);
 
-ProjectCard.displayName = 'ProjectCard'; // Add a display name for better debugging
-
+ProjectCard.displayName = 'ProjectCard';
 export default ProjectCard;

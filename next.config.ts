@@ -1,5 +1,22 @@
 import type { NextConfig } from "next";
 
+// Node 22+ exposes a broken global localStorage when --localstorage-file is missing.
+// Patch it before any dependency tries to use it during SSR.
+if (typeof globalThis !== "undefined" && typeof window === "undefined") {
+  const ls = (globalThis as Record<string, unknown>).localStorage;
+  if (ls && typeof (ls as Record<string, unknown>).getItem !== "function") {
+    const noop = () => null;
+    (globalThis as Record<string, unknown>).localStorage = {
+      getItem: noop,
+      setItem: noop,
+      removeItem: noop,
+      clear: noop,
+      key: noop,
+      length: 0,
+    };
+  }
+}
+
 const nextConfig: NextConfig = {
   // Performance & Build Optimization
   poweredByHeader: false,
