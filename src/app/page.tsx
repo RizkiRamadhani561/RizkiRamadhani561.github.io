@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import ExperienceTimeline from '@/components/ExperienceTimeline';
 import SkillTag from '@/components/SkillTag';
 import ProjectCard from '@/components/ProjectCard';
-import NeubrutalismCard, { type NbColor } from '@/components/NeubrutalismCard';
+import NeubrutalismCard from '@/components/NeubrutalismCard';
 import SkillsMarquee from '@/components/SkillsMarquee';
 import Achievements from '@/components/Achievements';
 import {
@@ -58,38 +58,26 @@ const dataSkills = [
   'Inventory & Stock Control',
 ];
 
+const devSkills = [
+  'TypeScript & JavaScript',
+  'React & Next.js',
+  'PHP & CodeIgniter',
+  'Python & FastAPI',
+  'Tailwind CSS & Bootstrap',
+  'MySQL & Database Design',
+  'Git & GitHub',
+  'HTML5 & CSS3',
+  'REST API Integration',
+  'Responsive Web Design',
+];
+
 const languages = [
   { name: 'Indonesian', level: 'Native (C2)', flag: '\u{1F1EE}\u{1F1E9}' },
   { name: 'English', level: 'Professional Working', flag: '\u{1F1EC}\u{1F1E7}' },
   { name: 'Arabic', level: 'Conversational', flag: '\u{1F1F8}\u{1F1E6}' },
 ];
 
-const cardColors: NbColor[] = ['pink', 'cyan', 'yellow', 'lime', 'purple'];
-
 const interests = ['Traveling', 'Reading', 'Community Engagement', 'Hospitality Trends'];
-
-const marriottValues = [
-  {
-    value: 'Put People First',
-    text: '150+ daily guests served with genuine warmth at Geprekin Aja and Summarecon Serpong Mall, maintaining 90%+ customer satisfaction.',
-  },
-  {
-    value: 'Pursue Excellence',
-    text: '99%+ data accuracy across 5,000+ daily records and zero-stock discrepancy for 6 consecutive months through disciplined verification.',
-  },
-  {
-    value: 'Embrace Change',
-    text: 'Adapted across restaurant, retail, logistics, HR, and corporate environments — thriving in rotating shifts and fast-paced operations.',
-  },
-  {
-    value: 'Act with Integrity',
-    text: 'Safeguarded sensitive datasets and personnel records with disciplined backup protocols — zero data breach incidents.',
-  },
-  {
-    value: 'Serve Our World',
-    text: 'Resolved 50+ daily guest and operational inquiries with sub-15-minute response time, turning complaints into loyal repeat visitors.',
-  },
-];
 
 const handleAnimationComplete = () => {};
 
@@ -116,7 +104,7 @@ export default function Home() {
           />
           <div className="mt-4 font-bold">
             <TrueFocus
-              sentence="Front Office Enthusiast | Guest Experience Advocate | Data-Driven Operations"
+              sentence="Front Office Enthusiast | Full-Stack Developer | Data-Driven Operations"
               manualMode={true}
               blurAmount={5}
               borderColor="cyan"
@@ -349,31 +337,36 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* WHY SHERATON */}
+        {/* DEVELOPMENT SKILLS */}
         <section className="w-full max-w-5xl mx-auto px-4 mt-20">
           <div className="flex items-center gap-4 mb-8">
             <span className="inline-flex items-center gap-2 nb-section-label bg-nb-white">
               <IconStar size={16} />
-              WHY SHERATON?
+              DEVELOPMENT SKILLS
             </span>
             <div className="nb-divider" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {marriottValues.map((item, index) => (
-              <motion.div
-                key={item.value}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-              >
-                <NeubrutalismCard color={cardColors[index % cardColors.length]}>
-                  <h3 className="font-black text-lg uppercase mb-2">{item.value}</h3>
-                  <p className="text-sm font-medium opacity-70">{item.text}</p>
-                </NeubrutalismCard>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+          >
+            <NeubrutalismCard color="purple">
+              <h3 className="font-black text-lg uppercase mb-1 inline-flex items-center gap-2">
+                <IconCode size={20} />
+                Programming & Web Development
+              </h3>
+              <p className="text-sm font-medium opacity-70 mb-4">
+                Full-stack developer building scalable web applications with modern frameworks, clean code practices, and responsive design.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {devSkills.map((skill) => (
+                  <SkillTag key={skill} skillName={skill} />
+                ))}
+              </div>
+            </NeubrutalismCard>
+          </motion.div>
         </section>
 
         {/* ACHIEVEMENTS */}

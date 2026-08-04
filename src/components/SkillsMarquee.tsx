@@ -15,6 +15,11 @@ import {
   IconShield,
   IconUsers,
   IconPackage,
+  IconCode,
+  IconGlobe,
+  IconLayers,
+  IconZap,
+  IconRocket,
 } from '@/components/Icons';
 
 const skills = [
@@ -30,6 +35,12 @@ const skills = [
   { name: 'Conflict Resolution', icon: <IconShield size={18} /> },
   { name: 'Team Training', icon: <IconUsers size={18} /> },
   { name: 'Inventory Control', icon: <IconPackage size={18} /> },
+  { name: 'TypeScript', icon: <IconCode size={18} /> },
+  { name: 'React & Next.js', icon: <IconGlobe size={18} /> },
+  { name: 'PHP & CodeIgniter', icon: <IconDatabase size={18} /> },
+  { name: 'Python', icon: <IconZap size={18} /> },
+  { name: 'Git & GitHub', icon: <IconLayers size={18} /> },
+  { name: 'Tailwind CSS', icon: <IconRocket size={18} /> },
 ];
 
 const SkillsMarquee: React.FC = () => {

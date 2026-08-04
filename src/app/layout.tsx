@@ -94,6 +94,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <title>M Rizki Ramadhani — Front Office & Full-Stack Developer Portfolio</title>
+        <meta name="description" content="Portfolio of M Rizki Ramadhani — Front Office Enthusiast, Full-Stack Developer, and Data-Driven Operations Professional." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/logo/favicon-32x32.png" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${gilroy.variable} antialiased font-gilroy bg-nb-cream text-nb-black`}
         style={{ cursor: 'none' }}
