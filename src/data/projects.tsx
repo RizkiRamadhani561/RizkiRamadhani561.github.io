@@ -18,7 +18,7 @@ const projects = [
     category: 'Web Application',
     description: 'Enterprise Government Service Platform built with CodeIgniter 4 for public administration.',
     techstack: ['/techstack/php.svg', '/techstack/mysql.svg', '/techstack/bootstrap.svg'],
-    imageSrc: '/proj/projectTwo.svg',
+    imageSrc: '/proj/projectFour.svg',
     link: 'https://github.com/RizkiRamadhani561/sistem-pelayanan-masyarakat',
   },
   {
@@ -28,7 +28,7 @@ const projects = [
     category: 'Automation & AI',
     description: 'Bot Melankolis — Python-based automation bot for creative text generation and interaction.',
     techstack: ['/techstack/python.svg', '/techstack/fastapi.svg', '/techstack/telegram.svg'],
-    imageSrc: '/proj/projectThree.svg',
+    imageSrc: '/proj/projectFive.svg',
     link: 'https://github.com/RizkiRamadhani561/GalaksiAksaraBot',
   },
   {
@@ -38,7 +38,7 @@ const projects = [
     category: 'Web Development',
     description: 'Car rental management system — PHP web application for booking and fleet management.',
     techstack: ['/techstack/php.svg', '/techstack/mysql.svg', '/techstack/html.svg'],
-    imageSrc: '/proj/projectFour.svg',
+    imageSrc: '/proj/projectSix.svg',
     link: 'https://github.com/RizkiRamadhani561/RentalMobil',
   },
   {
@@ -48,7 +48,7 @@ const projects = [
     category: 'Web Development',
     description: 'Library management system — PHP-based application for book cataloging and lending.',
     techstack: ['/techstack/php.svg', '/techstack/mysql.svg', '/techstack/css.svg'],
-    imageSrc: '/proj/projectFive.svg',
+    imageSrc: '/proj/projectSeven.svg',
     link: 'https://github.com/RizkiRamadhani561/perpustakaan',
   },
   {
@@ -58,7 +58,7 @@ const projects = [
     category: 'Web Development',
     description: 'Laundry service web application — JavaScript-based order and delivery tracking system.',
     techstack: ['/techstack/javascript.svg', '/techstack/html.svg', '/techstack/css.svg'],
-    imageSrc: '/proj/projectSix.svg',
+    imageSrc: '/proj/projectEight.svg',
     link: 'https://github.com/RizkiRamadhani561/laundry-web',
   },
   {
@@ -68,7 +68,7 @@ const projects = [
     category: 'E-Commerce',
     description: 'Simple e-commerce storefront built with HTML for learning web fundamentals.',
     techstack: ['/techstack/html.svg', '/techstack/css.svg', '/techstack/javascript.svg'],
-    imageSrc: '/proj/projectOne.svg',
+    imageSrc: '/proj/projectNine.svg',
     link: 'https://github.com/RizkiRamadhani561/OnlineShop',
   },
   {
