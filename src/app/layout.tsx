@@ -1,231 +1,114 @@
-'use client';
+import { Analytics } from "@vercel/analytics/next";
+import type { Metadata, Viewport } from "next";
+import { Bungee, Press_Start_2P, Space_Grotesk } from "next/font/google";
+import { Suspense } from "react";
+import "./globals.css";
 
-import React, { useEffect, useRef, useState } from 'react';
-import Lenis from 'lenis';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import { gilroy } from '@/fonts/fonts';
-import { VscHome, VscArchive, VscAccount } from 'react-icons/vsc';
-import { IconMenu, IconX, IconGitHub, IconLinkedIn, IconMail } from '@/components/Icons';
-
-const items = [
-  { icon: <VscHome size={18} />, label: 'Home', href: '/', onClick: () => {} },
-  {
-    icon: <VscArchive size={18} />,
-    label: 'Archive',
-    href: '/Archive',
-    onClick: () => {},
-  },
-  {
-    icon: <VscAccount size={18} />,
-    label: 'Profile',
-    href: '/Contact',
-    onClick: () => {},
-  },
-];
-
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const pressStart = Press_Start_2P({
+  variable: "--font-press-start",
+  weight: "400",
+  subsets: ["latin"],
 });
+
+const bungee = Bungee({
+  variable: "--font-bungee",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://rizkiramadhani561.github.io"),
+  title: {
+    default:
+      "M Rizki Ramadhani | Front Office, Full-Stack Developer & Operations Specialist",
+    template: "%s | Rizki Ramadhani",
+  },
+  description:
+    "Portfolio of M Rizki Ramadhani — Full-Stack Developer, Front Office Enthusiast, and Data-Driven Operations Professional. Specialized in service excellence, operational efficiency, and modern web development.",
+  keywords: [
+    "M Rizki Ramadhani",
+    "Full Stack Developer",
+    "Front Office",
+    "Operations Specialist",
+    "TypeScript",
+    "Next.js",
+    "React",
+    "PHP",
+    "Portfolio",
+    "Jakarta",
+  ],
+  creator: "M Rizki Ramadhani",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "M Rizki Ramadhani | Full-Stack Developer & Operations Specialist",
+    description:
+      "Modern portfolio showcasing expertise in web development, operations management, and customer service excellence.",
+    url: "https://rizkiramadhani561.github.io",
+    siteName: "Rizki Ramadhani",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "M Rizki Ramadhani",
+    description: "Full-Stack Developer & Operations Specialist",
+  },
+};
+
+export function generateViewport(): Viewport {
+  return {
+    themeColor: [
+      { media: "(prefers-color-scheme: light)", color: "#e63946" },
+      { media: "(prefers-color-scheme: dark)", color: "#ff5a64" },
+    ],
+    colorScheme: "light dark",
+  };
+}
+
+const shellFallback = (
+  <div className="fixed inset-0 z-80 flex items-center justify-center bg-background px-4">
+    <div className="w-full max-w-lg border-4 border-black bg-card p-6 shadow-retro-lg">
+      <p className="font-pixel text-2xl uppercase text-foreground sm:text-3xl">
+        Rizki R.
+      </p>
+      <p className="mt-2 text-sm font-black uppercase text-muted-foreground sm:text-base">
+        Loading workspace<span className="animate-pulse">...</span>
+      </p>
+      <div className="mt-5 h-7 border-4 border-black bg-muted p-1">
+        <div className="h-full w-full animate-pulse border-2 border-black bg-primary" />
+      </div>
+    </div>
+  </div>
+);
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const lenis = useRef<Lenis | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      lenis.current = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-      });
-
-      function raf(time: number) {
-        lenis.current?.raf(time);
-        requestAnimationFrame(raf);
-      }
-
-      requestAnimationFrame(raf);
-
-      return () => {
-        lenis.current?.destroy();
-      };
-    }
-  }, []);
-
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
-
-  const dotSpring = { damping: 25, stiffness: 200 };
-  const outlineSpring = { damping: 35, stiffness: 400 };
-
-  const dotX = useSpring(cursorX, dotSpring);
-  const dotY = useSpring(cursorY, dotSpring);
-  const outlineX = useSpring(dotX, outlineSpring);
-  const outlineY = useSpring(dotY, outlineSpring);
-
-  useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-    };
-
-    cursorX.set(window.innerWidth / 2);
-    cursorY.set(window.innerHeight / 2);
-
-    window.addEventListener('mousemove', moveCursor);
-    return () => window.removeEventListener('mousemove', moveCursor);
-  }, [cursorX, cursorY]);
-
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <title>M Rizki Ramadhani — Front Office & Full-Stack Developer Portfolio</title>
-        <meta name="description" content="Portfolio of M Rizki Ramadhani — Front Office Enthusiast, Full-Stack Developer, and Data-Driven Operations Professional." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/logo/favicon-32x32.png" />
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gilroy.variable} antialiased font-gilroy bg-nb-cream text-nb-black`}
-        style={{ cursor: 'none' }}
+        className={`${spaceGrotesk.variable} ${bungee.variable} ${pressStart.variable} antialiased`}
       >
-        {/* Custom cursor — nb-black */}
-        <motion.div
-          style={{
-            x: dotX,
-            y: dotY,
-            pointerEvents: 'none',
-            left: 0,
-            top: 0,
-            position: 'fixed',
-            zIndex: 9999,
-            transform: 'translate(-50%, -50%)',
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: '#1a1a1a',
-          }}
-          className="hidden md:block"
-        />
-        <motion.div
-          style={{
-            x: outlineX,
-            y: outlineY,
-            pointerEvents: 'none',
-            left: 0,
-            top: 0,
-            position: 'fixed',
-            zIndex: 9998,
-            transform: 'translate(-50%, -50%)',
-            width: '30px',
-            height: '30px',
-            borderRadius: '50%',
-            border: '2px solid #1a1a1a',
-            opacity: 0.5,
-          }}
-          className="hidden md:block"
-        />
-
-        {/* Header */}
-        <header className="sticky top-0 z-50 flex w-full items-center justify-between px-6 py-3 md:px-10 md:py-4 bg-nb-cream/95 backdrop-blur-sm border-b-[3px] border-nb-black">
-          <Link href="/" passHref className="flex items-center gap-3 group">
-            <Image
-              src="/logo/favicon-32x32.png"
-              alt="R Logo"
-              width={36}
-              height={36}
-              className="transition-all duration-300 group-hover:scale-110 group-hover:-rotate-12"
-            />
-            <span className="hidden sm:inline font-black text-lg uppercase tracking-tight">Rizki R.</span>
-          </Link>
-
-          {/* Desktop nav links */}
-          <nav className="hidden md:flex items-center gap-2">
-            {items.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className="flex items-center gap-2 px-4 py-2 font-bold text-sm uppercase border-2 border-nb-black bg-nb-cream hover:bg-nb-black hover:text-nb-cream transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none shadow-[3px_3px_0px_#1a1a1a]"
-              >
-                {item.icon}
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Hamburger */}
-          <button
-            className="md:hidden border-2 border-nb-black p-2 bg-nb-cream hover:bg-nb-black hover:text-nb-cream transition-all duration-200 shadow-[3px_3px_0px_#1a1a1a] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle mobile menu"
-          >
-            {mobileMenuOpen ? <IconX size={22} /> : <IconMenu size={22} />}
-          </button>
-        </header>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-nb-cream/98 backdrop-blur-sm fixed top-[60px] right-0 left-0 z-40 p-6 overflow-y-auto h-[calc(100vh-60px)] border-b-[3px] border-nb-black">
-            <nav className="flex flex-col space-y-3 pt-4">
-              {items.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className="flex items-center gap-3 text-nb-black hover:bg-nb-black hover:text-nb-cream py-3 px-5 font-black text-lg uppercase border-2 border-nb-black transition-all shadow-[4px_4px_0px_#1a1a1a] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.icon}
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+        <Suspense fallback={shellFallback}>
+          <div className="relative flex min-h-screen flex-col overflow-x-hidden">
+            <main className="flex-1">{children}</main>
           </div>
-        )}
-
-        {children}
-
-        {/* Sticky Socials — neubrutalism style */}
-        <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 bg-nb-cream border-2 border-nb-black rounded-full p-2 md:p-3 flex flex-col items-center space-y-4 shadow-[3px_3px_0px_#1a1a1a]">
-          <Link
-            href="https://github.com/RizkiRamadhani561"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-transform duration-200 hover:scale-125 p-1"
-          >
-            <IconGitHub size={22} />
-          </Link>
-          <Link
-            href="https://www.linkedin.com/in/m-rizki-ramadhani"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-transform duration-200 hover:scale-125 p-1"
-          >
-            <IconLinkedIn size={22} />
-          </Link>
-          <Link
-            href="mailto:ramscool98@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-transform duration-200 hover:scale-125 p-1"
-          >
-            <IconMail size={22} />
-          </Link>
-        </div>
+        </Suspense>
+        <Analytics />
       </body>
     </html>
   );
