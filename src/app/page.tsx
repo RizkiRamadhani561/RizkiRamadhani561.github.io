@@ -15,6 +15,7 @@ import {
 } from 'react-icons/fa6';
 import projects from '@/data/projects';
 import { PortfolioMotionLayer, ThemeToggleButton } from '@/components/PortfolioMotionLayer';
+import { SnakeGame } from '@/components/SnakeGame';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -670,6 +671,10 @@ export default function Home() {
               </a>
             </div>
           </div>
+        </section>
+
+        <section className="container section snake-wrap" data-reveal>
+          <SnakeGame />
         </section>
 
         <section className="container section faq-section" data-reveal>
