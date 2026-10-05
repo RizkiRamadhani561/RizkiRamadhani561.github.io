@@ -2526,3 +2526,741 @@ html {
     box-shadow: 3px 3px 0 var(--ink);
   }
 }
+
+
+/* GLOBAL NAVBAR: single source of truth */
+.app-frame {
+  min-height: 100vh;
+}
+
+.global-navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 3000;
+  width: 100%;
+  border-bottom: 4px solid var(--ink);
+  background: rgba(255,243,107,.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.global-navbar-inner {
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.global-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-weight: 1000;
+  text-transform: uppercase;
+  letter-spacing: .035em;
+}
+
+.global-brand-mark {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--ink);
+  background: var(--pink);
+  color: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-bungee);
+}
+
+.global-brand-name {
+  white-space: nowrap;
+}
+
+.global-desktop-nav {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+
+.global-desktop-nav a {
+  border: 3px solid var(--ink);
+  padding: 10px 11px;
+  background: #fff;
+  color: #161129;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-size: .72rem;
+  font-weight: 1000;
+  text-transform: uppercase;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.global-desktop-nav a:nth-child(2) { background: var(--cyan); }
+.global-desktop-nav a:nth-child(3) { background: var(--lime); }
+.global-desktop-nav a:nth-child(4) { background: #ff9add; }
+.global-desktop-nav a:nth-child(5) { background: #a88dff; }
+.global-desktop-nav a:nth-child(6) { background: #ffcf56; }
+
+.global-desktop-nav a:hover,
+.global-desktop-nav a.active {
+  transform: translate(3px,3px);
+  box-shadow: 1px 1px 0 var(--ink);
+  background: var(--orange);
+  color: #fff;
+}
+
+.global-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.global-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 3px solid var(--ink);
+  padding: 11px 13px;
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-size: .7rem;
+  font-weight: 1000;
+  text-transform: uppercase;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.global-cta:hover {
+  transform: translate(3px,3px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.global-menu {
+  display: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 3px solid var(--ink);
+  background: var(--cyan);
+  color: #161129;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.global-mobile-nav {
+  overflow: hidden;
+  border-top: 3px solid var(--ink);
+  background: rgba(255,255,255,.98);
+}
+
+.global-mobile-nav-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 12px 0 16px;
+}
+
+.global-mobile-nav a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 45px;
+  border: 3px solid var(--ink);
+  padding: 10px 12px;
+  background: #fff;
+  color: #161129;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-size: .69rem;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.global-mobile-nav a:nth-child(2) { background: var(--cyan); }
+.global-mobile-nav a:nth-child(3) { background: var(--lime); }
+.global-mobile-nav a:nth-child(4) { background: #ff9add; }
+.global-mobile-nav a:nth-child(5) { background: #a88dff; }
+.global-mobile-nav a:nth-child(6) { background: #ffcf56; }
+
+.global-mobile-nav .mobile-profile-link {
+  grid-column: 1 / -1;
+  justify-content: center;
+  background: var(--pink);
+  color: #fff;
+}
+
+.dark .global-navbar {
+  background: rgba(12,8,32,.96);
+  border-color: #fff;
+}
+
+.dark .global-brand {
+  color: #fff;
+}
+
+.dark .global-desktop-nav a,
+.dark .global-mobile-nav a {
+  border-color: #161129;
+  color: #161129;
+}
+
+.dark .global-desktop-nav a:hover,
+.dark .global-desktop-nav a.active {
+  color: #fff;
+  background: var(--pink);
+}
+
+.dark .global-cta {
+  border-color: #fff;
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.dark .global-menu {
+  border-color: #161129;
+}
+
+.dark .global-mobile-nav {
+  background: #fff;
+  border-color: #161129;
+}
+
+.dark .global-mobile-nav .mobile-profile-link {
+  color: #fff;
+  border-color: #161129;
+}
+
+.site-shell {
+  padding-top: 0;
+}
+
+.hero {
+  padding-top: 76px;
+}
+
+/* Hard contrast contract for dark mode */
+.dark body,
+.dark .site-shell {
+  color: #fff;
+}
+
+.dark .hero h1,
+.dark .section-heading h2 {
+  color: #fff;
+}
+
+.dark .hero-lead,
+.dark .hero-lead strong,
+.dark .panel p,
+.dark .timeline-card p,
+.dark .timeline-card h3,
+.dark .skill-head h3,
+.dark .skill-head span,
+.dark .section p {
+  color: #f6f1ff;
+}
+
+.dark .section-index,
+.dark .kicker {
+  color: var(--purple);
+  background: #fff;
+  border-color: var(--purple);
+}
+
+.dark .about-main {
+  background: #171329;
+  color: #fff;
+}
+
+.dark .about-main .big-copy,
+.dark .about-main p {
+  color: #fff;
+}
+
+.dark .accent-panel {
+  background: var(--orange);
+  color: #161129;
+}
+
+.dark .cyan-panel {
+  background: var(--cyan);
+  color: #161129;
+}
+
+.dark .white-panel {
+  background: #fff;
+  color: #161129;
+}
+
+.dark .accent-panel *,
+.dark .cyan-panel *,
+.dark .white-panel * {
+  color: #161129;
+}
+
+.dark .skill-card.orange {
+  background: var(--orange);
+}
+
+.dark .skill-card.orange *,
+.dark .skill-card.orange .tag-list span {
+  color: #fff;
+}
+
+.dark .skill-card.cyan *,
+.dark .skill-card.lime * {
+  color: #161129;
+}
+
+.dark .timeline-card {
+  background: #fff;
+  color: #161129;
+}
+
+.dark .timeline-card h3,
+.dark .timeline-card p:last-child,
+.dark .timeline-tools {
+  color: #24183f !important;
+}
+
+.dark .timeline-company,
+.dark .timeline-result strong {
+  color: #a63ab2 !important;
+}
+
+.dark .workflow-card,
+.dark .code-card {
+  background: #fff;
+  color: #161129;
+}
+
+.dark .workflow-label,
+.dark .code-card-head h3,
+.dark .workflow-main-copy h3,
+.dark .workflow-main-copy p {
+  color: #161129;
+}
+
+.dark .workflow-main-card {
+  background: var(--lime);
+  color: #161129;
+}
+
+.dark .code-screen {
+  background: #120d22;
+  color: #ffffff;
+  border-color: #fff;
+}
+
+.dark .github-pulse {
+  background: var(--cyan);
+  color: #161129;
+}
+
+.dark .github-pulse h3,
+.dark .github-pulse p,
+.dark .github-pulse .section-index {
+  color: #161129;
+}
+
+.dark .github-story {
+  background: #120d22;
+  color: #fff;
+}
+
+.dark .project-card {
+  background: #fff;
+  color: #161129;
+}
+
+.dark .project-card h3,
+.dark .project-card p,
+.dark .project-category,
+.dark .project-tech span,
+.dark .project-top {
+  color: #161129;
+}
+
+.dark .faq-item {
+  background: #fff;
+}
+
+.dark .faq-item button {
+  color: #161129;
+  background: #fff;
+}
+
+.dark .faq-item.open,
+.dark .faq-item.open button,
+.dark .faq-item.open .faq-answer {
+  background: var(--cyan);
+  color: #161129;
+}
+
+.dark .faq-answer p {
+  color: #161129;
+}
+
+.dark .contact-card {
+  background: var(--lime);
+  color: #161129;
+}
+
+.dark .contact-card h2,
+.dark .contact-card p {
+  color: #161129;
+}
+
+.dark .contact-links a {
+  background: #fff;
+  color: #161129;
+}
+
+.dark .contact-links a:hover {
+  background: var(--pink);
+  color: #fff;
+}
+
+.dark .button-primary {
+  background: var(--orange);
+  color: #fff;
+}
+
+.dark .button-light,
+.dark .button-light:hover {
+  background: #fff;
+  color: #161129;
+}
+
+.dark .button-lime {
+  background: var(--lime);
+  color: #161129;
+}
+
+.dark .filter {
+  background: #120d22;
+  color: #fff;
+  border-color: #fff;
+}
+
+.dark .filter.active,
+.dark .filter:hover {
+  background: var(--lime);
+  color: #161129;
+  border-color: #161129;
+}
+
+.dark .topbar,
+.dark .desktop-nav a,
+.dark .top-cta,
+.dark .theme-button,
+.dark .floating-dock {
+  /* legacy selectors intentionally retained for route compatibility */
+}
+
+.dark .footer {
+  color: #fff;
+}
+
+.dark .footer a,
+.dark .footer-links a {
+  color: var(--lime);
+}
+
+/* Game Boy — fixed, non-overflowing mobile layout */
+.snake-section {
+  width: 100%;
+  min-width: 0;
+}
+
+.snake-gameboy {
+  width: min(100%, 570px);
+  min-width: 0;
+  overflow: hidden;
+  flex: 0 1 auto;
+}
+
+.gameboy-screen-frame,
+.gameboy-screen,
+.gameboy-board,
+.snake-board {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.snake-board {
+  width: 100%;
+}
+
+.gameboy-controls {
+  display: grid;
+  grid-template-columns: minmax(110px, 1fr) minmax(150px, .9fr);
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.dpad {
+  justify-self: start;
+  flex: 0 0 auto;
+}
+
+.gameboy-action-area {
+  justify-self: end;
+  flex: 0 0 auto;
+}
+
+.gameboy-menu,
+.gameboy-speaker,
+.gameboy-toggle-row,
+.gameboy-led-row {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .global-navbar-inner {
+    min-height: 70px;
+  }
+
+  .global-desktop-nav {
+    display: none;
+  }
+
+  .global-menu {
+    display: grid;
+  }
+
+  .global-brand-name {
+    font-size: .82rem;
+  }
+
+  .global-mobile-nav-inner {
+    width: min(100% - 22px, 1180px);
+  }
+
+  .hero {
+    padding-top: 55px;
+  }
+
+  .snake-section {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .global-navbar-inner {
+    min-height: 64px;
+  }
+
+  .global-brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .global-brand-name {
+    display: block;
+    max-width: 145px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .global-actions {
+    gap: 5px;
+  }
+
+  .global-cta {
+    display: none;
+  }
+
+  .global-menu {
+    width: 40px;
+    height: 40px;
+  }
+
+  .global-mobile-nav-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .global-mobile-nav a {
+    min-height: 42px;
+    padding: 9px 8px;
+    font-size: .58rem;
+  }
+
+  .hero {
+    padding-top: 42px;
+  }
+
+  .snake-section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 18px 10px;
+  }
+
+  .snake-copy {
+    width: 100%;
+  }
+
+  .snake-copy h2 {
+    font-size: clamp(2rem, 10.5vw, 3rem);
+  }
+
+  .snake-machine {
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 7px 8px 0 var(--pink);
+    padding: 11px 9px 15px;
+    border-radius: 14px 14px 23px 23px;
+  }
+
+  .gameboy-top {
+    gap: 8px;
+  }
+
+  .gameboy-brand {
+    font-size: .98rem;
+  }
+
+  .gameboy-model {
+    font-size: .34rem;
+  }
+
+  .gameboy-screen-frame {
+    width: 100%;
+    padding: 8px;
+    border-width: 4px;
+  }
+
+  .gameboy-screen {
+    width: 100%;
+    padding: 6px;
+  }
+
+  .gameboy-screen-header {
+    font-size: .39rem;
+    padding: 2px 3px 6px;
+  }
+
+  .gameboy-controls {
+    grid-template-columns: minmax(0, 1fr) minmax(125px, 1fr);
+    gap: 8px;
+    min-height: 132px;
+    padding: 5px 2px 0;
+  }
+
+  .dpad {
+    width: 102px;
+    height: 102px;
+    transform: none;
+    justify-self: center;
+  }
+
+  .dpad button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .dpad-up { left: 34px; top: 0; }
+  .dpad-left { left: 0; top: 34px; }
+  .dpad-center { left: 34px; top: 34px; }
+  .dpad-right { right: 0; top: 34px; }
+  .dpad-down { left: 34px; bottom: 0; }
+
+  .gameboy-action-area {
+    justify-self: center;
+    margin-right: 0;
+    gap: 12px;
+    transform: rotate(-12deg);
+  }
+
+  .gb-button {
+    width: 47px;
+    height: 47px;
+    font-size: 1.05rem;
+    border-width: 3px;
+  }
+
+  .gameboy-menu {
+    gap: 10px;
+    transform: rotate(-6deg);
+  }
+
+  .gameboy-menu button {
+    padding: 5px 9px;
+    font-size: .37rem;
+  }
+
+  .gameboy-speaker {
+    grid-template-columns: repeat(8, 6px);
+    justify-content: end;
+    gap: 4px;
+    padding-right: 6px;
+    transform: rotate(-10deg);
+  }
+
+  .gameboy-speaker i {
+    width: 6px;
+    height: 6px;
+  }
+
+  .gameboy-toggle-row {
+    justify-content: center;
+    padding-right: 0;
+    gap: 6px;
+  }
+
+  .snake-status {
+    justify-content: center;
+    font-size: .42rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .global-brand-name {
+    max-width: 105px;
+    font-size: .7rem;
+  }
+
+  .snake-section {
+    padding-inline: 7px;
+  }
+
+  .gameboy-controls {
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .dpad {
+    width: 94px;
+    height: 94px;
+  }
+
+  .dpad button {
+    width: 31px;
+    height: 31px;
+  }
+
+  .dpad-up { left: 31px; }
+  .dpad-left { top: 31px; }
+  .dpad-center { left: 31px; top: 31px; }
+  .dpad-right { top: 31px; }
+  .dpad-down { left: 31px; }
+
+  .gameboy-action-area {
+    gap: 8px;
+  }
+
+  .gb-button {
+    width: 43px;
+    height: 43px;
+  }
+}
