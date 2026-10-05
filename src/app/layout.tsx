@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Bungee, Press_Start_2P, Space_Grotesk } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
+import { GlobalNavbar } from "@/components/GlobalNavbar";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -104,7 +105,8 @@ export default function RootLayout({
         className={`${spaceGrotesk.variable} ${bungee.variable} ${pressStart.variable} antialiased`}
       >
         <Suspense fallback={shellFallback}>
-          <div className="relative flex min-h-screen flex-col overflow-x-hidden">
+          <div className="app-frame">
+            <GlobalNavbar />
             <main className="flex-1">{children}</main>
           </div>
         </Suspense>
