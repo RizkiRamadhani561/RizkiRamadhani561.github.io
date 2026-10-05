@@ -1,5 +1,3 @@
-// data/projects.ts
-// Projects from RizkiRamadhani561 GitHub repositories
 const projects = [
   {
     id: 1,
@@ -7,8 +5,7 @@ const projects = [
     title: 'SIAKAD',
     category: 'Full Stack Development',
     description: 'Sistem Informasi Akademik (Academic Information System) — latihan fullstack TypeScript.',
-    techstack: ['/techstack/react.svg', '/techstack/typescript.svg', '/techstack/nextjs.svg'],
-    imageSrc: '/proj/projectOne.svg',
+    techstack: ['React', 'TypeScript', 'Next.js'],
     link: 'https://github.com/RizkiRamadhani561/SIAKAD',
   },
   {
@@ -17,8 +14,7 @@ const projects = [
     title: 'Sistem Pelayanan Masyarakat',
     category: 'Web Application',
     description: 'Enterprise Government Service Platform built with CodeIgniter 4 for public administration.',
-    techstack: ['/techstack/php.svg', '/techstack/mysql.svg', '/techstack/bootstrap.svg'],
-    imageSrc: '/proj/projectFour.svg',
+    techstack: ['PHP', 'MySQL', 'Bootstrap'],
     link: 'https://github.com/RizkiRamadhani561/sistem-pelayanan-masyarakat',
   },
   {
@@ -27,8 +23,7 @@ const projects = [
     title: 'Galaksi Aksara Bot',
     category: 'Automation & AI',
     description: 'Bot Melankolis — Python-based automation bot for creative text generation and interaction.',
-    techstack: ['/techstack/python.svg', '/techstack/fastapi.svg', '/techstack/telegram.svg'],
-    imageSrc: '/proj/projectFive.svg',
+    techstack: ['Python', 'Telegram Bot API', 'Google Gemini'],
     link: 'https://github.com/RizkiRamadhani561/GalaksiAksaraBot',
   },
   {
@@ -37,8 +32,7 @@ const projects = [
     title: 'Rental Mobil',
     category: 'Web Development',
     description: 'Car rental management system — PHP web application for booking and fleet management.',
-    techstack: ['/techstack/php.svg', '/techstack/mysql.svg', '/techstack/html.svg'],
-    imageSrc: '/proj/projectSix.svg',
+    techstack: ['PHP', 'MySQL', 'HTML'],
     link: 'https://github.com/RizkiRamadhani561/RentalMobil',
   },
   {
@@ -47,8 +41,7 @@ const projects = [
     title: 'Perpustakaan',
     category: 'Web Development',
     description: 'Library management system — PHP-based application for book cataloging and lending.',
-    techstack: ['/techstack/php.svg', '/techstack/mysql.svg', '/techstack/css.svg'],
-    imageSrc: '/proj/projectSeven.svg',
+    techstack: ['PHP', 'MySQL', 'CSS'],
     link: 'https://github.com/RizkiRamadhani561/perpustakaan',
   },
   {
@@ -57,8 +50,7 @@ const projects = [
     title: 'Laundry Web',
     category: 'Web Development',
     description: 'Laundry service web application — JavaScript-based order and delivery tracking system.',
-    techstack: ['/techstack/javascript.svg', '/techstack/html.svg', '/techstack/css.svg'],
-    imageSrc: '/proj/projectEight.svg',
+    techstack: ['JavaScript', 'HTML', 'CSS'],
     link: 'https://github.com/RizkiRamadhani561/laundry-web',
   },
   {
@@ -67,8 +59,7 @@ const projects = [
     title: 'Online Shop',
     category: 'E-Commerce',
     description: 'Simple e-commerce storefront built with HTML for learning web fundamentals.',
-    techstack: ['/techstack/html.svg', '/techstack/css.svg', '/techstack/javascript.svg'],
-    imageSrc: '/proj/projectNine.svg',
+    techstack: ['HTML', 'CSS', 'JavaScript'],
     link: 'https://github.com/RizkiRamadhani561/OnlineShop',
   },
   {
@@ -77,8 +68,7 @@ const projects = [
     title: 'Library Management',
     category: 'Web Development',
     description: 'Another library management system variant — PHP-based with extended features.',
-    techstack: ['/techstack/php.svg', '/techstack/mysql.svg', '/techstack/bootstrap.svg'],
-    imageSrc: '/proj/projectTwo.svg',
+    techstack: ['PHP', 'MySQL', 'Bootstrap'],
     link: 'https://github.com/RizkiRamadhani561/Library_management',
   },
   {
@@ -87,8 +77,7 @@ const projects = [
     title: 'Portfolio Neubrutalism',
     category: 'UI/UX Design',
     description: 'Modern neubrutalism portfolio design — TypeScript & Next.js aesthetic showcase.',
-    techstack: ['/techstack/nextjs.svg', '/techstack/typescript.svg', '/techstack/tailwind.svg'],
-    imageSrc: '/proj/projectThree.svg',
+    techstack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     link: 'https://github.com/RizkiRamadhani561/portfolio-neubrutalism',
   },
 ];
