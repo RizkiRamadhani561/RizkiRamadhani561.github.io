@@ -1700,3 +1700,770 @@ body {
     animation: none !important;
   }
 }
+
+
+/* FINAL UI STABILITY + GAME BOY PASS */
+html {
+  scroll-padding-top: 92px;
+}
+
+[id] {
+  scroll-margin-top: 92px;
+}
+
+.site-shell {
+  padding-top: 82px;
+}
+
+.topbar {
+  position: fixed;
+  inset: 0 0 auto;
+  width: 100%;
+  z-index: 1000;
+}
+
+.topbar-inner {
+  min-height: 82px;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity .65s cubic-bezier(.22,.8,.22,1), transform .65s cubic-bezier(.22,.8,.22,1);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.hero {
+  min-height: 700px;
+}
+
+.section-heading h2,
+.hero h1,
+.contact-card h2,
+.snake-copy h2 {
+  text-wrap: balance;
+}
+
+.morph-word {
+  width: 7ch;
+  min-width: 7ch;
+  display: inline-block;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.workflow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow-stage {
+  position: relative;
+  height: 280px;
+  margin-top: 22px;
+}
+
+.workflow-main-card {
+  position: absolute;
+  inset: 0 0 auto;
+  min-height: 188px;
+  height: 188px;
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 16px;
+  align-items: start;
+  border: 3px solid var(--ink);
+  padding: 20px;
+  background: var(--lime);
+  color: #161129;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.workflow-main-number {
+  font-family: var(--font-press-start);
+  font-size: .62rem;
+  color: var(--purple);
+}
+
+.workflow-main-copy {
+  min-width: 0;
+}
+
+.workflow-main-copy h3 {
+  margin: 0;
+  font-family: var(--font-bungee);
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #161129;
+}
+
+.workflow-main-copy p {
+  margin: 10px 0 0;
+  max-width: 55ch;
+  color: #2d2747;
+  line-height: 1.65;
+}
+
+.workflow-next-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+
+.workflow-chip {
+  min-height: 45px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  color: #161129;
+  padding: 8px 7px;
+  box-shadow: 3px 3px 0 var(--ink);
+  cursor: pointer;
+  font-size: .64rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.workflow-chip span {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-press-start);
+  color: var(--pink);
+  font-size: .48rem;
+}
+
+.workflow-chip.active,
+.workflow-chip:hover {
+  background: var(--pink);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.workflow-chip.active span,
+.workflow-chip:hover span {
+  color: #fff;
+}
+
+.timeline-card {
+  min-height: 206px;
+}
+
+.timeline-tools {
+  margin: 2px 0 10px;
+  color: var(--purple) !important;
+  font-size: .68rem !important;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.timeline-result {
+  margin-top: 12px !important;
+  padding-top: 11px;
+  border-top: 2px dashed rgba(22,17,41,.22);
+  color: var(--pink) !important;
+  font-size: .82rem;
+}
+
+.timeline-result strong {
+  color: var(--purple);
+}
+
+.dark .timeline-result {
+  border-top-color: rgba(255,255,255,.18);
+}
+
+.dark .timeline-tools {
+  color: var(--purple) !important;
+}
+
+.dark .desktop-nav a:nth-child(1),
+.dark .desktop-nav a:nth-child(2),
+.dark .desktop-nav a:nth-child(3),
+.dark .desktop-nav a:nth-child(4),
+.dark .desktop-nav a:nth-child(5),
+.dark .top-cta,
+.dark .theme-button,
+.dark .button-light,
+.dark .code-tab,
+.dark .workflow-chip,
+.dark .faq-item button,
+.dark .contact-links a,
+.dark .floating-dock a,
+.dark .mini-link {
+  text-shadow: none;
+}
+
+.dark .topbar-inner .brand {
+  color: #fff;
+}
+
+.dark .hero-lead strong,
+.dark .project-card h3,
+.dark .timeline-card h3 {
+  color: var(--purple);
+}
+
+.dark .button-light {
+  background: #ffffff;
+  color: #161129;
+  border-color: #ffffff;
+}
+
+.dark .button-light:hover {
+  background: var(--cyan);
+}
+
+.dark .top-cta {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.dark .code-tab {
+  background: #ffffff;
+  color: #161129;
+  border-color: #ffffff;
+}
+
+.dark .code-tab.active,
+.dark .code-tab:hover {
+  background: var(--pink);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.dark .workflow-card {
+  background: #ffffff;
+}
+
+.dark .workflow-main-card {
+  background: var(--lime);
+  color: #161129;
+}
+
+.dark .workflow-main-copy h3,
+.dark .workflow-main-copy p {
+  color: #161129;
+}
+
+.dark .workflow-chip {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .workflow-chip.active,
+.dark .workflow-chip:hover {
+  background: var(--pink);
+  color: #ffffff;
+}
+
+.dark .section-paper {
+  background: #fffaff;
+}
+
+.dark .project-card {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .project-card p,
+.dark .project-card h3,
+.dark .project-category,
+.dark .project-tech span {
+  color: #161129;
+}
+
+.dark .project-category {
+  color: #5c39c7;
+}
+
+.dark .faq-item,
+.dark .faq-item button {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .faq-item.open,
+.dark .faq-item.open button {
+  background: var(--cyan);
+  color: #161129;
+}
+
+.dark .contact-card {
+  color: #161129;
+}
+
+.dark .contact-card p {
+  color: #20193d;
+}
+
+.dark .footer {
+  background: #0a061b;
+}
+
+/* Game Boy housing */
+.snake-section {
+  grid-template-columns: .74fr 1.26fr;
+  overflow: hidden;
+}
+
+.snake-gameboy {
+  position: relative;
+  max-width: 570px;
+  margin-left: auto;
+  border: 5px solid #18201b;
+  border-radius: 20px 20px 34px 34px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.35), transparent 30%),
+    #c7d1b8;
+  padding: 20px 20px 28px;
+  box-shadow:
+    0 14px 0 #7e8a76,
+    12px 18px 0 var(--ink),
+    inset 0 0 0 4px rgba(255,255,255,.4);
+}
+
+.snake-gameboy.shake {
+  animation: gameboyShake .24s linear 1;
+}
+
+@keyframes gameboyShake {
+  0%,100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-7px) rotate(-.6deg); }
+  75% { transform: translateX(7px) rotate(.6deg); }
+}
+
+.gameboy-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 3px;
+  color: #29312b;
+}
+
+.gameboy-brand {
+  font-family: var(--font-bungee);
+  font-size: 1.4rem;
+  letter-spacing: .03em;
+}
+
+.gameboy-model {
+  font-family: var(--font-press-start);
+  font-size: .48rem;
+}
+
+.gameboy-screen-frame {
+  border: 5px solid #263028;
+  border-radius: 14px;
+  background: #4b564a;
+  padding: 16px 18px 18px;
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,.22);
+}
+
+.gameboy-screen {
+  position: relative;
+  border: 4px solid #121912;
+  border-radius: 8px;
+  background: #9bbc0f;
+  padding: 10px;
+  box-shadow:
+    inset 0 0 0 3px #8bac0f,
+    0 0 0 2px rgba(255,255,255,.15);
+}
+
+.gameboy-screen::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(32,48,16,.07) 0 2px,
+    transparent 2px 5px
+  );
+  mix-blend-mode: multiply;
+}
+
+.gameboy-screen-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 4px 7px;
+  color: #17340c;
+  font-family: var(--font-press-start);
+  font-size: .45rem;
+}
+
+.gameboy-screen .snake-board {
+  border-color: #17340c;
+  background: #9bbc0f;
+  box-shadow: inset 0 0 0 2px rgba(32,52,12,.25);
+}
+
+.gameboy-screen .snake-cell {
+  border-right-color: rgba(23,52,12,.06);
+  border-bottom-color: rgba(23,52,12,.06);
+}
+
+.gameboy-screen .snake-segment {
+  background: #306230;
+  border-color: #17340c;
+  box-shadow: none;
+  border-radius: 2px;
+}
+
+.gameboy-screen .snake-head {
+  background: #17340c;
+  border-color: #17340c;
+  box-shadow: none;
+}
+
+.gameboy-screen .snake-food {
+  background: #0f380f;
+  border-color: #17340c;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.gameboy-screen .snake-eyes {
+  color: #9bbc0f;
+}
+
+.gameboy-led-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 11px 0 10px 5px;
+  color: #29312b;
+  font-family: var(--font-press-start);
+  font-size: .48rem;
+  text-transform: uppercase;
+}
+
+.gameboy-controls {
+  position: relative;
+  min-height: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px 0;
+}
+
+.dpad {
+  position: relative;
+  width: 132px;
+  height: 132px;
+}
+
+.dpad button {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: #303532;
+  color: #111;
+  box-shadow: inset 2px 2px 0 #4a514d, inset -2px -2px 0 #191d1b;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dpad button:active {
+  background: #222623;
+  transform: translateY(2px);
+}
+
+.dpad-up { left: 44px; top: 0; }
+.dpad-left { left: 0; top: 44px; }
+.dpad-center { left: 44px; top: 44px; cursor: default !important; }
+.dpad-right { right: 0; top: 44px; }
+.dpad-down { left: 44px; bottom: 0; }
+
+.dpad-center::after {
+  content: '';
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #202420;
+  box-shadow: inset 2px 2px 0 #0d100e;
+}
+
+.gameboy-action-area {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transform: rotate(-12deg);
+  margin-right: 8px;
+}
+
+.gb-button {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 4px solid #232925;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  box-shadow: 0 5px 0 #55204a;
+  font-family: var(--font-bungee);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.gb-b { background: var(--purple); }
+.gb-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #55204a;
+}
+
+.gameboy-menu {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  transform: rotate(-7deg);
+  margin-top: 3px;
+}
+
+.gameboy-menu button {
+  border: 3px solid #232925;
+  border-radius: 9px;
+  padding: 4px 12px;
+  background: #687264;
+  color: #f2f6ea;
+  font-family: var(--font-press-start);
+  font-size: .42rem;
+  box-shadow: 0 3px 0 #333a34;
+  cursor: pointer;
+}
+
+.gameboy-menu button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #333a34;
+}
+
+.gameboy-speaker {
+  display: grid;
+  grid-template-columns: repeat(4, 9px);
+  gap: 7px;
+  justify-content: end;
+  padding: 0 10px;
+  transform: rotate(-12deg);
+}
+
+.gameboy-speaker i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #737d70;
+  border: 2px solid #596258;
+}
+
+.gameboy-toggle-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding-right: 8px;
+  color: #29312b;
+  font-family: var(--font-press-start);
+  font-size: .43rem;
+}
+
+.power-toggle {
+  position: relative;
+  width: 44px;
+  height: 20px;
+  border: 3px solid #263028;
+  border-radius: 999px;
+  background: #626b61;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.power-toggle span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d7ddd0;
+  transition: transform .22s ease;
+}
+
+.power-toggle.on span {
+  transform: translateX(20px);
+  background: var(--lime);
+}
+
+.snake-status {
+  color: #273027;
+  justify-content: flex-start;
+  padding-left: 5px;
+  margin-top: 5px;
+}
+
+.snake-status .led-on {
+  background: #3f7d2f;
+  border-color: #1e3818;
+  box-shadow: 0 0 8px rgba(63,125,47,.55);
+}
+
+.snake-status .led-off {
+  background: #a02b57;
+  border-color: #3d1726;
+}
+
+.dark .snake-section {
+  background:
+    radial-gradient(circle at 80% 16%, rgba(34,221,255,.13), transparent 19rem),
+    radial-gradient(circle at 12% 84%, rgba(255,77,202,.12), transparent 18rem),
+    #19152e;
+  color: #fff;
+}
+
+.dark .snake-copy h2 {
+  color: #fff;
+  text-shadow: 3px 3px 0 var(--pink);
+}
+
+.dark .snake-copy > p {
+  color: #eee9ff;
+}
+
+.dark .snake-console {
+  background: var(--lime);
+  color: #161129;
+}
+
+.dark .snake-gameboy {
+  border-color: #dce5d5;
+  box-shadow: 0 14px 0 #687366, 12px 18px 0 #07050f, inset 0 0 0 4px rgba(255,255,255,.35);
+}
+
+@media (max-width: 900px) {
+  .site-shell {
+    padding-top: 70px;
+  }
+
+  .topbar-inner {
+    min-height: 70px;
+  }
+
+  html {
+    scroll-padding-top: 78px;
+  }
+
+  [id] {
+    scroll-margin-top: 78px;
+  }
+
+  .snake-gameboy {
+    margin: 0 auto;
+  }
+
+  .workflow-stage {
+    height: 270px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    padding-top: 66px;
+  }
+
+  .topbar-inner {
+    min-height: 66px;
+  }
+
+  .workflow-stage {
+    height: 290px;
+  }
+
+  .workflow-main-card {
+    height: 185px;
+  }
+
+  .workflow-main-copy h3 {
+    font-size: 1.55rem;
+  }
+
+  .workflow-main-copy p {
+    font-size: .76rem;
+  }
+
+  .workflow-next-row {
+    bottom: 7px;
+  }
+
+  .workflow-chip {
+    font-size: .54rem;
+    padding: 7px 5px;
+  }
+
+  .snake-section {
+    padding: 18px 10px;
+  }
+
+  .snake-gameboy {
+    width: min(100%, 410px);
+    border-radius: 16px 16px 28px 28px;
+    padding: 15px 13px 20px;
+  }
+
+  .gameboy-brand {
+    font-size: 1.1rem;
+  }
+
+  .gameboy-model {
+    font-size: .37rem;
+  }
+
+  .gameboy-screen-frame {
+    padding: 10px 11px 12px;
+  }
+
+  .gameboy-controls {
+    min-height: 155px;
+    padding: 7px 8px 0;
+  }
+
+  .dpad {
+    width: 112px;
+    height: 112px;
+    transform: scale(.86);
+    transform-origin: left center;
+  }
+
+  .gameboy-action-area {
+    transform: rotate(-12deg) scale(.83);
+    transform-origin: right center;
+  }
+
+  .gb-button {
+    width: 51px;
+    height: 51px;
+  }
+
+  .gameboy-speaker {
+    grid-template-columns: repeat(4, 8px);
+    gap: 5px;
+  }
+
+  .gameboy-speaker i {
+    width: 8px;
+    height: 8px;
+  }
+
+  .timeline-card {
+    min-height: 0;
+  }
+}
