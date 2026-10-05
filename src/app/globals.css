@@ -2467,3 +2467,62 @@ html {
     min-height: 0;
   }
 }
+
+
+.dark .button-lime {
+  background: var(--lime);
+  color: #161129;
+}
+
+.dark .button-primary {
+  background: var(--orange);
+  color: #fff;
+}
+
+.dark .menu-toggle {
+  background: var(--cyan);
+  color: #161129;
+}
+
+.dark .floating-dock a:nth-child(1),
+.dark .floating-dock a:nth-child(2),
+.dark .floating-dock a:nth-child(3),
+.dark .floating-dock a:nth-child(4) {
+  border-color: #161129;
+}
+.dark .floating-dock a:nth-child(1) { color: #fff; }
+.dark .floating-dock a:nth-child(2) { color: #161129; }
+.dark .floating-dock a:nth-child(3) { color: #161129; }
+.dark .floating-dock a:nth-child(4) { color: #fff; }
+
+.dark .snake-reset,
+.dark .gb-button {
+  color: #fff;
+}
+
+.dark .gameboy-menu button,
+.dark .power-toggle {
+  color: #f2f6ea;
+}
+
+.dark .timeline-company {
+  color: var(--pink);
+}
+
+.dark .timeline-result {
+  color: var(--pink) !important;
+}
+
+.dark .section-index {
+  color: var(--purple);
+}
+
+@media (max-width: 640px) {
+  .top-actions {
+    gap: 6px;
+  }
+
+  .topbar .brand-mark {
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+}
