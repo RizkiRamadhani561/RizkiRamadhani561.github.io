@@ -100,6 +100,23 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+              try {
+                const nav = performance.getEntriesByType('navigation')[0];
+                if (nav && nav.type === 'reload' && window.location.hash) {
+                  window.history.replaceState(
+                    null,
+                    document.title,
+                    window.location.pathname + window.location.search
+                  );
+                }
+                window.scrollTo(0, 0);
+              } catch (_) {}
+            })()`,
+          }}
+        />
       </head>
       <body
         className={`${spaceGrotesk.variable} ${bungee.variable} ${pressStart.variable} antialiased`}
