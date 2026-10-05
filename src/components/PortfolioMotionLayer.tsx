@@ -204,6 +204,7 @@ export function ThemeToggleButton() {
     const initial = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
     setDark(initial);
     document.documentElement.classList.toggle('dark', initial);
+    document.body?.classList.toggle('dark', initial);
   }, []);
 
   const toggle = () => {
@@ -211,6 +212,7 @@ export function ThemeToggleButton() {
     setDark(next);
     window.localStorage.setItem('rizki-theme', next ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', next);
+    document.body?.classList.toggle('dark', next);
   };
 
   return (
