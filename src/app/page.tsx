@@ -1,15 +1,27 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion, animate, useInView, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
-import { FaArrowRight, FaCode, FaEnvelope, FaGithub, FaLinkedin, FaBars, FaXmark, FaTerminal } from 'react-icons/fa6';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  FaArrowRight,
+  FaBars,
+  FaCode,
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaMoon,
+  FaTerminal,
+  FaXmark,
+} from 'react-icons/fa6';
 import projects from '@/data/projects';
+import { PortfolioMotionLayer, ThemeToggleButton } from '@/components/PortfolioMotionLayer';
 
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
-  { label: 'Stack', href: '#skills' },
+  { label: 'Toolkit', href: '#skills' },
+  { label: 'Journey', href: '#journey' },
   { label: 'Work', href: '#work' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -53,9 +65,204 @@ const experiences = [
 
 const filters = ['All', 'Full Stack', 'Web App', 'Automation', 'UI/UX'];
 
+const workflowItems = [
+  {
+    title: 'Discover',
+    body: 'Understand the problem, users, data, constraints, and what success should look like.',
+  },
+  {
+    title: 'Build',
+    body: 'Turn the idea into a clean interface, working system, and repeatable delivery flow.',
+  },
+  {
+    title: 'Improve',
+    body: 'Measure what matters, refine the experience, reduce friction, and keep shipping.',
+  },
+];
+
+const snippets = {
+  frontend: [
+    '// FRONTEND DELIVERY',
+    'const stack = [',
+    '  "Next.js",',
+    '  "React",',
+    '  "TypeScript",',
+    '  "Tailwind CSS",',
+    '];',
+    '',
+    'ship(stack).with("clarity");',
+  ].join('\n'),
+  backend: [
+    '// DATA + BACKEND',
+    'const system = {',
+    '  api: "REST",',
+    '  database: "MySQL",',
+    '  state: "simple & explicit",',
+    '};',
+    '',
+    'system.validate().then(ship);',
+  ].join('\n'),
+  ops: [
+    '// DELIVERY + OPERATIONS',
+    'const release = {',
+    '  verify: true,',
+    '  monitor: true,',
+    '  rollback: true,',
+    '};',
+    '',
+    'deploy(release);',
+  ].join('\n'),
+} as const;
+
+const morphWords = ['BUILD', 'AUTOMATE', 'SIMPLIFY', 'SHIP', 'IMPROVE'];
+
+const faqs = [
+  {
+    q: 'What kind of work do you take on?',
+    a: 'Web applications, portfolio sites, internal tools, automation, data workflows, and practical UI improvements.',
+  },
+  {
+    q: 'Which technologies do you prefer?',
+    a: 'I enjoy TypeScript, React, Next.js, Node.js, PHP, MySQL, Tailwind CSS, and tools that keep the final system understandable.',
+  },
+  {
+    q: 'Can you work with an existing project?',
+    a: 'Yes. I can improve an existing codebase, fix issues, refine UX, or add features without forcing an unnecessary rewrite.',
+  },
+  {
+    q: 'How do you approach a new project?',
+    a: 'First I clarify the goal and constraints, then break the work into small deliverable pieces and iterate from a working baseline.',
+  },
+];
+
+function AnimatedMetric({
+  value,
+  suffix = '',
+  label,
+}: {
+  value: number;
+  suffix?: string;
+  label: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.7 });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, value, {
+      duration: 1.1,
+      ease: 'easeOut',
+      onUpdate: (latest) => setDisplay(Math.round(latest)),
+    });
+    return () => controls.stop();
+  }, [inView, value]);
+
+  return (
+    <div className="metric-cell">
+      <span ref={ref} className="metric-value">{display}{suffix}</span>
+      <span className="metric-label">{label}</span>
+    </div>
+  );
+}
+
+function TypeSnippet({ text }: { text: string }) {
+  const [visible, setVisible] = useState(0);
+
+  useEffect(() => {
+    setVisible(0);
+    const timer = window.setInterval(() => {
+      setVisible((count) => {
+        if (count >= text.length) {
+          window.clearInterval(timer);
+          return count;
+        }
+        return count + 2;
+      });
+    }, 18);
+    return () => window.clearInterval(timer);
+  }, [text]);
+
+  return (
+    <pre className="code-screen">
+      <code>{text.slice(0, visible)}<span className="type-caret">▋</span></code>
+    </pre>
+  );
+}
+
+function GithubPulse() {
+  const [stats, setStats] = useState({ repos: 0, stars: 0, followers: 0, loading: true });
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const [profileRes, reposRes] = await Promise.all([
+          fetch('https://api.github.com/users/RizkiRamadhani561'),
+          fetch('https://api.github.com/users/RizkiRamadhani561/repos?per_page=100&sort=updated'),
+        ]);
+        if (!profileRes.ok || !reposRes.ok) throw new Error('GitHub unavailable');
+        const profile = (await profileRes.json()) as { followers?: number };
+        const repos = (await reposRes.json()) as Array<{ stargazers_count?: number }>;
+        setStats({
+          repos: repos.length,
+          stars: repos.reduce((sum, repo) => sum + (repo.stargazers_count ?? 0), 0),
+          followers: profile.followers ?? 0,
+          loading: false,
+        });
+      } catch {
+        setStats((current) => ({ ...current, loading: false }));
+      }
+    };
+    load();
+  }, []);
+
+  return (
+    <div className="github-pulse">
+      <div className="github-pulse-head">
+        <span className="section-index">LIVE SIGNAL</span>
+        <span className="pulse-led" />
+      </div>
+      <h3>GitHub Pulse</h3>
+      <p>Repository activity pulled from the public GitHub profile.</p>
+      <div className="github-stats">
+        <div><strong>{stats.loading ? '—' : stats.repos}</strong><span>Repositories</span></div>
+        <div><strong>{stats.loading ? '—' : stats.stars}</strong><span>Total stars</span></div>
+        <div><strong>{stats.loading ? '—' : stats.followers}</strong><span>Followers</span></div>
+      </div>
+      <a className="mini-link" href="https://github.com/RizkiRamadhani561" target="_blank" rel="noreferrer">
+        Open GitHub <FaArrowRight />
+      </a>
+    </div>
+  );
+}
+
 export default function Home() {
+  const reduceMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState('All');
+  const [workflowIndex, setWorkflowIndex] = useState(0);
+  const [snippetTab, setSnippetTab] = useState<keyof typeof snippets>('frontend');
+  const [flipIndex, setFlipIndex] = useState(0);
+  const [openFaq, setOpenFaq] = useState(0);
+  const [morphIndex, setMorphIndex] = useState(0);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const workflowTimer = window.setInterval(() => {
+      setWorkflowIndex((value) => (value + 1) % workflowItems.length);
+    }, 2200);
+    const morphTimer = window.setInterval(() => {
+      setMorphIndex((value) => (value + 1) % morphWords.length);
+    }, 1750);
+    const flipTimer = window.setInterval(() => {
+      setFlipIndex((value) => (value + 1) % 3);
+    }, 2600);
+    return () => {
+      window.clearInterval(workflowTimer);
+      window.clearInterval(morphTimer);
+      window.clearInterval(flipTimer);
+    };
+  }, [reduceMotion]);
 
   const visibleProjects = useMemo(() => {
     if (filter === 'All') return projects.slice(0, 6);
@@ -70,26 +277,37 @@ export default function Home() {
       .slice(0, 6);
   }, [filter]);
 
+  const currentWorkflow = workflowItems[workflowIndex];
+  const flipCards = [
+    ['SPEED', 'Move from idea to usable baseline without unnecessary ceremony.'],
+    ['QUALITY', 'Readable systems, deliberate interactions, and repeatable delivery.'],
+    ['GROWTH', 'Use feedback and data to keep improving what was shipped.'],
+  ] as const;
+
   return (
     <div className="site-shell">
+      <PortfolioMotionLayer />
+
       <header className="topbar">
         <div className="container topbar-inner">
-          <Link href="#home" className="brand" onClick={() => setMenuOpen(false)}>
+          <Link href="#home" className="brand" onClick={() => setMenuOpen(false)} data-cursor>
             <span className="brand-mark">RR</span>
             <span>Rizki Ramadhani</span>
           </Link>
 
           <nav className="desktop-nav">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href}>{item.label}</a>
+              <a key={item.href} href={item.href} data-cursor>{item.label}</a>
             ))}
           </nav>
 
-          <a className="top-cta" href="#contact">Let&apos;s talk <FaArrowRight /></a>
-
-          <button className="menu-toggle" onClick={() => setMenuOpen((v) => !v)} aria-label="Toggle menu">
-            {menuOpen ? <FaXmark /> : <FaBars />}
-          </button>
+          <div className="top-actions">
+            <ThemeToggleButton />
+            <a className="top-cta" href="#contact" data-cursor>Let&apos;s talk <FaArrowRight /></a>
+            <button className="menu-toggle" onClick={() => setMenuOpen((v) => !v)} aria-label="Toggle menu">
+              {menuOpen ? <FaXmark /> : <FaBars />}
+            </button>
+          </div>
         </div>
 
         <AnimatePresence>
@@ -109,83 +327,117 @@ export default function Home() {
       </header>
 
       <main>
-        <section id="home" className="container hero">
+        <section id="home" className="container hero" data-reveal>
           <div className="hero-copy">
             <div className="eyebrow"><span className="status-dot" /> Available for selected opportunities</div>
             <p className="kicker">FULL-STACK DEVELOPER / OPERATIONS</p>
-            <h1>Build useful things.<br /><span>Make them work.</span></h1>
+            <h1>
+              <span className="hero-line">Build useful things.</span>
+              <span className="hero-line hero-accent">
+                {Array.from('Make them work.').map((char, index) => (
+                  <motion.span
+                    key={`${char}-${index}`}
+                    className="char"
+                    initial={{ opacity: 0, y: 25, rotate: 8 }}
+                    animate={{ opacity: 1, y: 0, rotate: 0 }}
+                    transition={{ delay: reduceMotion ? 0 : 0.55 + index * 0.035, duration: 0.45, ease: 'easeOut' }}
+                  >
+                    {char === ' ' ? '\u00a0' : char}
+                  </motion.span>
+                ))}
+              </span>
+            </h1>
             <p className="hero-lead">
-              I&apos;m <strong>M. Rizki Ramadhani</strong> — an Information Management student who combines
+              I&apos;m <strong>M. Rizki Ramadhani</strong> — an Information Management student combining
               web development, data discipline, and real-world service experience to create practical digital products.
             </p>
             <div className="hero-actions">
-              <a href="#work" className="button button-primary">Explore my work <FaArrowRight /></a>
-              <a href="#contact" className="button button-light">Start a conversation</a>
+              <a href="#work" className="button button-primary" data-cursor>Explore my work <FaArrowRight /></a>
+              <a href="#contact" className="button button-light" data-cursor>Start a conversation</a>
             </div>
             <div className="micro-stats">
-              <div><strong>09+</strong><span>Projects</span></div>
-              <div><strong>4</strong><span>Work chapters</span></div>
-              <div><strong>99%</strong><span>Accuracy mindset</span></div>
+              <AnimatedMetric value={9} suffix="+" label="Projects" />
+              <AnimatedMetric value={4} label="Work chapters" />
+              <AnimatedMetric value={99} suffix="%" label="Accuracy mindset" />
             </div>
           </div>
 
-          <div className="hero-window">
-            <div className="window-bar">
-              <span className="window-title"><FaTerminal /> rizki@workspace</span>
-              <div className="window-dots"><i /><i /><i /></div>
-            </div>
-            <div className="terminal-body">
-              <p><span className="terminal-muted">$</span> whoami</p>
-              <h2>rizki_ramadhani</h2>
-              <p><span className="terminal-muted">$</span> cat focus.txt</p>
-              <div className="focus-box">
-                <span>01</span><p>Interfaces that feel simple.</p>
-                <span>02</span><p>Systems that stay reliable.</p>
-                <span>03</span><p>Data that tells the truth.</p>
+          <div className="hero-visual">
+            <div className="hero-badge badge-one" data-cursor>BUILD</div>
+            <div className="hero-badge badge-two" data-cursor>DATA</div>
+            <div className="hero-badge badge-three" data-cursor>OPS</div>
+            <motion.div
+              className="hero-window"
+              initial={{ opacity: 0, y: 30, rotate: 4, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, rotate: 1.5, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.7, ease: 'easeOut' }}
+            >
+              <div className="window-bar">
+                <span className="window-title"><FaTerminal /> rizki@workspace</span>
+                <div className="window-dots"><i /><i /><i /></div>
               </div>
-              <p><span className="terminal-muted">$</span> status</p>
-              <div className="terminal-status"><span>●</span> ONLINE / LEARNING / SHIPPING</div>
-              <div className="terminal-sign">RR<span>_</span></div>
-            </div>
+              <div className="terminal-body">
+                <p><span className="terminal-muted">$</span> whoami</p>
+                <h2>rizki_ramadhani</h2>
+                <p><span className="terminal-muted">$</span> focus --today</p>
+                <div className="focus-box">
+                  <span>01</span><p>Interfaces that feel simple.</p>
+                  <span>02</span><p>Systems that stay reliable.</p>
+                  <span>03</span><p>Data that tells the truth.</p>
+                </div>
+                <p><span className="terminal-muted">$</span> status</p>
+                <div className="terminal-status"><span>●</span> ONLINE / LEARNING / SHIPPING</div>
+                <div className="terminal-sign">RR<span>_</span></div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        <div className="ticker">
-          <div className="ticker-track">
-            {['NEXT.JS', 'REACT', 'TYPESCRIPT', 'PHP', 'MYSQL', 'UI/UX', 'DATA', 'OPERATIONS', 'NEXT.JS', 'REACT', 'TYPESCRIPT', 'PHP'].map((item, i) => (
-              <span key={i}>{item}<b>✦</b></span>
-            ))}
-          </div>
-        </div>
+        <section className="ticker stat-ticker" data-reveal aria-label="Portfolio highlights">
+          <motion.div
+            className="ticker-track"
+            animate={reduceMotion ? undefined : { x: ['0%', '-50%'] }}
+            transition={reduceMotion ? undefined : { duration: 22, repeat: Infinity, ease: 'linear' }}
+          >
+            {[...Array(2)].flatMap((_, copy) =>
+              ['9+ PROJECTS', 'FULL-STACK + OPERATIONS', 'DATA-AWARE DELIVERY', 'BASED IN JAKARTA', 'OPEN TO COLLABORATION'].map((item, i) => (
+                <span key={`${copy}-${i}`}>{item}<b>✦</b></span>
+              )),
+            )}
+          </motion.div>
+        </section>
 
-        <section id="about" className="container section">
+        <section id="about" className="container section" data-reveal>
           <div className="section-heading">
             <span className="section-index">01 / ABOUT</span>
             <h2>A technical mind with an operational instinct.</h2>
           </div>
-
           <div className="bento about-grid">
-            <article className="panel panel-dark about-main">
+            <article className="panel panel-dark about-main" data-reveal>
               <div className="panel-label">PROFILE.LOG</div>
               <p className="big-copy">
                 I enjoy the space between <em>people, process, and technology.</em>
               </p>
               <p>
-                My background in hospitality and operations taught me to care about details, speed, and
-                how people actually experience a system. I bring that perspective into full-stack development.
+                My background in hospitality and operations taught me to care about details, speed, and how people actually experience a system.
+                I bring that perspective into full-stack development.
               </p>
+              <div className="mini-metrics">
+                <AnimatedMetric value={150} suffix="+" label="Daily orders handled" />
+                <AnimatedMetric value={500} suffix="+" label="Daily data entries" />
+              </div>
             </article>
-            <article className="panel accent-panel">
+            <article className="panel accent-panel" data-reveal>
               <span className="giant-number">01</span>
               <h3>Human first</h3>
               <p>Clear flows, useful interfaces, and communication that makes technology approachable.</p>
             </article>
-            <article className="panel cyan-panel">
+            <article className="panel cyan-panel" data-reveal>
               <span className="giant-number">02</span>
               <h3>Data aware</h3>
               <p>Structured information, validation, reporting, and measurable improvements.</p>
             </article>
-            <article className="panel white-panel">
+            <article className="panel white-panel" data-reveal>
               <span className="giant-number">03</span>
               <h3>Always shipping</h3>
               <p>Learn fast, build practical, iterate often, and keep the result maintainable.</p>
@@ -193,7 +445,105 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="skills" className="section section-paper">
+        <section className="container section matrix-section" data-reveal>
+          <div className="section-heading">
+            <span className="section-index">01.5 / EXECUTION ENGINE</span>
+            <h2>We build to <span className="morph-word">{morphWords[morphIndex]}</span>.</h2>
+          </div>
+
+          <div className="matrix-grid">
+            <article className="workflow-card" data-cursor>
+              <div className="workflow-label">SERVICE WORKFLOW</div>
+              <div className="workflow-stack">
+                {workflowItems.map((item, index) => {
+                  const distance = (index - workflowIndex + workflowItems.length) % workflowItems.length;
+                  return (
+                    <motion.div
+                      key={item.title}
+                      className="workflow-stack-card"
+                      animate={{
+                        y: distance * 17,
+                        scale: 1 - distance * 0.035,
+                        opacity: 1 - distance * 0.14,
+                        rotate: distance === 0 ? 0 : distance === 1 ? 1.2 : -1.2,
+                      }}
+                      transition={{ duration: 0.45, ease: 'easeOut' }}
+                    >
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <div>
+                        <h3>{item.title}</h3>
+                        <p>{distance === 0 ? currentWorkflow.body : item.body}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+              <div className="workflow-progress">
+                {workflowItems.map((_, index) => <i key={index} className={index === workflowIndex ? 'active' : ''} />)}
+              </div>
+            </article>
+
+            <article className="code-card">
+              <div className="code-card-head">
+                <div>
+                  <span className="workflow-label">FRAMEWORKS / LANGUAGES</span>
+                  <h3>Code that explains itself.</h3>
+                </div>
+                <FaCode />
+              </div>
+              <div className="code-tabs">
+                {(Object.keys(snippets) as Array<keyof typeof snippets>).map((tab) => (
+                  <button
+                    key={tab}
+                    className={snippetTab === tab ? 'code-tab active' : 'code-tab'}
+                    onClick={() => setSnippetTab(tab)}
+                    data-cursor
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={snippetTab}
+                  initial={{ opacity: 0, y: 7 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -7 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <TypeSnippet text={snippets[snippetTab]} />
+                </motion.div>
+              </AnimatePresence>
+            </article>
+          </div>
+
+          <div className="flip-grid">
+            {flipCards.map(([front, back], index) => (
+              <motion.button
+                key={front}
+                className="flip-card"
+                onClick={() => setFlipIndex(index)}
+                animate={{ rotateY: flipIndex === index ? 180 : 0 }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+                data-cursor
+                aria-label={`Show detail for ${front}`}
+              >
+                <div className="flip-face flip-front">
+                  <span>0{index + 1}</span>
+                  <h3>{front}</h3>
+                  <p>Click to reveal →</p>
+                </div>
+                <div className="flip-face flip-back">
+                  <span>RR / MATRIX</span>
+                  <h3>{front}</h3>
+                  <p>{back}</p>
+                </div>
+              </motion.button>
+            ))}
+          </div>
+        </section>
+
+        <section id="skills" className="section section-paper" data-reveal>
           <div className="container">
             <div className="section-heading">
               <span className="section-index">02 / TOOLKIT</span>
@@ -204,22 +554,47 @@ export default function Home() {
                 { num: '01', title: 'BUILD', items: skills.build, tone: 'orange' },
                 { num: '02', title: 'DATA', items: skills.data, tone: 'cyan' },
                 { num: '03', title: 'PRODUCT', items: skills.product, tone: 'lime' },
-              ].map((skillGroup) => (
-                <article
+              ].map((skillGroup, index) => (
+                <motion.article
                   className={`skill-card ${skillGroup.tone}`}
                   key={skillGroup.title}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  data-cursor
                 >
                   <div className="skill-head"><span>{skillGroup.num}</span><h3>{skillGroup.title}</h3></div>
                   <div className="tag-list">
                     {skillGroup.items.map((item) => <span key={item}>{item}</span>)}
                   </div>
-                </article>
+                </motion.article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="container section">
+        <section className="container section github-section" data-reveal>
+          <div className="section-heading">
+            <span className="section-index">02.5 / LIVE DATA</span>
+            <h2>A portfolio connected to the work.</h2>
+          </div>
+          <div className="github-grid">
+            <GithubPulse />
+            <article className="github-story panel panel-dark">
+              <span className="workflow-label">WHY IT MATTERS</span>
+              <h3>Make the portfolio prove the point.</h3>
+              <p>
+                Instead of only saying I build software, this area surfaces live public repository signals and a working code-delivery concept.
+              </p>
+              <div className="signal-row"><span /> repository-first <b>→</b></div>
+              <div className="signal-row"><span /> practical systems <b>→</b></div>
+              <div className="signal-row"><span /> continuous learning <b>→</b></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="journey" className="container section" data-reveal>
           <div className="section-heading">
             <span className="section-index">03 / JOURNEY</span>
             <h2>Experience, viewed as a timeline.</h2>
@@ -227,7 +602,7 @@ export default function Home() {
           <div className="timeline">
             {experiences.map((item, i) => (
               <motion.article
-                key={item.role}
+                key={`${item.company}-${item.role}`}
                 className="timeline-item"
                 initial={{ opacity: 0, x: -18 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -246,7 +621,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="work" className="section section-dark">
+        <section id="work" className="section section-dark" data-reveal>
           <div className="container">
             <div className="section-heading heading-light">
               <span className="section-index">04 / SELECTED WORK</span>
@@ -254,54 +629,96 @@ export default function Home() {
             </div>
             <div className="filter-row">
               {filters.map((item) => (
-                <button key={item} onClick={() => setFilter(item)} className={filter === item ? 'filter active' : 'filter'}>
+                <button key={item} onClick={() => setFilter(item)} className={filter === item ? 'filter active' : 'filter'} data-cursor>
                   {item}
                 </button>
               ))}
             </div>
             <motion.div layout className="project-grid">
-              {visibleProjects.map((project) => (
-                <motion.a
-                  layout
-                  key={project.id}
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-card"
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="project-top"><span>{project.number}</span><FaArrowRight /></div>
-                  <div className="project-icon"><FaCode /></div>
-                  <p className="project-category">{project.category}</p>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="project-tech">
-                    {project.techstack.slice(0, 3).map((tech) => (
-                      <span key={tech}>{tech.split('/').pop()?.replace('.svg', '')}</span>
-                    ))}
-                  </div>
-                </motion.a>
-              ))}
+              <AnimatePresence mode="popLayout">
+                {visibleProjects.map((project) => (
+                  <motion.a
+                    layout
+                    key={project.id}
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-card"
+                    initial={{ opacity: 0, y: 18, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 18, scale: 0.96 }}
+                    whileHover={{ y: -7, rotate: -0.4 }}
+                    transition={{ duration: 0.3 }}
+                    data-cursor
+                  >
+                    <div className="project-top"><span>{project.number}</span><FaArrowRight /></div>
+                    <div className="project-icon"><FaCode /></div>
+                    <p className="project-category">{project.category}</p>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="project-tech">
+                      {project.techstack.slice(0, 3).map((tech) => (
+                        <span key={tech}>{tech.split('/').pop()?.replace('.svg', '')}</span>
+                      ))}
+                    </div>
+                  </motion.a>
+                ))}
+              </AnimatePresence>
             </motion.div>
             <div className="center-action">
-              <a href="https://github.com/RizkiRamadhani561?tab=repositories" target="_blank" rel="noreferrer" className="button button-lime">
+              <a href="https://github.com/RizkiRamadhani561?tab=repositories" target="_blank" rel="noreferrer" className="button button-lime" data-cursor>
                 See all repositories <FaGithub />
               </a>
             </div>
           </div>
         </section>
 
-        <section id="contact" className="container section contact-section">
+        <section className="container section faq-section" data-reveal>
+          <div className="section-heading">
+            <span className="section-index">04.5 / FAQ</span>
+            <h2>Questions, answered without the fluff.</h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((item, index) => {
+              const open = openFaq === index;
+              return (
+                <div key={item.q} className={open ? 'faq-item open' : 'faq-item'} data-cursor>
+                  <button onClick={() => setOpenFaq(open ? -1 : index)} aria-expanded={open}>
+                    <span>0{index + 1}</span>
+                    <strong>{item.q}</strong>
+                    <b>{open ? '−' : '+'}</b>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {open && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="faq-answer"
+                      >
+                        <p>{item.a}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="contact" className="container section contact-section" data-reveal>
           <div className="contact-card">
             <div>
               <span className="section-index">05 / CONTACT</span>
               <h2>Have an idea?<br /><span>Let&apos;s make it useful.</span></h2>
-              <p>Open to web projects, collaborations, internships, and opportunities where technology can simplify real work.</p>
+              <p>
+                Open to web projects, collaborations, internships, and opportunities where technology can simplify real work.
+              </p>
             </div>
             <div className="contact-links">
-              <a href="mailto:ramscool98@gmail.com"><FaEnvelope /> Email me <FaArrowRight /></a>
-              <a href="https://www.linkedin.com/in/m-rizki-ramadhani" target="_blank" rel="noreferrer"><FaLinkedin /> LinkedIn <FaArrowRight /></a>
-              <a href="https://github.com/RizkiRamadhani561" target="_blank" rel="noreferrer"><FaGithub /> GitHub <FaArrowRight /></a>
+              <a href="mailto:ramscool98@gmail.com" data-cursor><FaEnvelope /> Email me <FaArrowRight /></a>
+              <a href="https://www.linkedin.com/in/m-rizki-ramadhani" target="_blank" rel="noreferrer" data-cursor><FaLinkedin /> LinkedIn <FaArrowRight /></a>
+              <a href="https://github.com/RizkiRamadhani561" target="_blank" rel="noreferrer" data-cursor><FaGithub /> GitHub <FaArrowRight /></a>
             </div>
           </div>
         </section>
@@ -311,7 +728,11 @@ export default function Home() {
         <div className="container footer-inner">
           <span>© 2026 M. Rizki Ramadhani</span>
           <span>DESIGNED & BUILT WITH PURPOSE</span>
-          <a href="#home">BACK TO TOP ↑</a>
+          <div className="footer-links">
+            <Link href="/Archive">Archive</Link>
+            <Link href="/Contact">Profile</Link>
+            <a href="#home">BACK TO TOP ↑</a>
+          </div>
         </div>
       </footer>
     </div>
