@@ -34,32 +34,49 @@ const skills = {
 
 const experiences = [
   {
-    period: '2026',
-    role: 'Outlet Service Crew',
-    company: 'Geprekin Aja',
-    location: 'South Tangerang',
-    text: 'Handled 150+ daily orders, improved transaction value through upselling, and maintained accurate POS operations.',
+    period: 'Jan 2025 — Now',
+    role: 'Spesialis Entri Data',
+    company: 'Dukungan Lepas / Jarak Jauh',
+    location: 'Indonesia',
+    tools: 'Excel Lanjutan · Google Sheets · SQL · Python · REST API',
+    text: 'Memproses rata-rata ratusan baris data per sesi dengan pemeriksaan berlapis, merapikan spreadsheet, dan menjaga file klien tetap tertata serta mudah ditelusuri.',
+    result: 'Otomasi dengan Excel lanjutan dan SQL memangkas waktu rekap lebih dari 60%.',
   },
   {
-    period: '2025 — Now',
-    role: 'Data Entry Specialist',
-    company: 'Freelance',
-    location: 'Remote',
-    text: 'Built verification workflows and recurring reports with Excel, Google Sheets, and SQL while maintaining near-zero error rates.',
+    period: 'Okt 2025 — Mei 2026',
+    role: 'Staf Dukungan IT',
+    company: 'Kejaksaan Negeri Jakarta Barat',
+    location: 'Jakarta Barat, Indonesia',
+    tools: 'Hardware · Software · Networking · Active Directory',
+    text: 'Menjadi titik kontak teknis pertama bagi lebih dari 50 staf, menangani perangkat, jaringan, dan software, serta memasang dan mengonfigurasi 30+ perangkat komputer, printer, dan jaringan.',
+    result: 'Membangun sistem inventaris perangkat agar aset dan jadwal perawatan mudah ditelusuri.',
   },
   {
-    period: '2024',
-    role: 'Human Resources Intern',
-    company: 'Solid Gold',
-    location: 'Jakarta',
-    text: 'Supported personnel administration, internship placements, data protection, and employee engagement initiatives.',
-  },
-  {
-    period: '2024',
-    role: 'Admin & Operations Support',
+    period: 'Jan 2025 — Jun 2025',
+    role: 'Petugas Administrasi & Dukungan',
     company: 'J&T Express',
     location: 'Indonesia',
-    text: 'Processed 500+ daily data entries, improved entry speed, and solved high-volume communication issues across operations.',
+    tools: 'Microsoft Office · Administrasi Operasional · Manajemen Data',
+    text: 'Mengelola pencatatan operasional harian cabang, verifikasi stok, rekap pengiriman, pengecekan dokumen, serta perapian sistem pengarsipan.',
+    result: 'Menjadi penghubung antara tim kantor, driver, dan manajemen agar informasi tersampaikan tepat waktu.',
+  },
+  {
+    period: 'Jul 2024 — Des 2024',
+    role: 'Magang Sumber Daya Manusia',
+    company: 'Solid Gold',
+    location: 'Jakarta, Indonesia',
+    tools: 'Administrasi SDM · Pengarsipan · Koordinasi · Mediasi',
+    text: 'Mengelola arsip personel ratusan karyawan dengan sistem terstandarisasi serta menjaga kerahasiaan dokumen.',
+    result: 'Mendukung penempatan mahasiswa magang dari komunikasi, seleksi, hingga penempatan akhir dan membantu mediasi perselisihan.',
+  },
+  {
+    period: 'Jan 2024 — Jun 2024',
+    role: 'Konsultan Layanan & Penjualan',
+    company: 'WAKI Indonesia',
+    location: 'Tangerang, Banten',
+    tools: 'Customer Service · Komunikasi Konsultatif · Sales',
+    text: 'Melayani pelanggan dengan pendekatan konsultatif, memahami kebutuhan sebelum memberi rekomendasi, dan menangani keluhan dengan solusi yang dapat dijalankan.',
+    result: 'Membimbing karyawan baru dalam standar layanan, kebutuhan pelanggan, dan penanganan situasi yang lebih kompleks.',
   },
 ];
 
@@ -454,29 +471,37 @@ export default function Home() {
           <div className="matrix-grid">
             <article className="workflow-card" data-cursor>
               <div className="workflow-label">SERVICE WORKFLOW</div>
-              <div className="workflow-stack">
-                {workflowItems.map((item, index) => {
-                  const distance = (index - workflowIndex + workflowItems.length) % workflowItems.length;
-                  return (
-                    <motion.div
+              <div className="workflow-stage">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={currentWorkflow.title}
+                    className="workflow-main-card"
+                    initial={reduceMotion ? undefined : { opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reduceMotion ? undefined : { opacity: 0, y: -10 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                  >
+                    <div className="workflow-main-number">{String(workflowIndex + 1).padStart(2, '0')}</div>
+                    <div className="workflow-main-copy">
+                      <h3>{currentWorkflow.title}</h3>
+                      <p>{currentWorkflow.body}</p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className="workflow-next-row">
+                  {workflowItems.map((item, index) => (
+                    <button
+                      type="button"
                       key={item.title}
-                      className="workflow-stack-card"
-                      animate={{
-                        y: distance * 17,
-                        scale: 1 - distance * 0.035,
-                        opacity: 1 - distance * 0.14,
-                        rotate: distance === 0 ? 0 : distance === 1 ? 1.2 : -1.2,
-                      }}
-                      transition={{ duration: 0.45, ease: 'easeOut' }}
+                      className={index === workflowIndex ? 'workflow-chip active' : 'workflow-chip'}
+                      onClick={() => setWorkflowIndex(index)}
+                      data-cursor
                     >
-                      <span>{String(index + 1).padStart(2, '0')}</span>
-                      <div>
-                        <h3>{item.title}</h3>
-                        <p>{distance === 0 ? currentWorkflow.body : item.body}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                      <span>{String(index + 1).padStart(2, '0')}</span>{item.title}
+                    </button>
+                  ))}
+                </div>
               </div>
               <div className="workflow-progress">
                 {workflowItems.map((_, index) => <i key={index} className={index === workflowIndex ? 'active' : ''} />)}
@@ -614,7 +639,9 @@ export default function Home() {
                 <div className="timeline-card">
                   <p className="timeline-company">{item.company} · {item.location}</p>
                   <h3>{item.role}</h3>
+                  <p className="timeline-tools">{item.tools}</p>
                   <p>{item.text}</p>
+                  <p className="timeline-result"><strong>Impact:</strong> {item.result}</p>
                 </div>
               </motion.article>
             ))}
