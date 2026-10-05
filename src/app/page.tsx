@@ -2,290 +2,498 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useState } from 'react';
 import projects from '@/data/projects';
+import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 
-const skills = [
-  'TypeScript',
-  'Next.js',
-  'React',
-  'Node.js',
-  'PHP',
-  'MySQL',
-  'Tailwind CSS',
-  'Figma',
-  'Excel',
-  'SQL',
-  'GitHub',
-  'REST API',
+const navItems = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Work', href: '#work' },
+  { label: 'Contact', href: '#contact' },
 ];
 
-const strengths = [
-  'Front Office Excellence',
-  'Operations Optimization',
-  'Customer Experience',
-  'Data Accuracy & Reporting',
-  'Team Training',
-  'UI/UX Thinking',
-];
+const skills = {
+  operations: [
+    'Customer Service',
+    'Sales Support',
+    'Upselling',
+    'Conflict Resolution',
+    'Team Training',
+    'Inventory Control',
+    'POS Systems',
+    'Guest Experience',
+  ],
+  tech: [
+    'TypeScript',
+    'React',
+    'Next.js',
+    'Node.js',
+    'PHP',
+    'MySQL',
+    'Tailwind CSS',
+    'Figma',
+    'Excel',
+    'SQL',
+    'GitHub',
+    'REST API',
+  ],
+};
 
 const experiences = [
   {
     period: 'Feb 2026 — May 2026',
     role: 'Outlet Service Crew',
     company: 'Geprekin Aja',
-    description:
-      'Handled daily rush orders, improved average transaction value, operated POS accurately, and kept service standards high in a fast-paced outlet environment.',
+    location: 'South Tangerang',
+    desc: 'Delivered 150+ daily orders with precision. Achieved 20% increase in transaction value through upselling. Operated POS with 100% cash accuracy.',
   },
   {
     period: 'Jan 2025 — Present',
     role: 'Data Entry Specialist',
     company: 'Freelance',
-    description:
-      'Built verification systems, produced reports with Excel and SQL, and improved data quality across daily processing workflows.',
+    location: 'Remote',
+    desc: 'Built multi-layer verification workflows. Produced daily/weekly reports using Excel, Google Sheets, and SQL. Achieved near-zero error rates.',
   },
   {
     period: 'Jul 2024 — Dec 2024',
     role: 'Human Resources Intern',
     company: 'Solid Gold',
-    description:
-      'Supported employee administration, compliance tracking, and internship placement coordination while improving HR documentation quality.',
+    location: 'Jakarta',
+    desc: 'Achieved 100% regulatory compliance in personnel data protection. Facilitated 20+ internship placements. Boosted D&I participation by 35%.',
   },
   {
     period: 'Jan 2024 — Jun 2024',
     role: 'Admin & Operations Support Officer',
     company: 'J&T Express',
-    description:
-      'Managed daily operational records, maintained inventory accuracy, and served as a communication bridge between teams and stakeholders.',
+    location: 'Indonesia',
+    desc: 'Managed 500+ daily data entries with 99.5% accuracy. Accelerated data entry speed by 30%. Resolved 50+ daily communication challenges.',
   },
 ];
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const featuredProjects = projects.slice(0, 6);
 
   return (
-    <main className="page-shell">
-      <section className="hero-section">
-        <div className="hero-copy">
-          <p className="eyebrow">Portfolio 2026</p>
-          <h1>
-            M. Rizki <span>Ramadhani</span>
-          </h1>
-          <p className="hero-tagline">
-            Front Office Enthusiast • Full-Stack Developer • Data-Driven Operations
-          </p>
+    <>
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 border-b-4 border-black bg-background/95 backdrop-blur">
+        <div className="retro-container flex items-center justify-between py-4">
+          <Link href="#home" className="flex items-center gap-2">
+            <div className="flex h-10 w-10 items-center justify-center border-2 border-black bg-primary font-bold text-white">
+              R
+            </div>
+            <span className="hidden font-display text-lg font-bold uppercase sm:inline">
+              Rizki
+            </span>
+          </Link>
 
-          <div className="cta-row">
-            <Link href="#projects" className="primary-btn">
-              View Projects
-            </Link>
-            <a href="mailto:ramscool98@gmail.com" className="secondary-btn">
-              Email Me
-            </a>
+          {/* Desktop Nav */}
+          <div className="hidden gap-2 md:flex">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="retro-press border-2 border-black bg-card px-4 py-2 font-bold uppercase transition"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
 
-          <div className="mini-metrics">
-            <div className="metric-box">
-              <strong>4+</strong>
-              <span>Years in service & ops</span>
-            </div>
-            <div className="metric-box">
-              <strong>15+</strong>
-              <span>Projects & case studies</span>
-            </div>
-            <div className="metric-box">
-              <strong>99%</strong>
-              <span>Data accuracy focus</span>
-            </div>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="retro-press md:hidden"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
         </div>
 
-        <div className="hero-visual">
-          <div className="orb orb-purple" />
-          <div className="orb orb-teal" />
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
           <motion.div
-            className="glass-card profile-card"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="border-t-4 border-black bg-muted"
           >
-            <div className="profile-topbar">
-              <span className="status-pill">Available for work</span>
-              <span className="dot-indicator" />
-            </div>
-
-            <div className="profile-avatar">
-              <div className="avatar-ring">
-                <div className="avatar-core">RR</div>
-              </div>
-            </div>
-
-            <div className="profile-meta">
-              <h3>M Rizki Ramadhani</h3>
-              <p>Front Office & Data Operations</p>
-            </div>
-
-            <div className="info-list">
-              <div>
-                <span>Location</span>
-                <strong>Jakarta Barat</strong>
-              </div>
-              <div>
-                <span>Email</span>
-                <strong>ramscool98@gmail.com</strong>
-              </div>
-              <div>
-                <span>Focus</span>
-                <strong>Ops + Web Dev</strong>
-              </div>
+            <div className="retro-container flex flex-col gap-2 py-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="retro-press border-2 border-black bg-card px-4 py-2 font-bold uppercase"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
           </motion.div>
-        </div>
-      </section>
+        )}
+      </nav>
 
-      <section className="section-block" id="about">
-        <div className="section-heading">
-          <span className="section-label">About</span>
-        </div>
-
-        <div className="about-grid">
-          <div className="glass-card large-card">
-            <p>
-              My background is rooted in hospitality, service, and operational excellence.
-              I enjoy creating systems that are efficient, human-centered, and measurable.
-              Over time, I developed a strong interest in building practical digital
-              experiences that combine performance, usability, and real business value.
+      {/* Hero Section */}
+      <section
+        id="home"
+        className="retro-container border-b-4 border-black py-16 sm:py-24"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="grid gap-12 md:grid-cols-2 md:gap-16 md:items-center"
+        >
+          <div>
+            <div className="mb-6 inline-block">
+              <span className="retro-badge">Portfolio 2026</span>
+            </div>
+            <h1 className="mb-4 font-display text-5xl font-bold uppercase leading-tight sm:text-6xl">
+              M. Rizki <span className="text-gradient">Ramadhani</span>
+            </h1>
+            <p className="mb-6 text-xl font-semibold text-muted-foreground">
+              Front Office Enthusiast • Full-Stack Developer • Data-Driven Operations
             </p>
-            <p>
-              I currently study Information Management and work on both operational support
-              and web development projects, balancing customer-facing experience with data
-              discipline and clean technical execution.
-            </p>
-          </div>
-
-          <div className="glass-card feature-stack">
-            <h3>Core Strengths</h3>
-            <div className="chip-wrap">
-              {strengths.map((item) => (
-                <span key={item} className="chip">
-                  {item}
-                </span>
-              ))}
+            <div className="mb-8 flex flex-wrap gap-3">
+              <a href="#work" className="retro-button bg-primary text-primary-foreground">
+                View Work
+              </a>
+              <a href="#contact" className="retro-button border-2 border-black">
+                Get In Touch
+              </a>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="section-block" id="skills">
-        <div className="section-heading">
-          <span className="section-label">Skillset</span>
-        </div>
-
-        <div className="skill-grid">
-          <div className="glass-card skill-card accent-purple">
-            <h3>Operations & Service</h3>
-            <p>Guest experience, service quality, upselling, conflict handling, and team support.</p>
-            <div className="chip-wrap">
-              {['Customer Service', 'Sales Support', 'Upselling', 'Conflict Resolution', 'Training', 'Inventory Control'].map((item) => (
-                <span key={item} className="chip soft">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="glass-card skill-card accent-teal">
-            <h3>Data & Development</h3>
-            <p>Data processing, reporting, web interfaces, and modern workflow automation.</p>
-            <div className="chip-wrap">
-              {skills.map((item) => (
-                <span key={item} className="chip soft">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-block" id="experience">
-        <div className="section-heading">
-          <span className="section-label">Experience</span>
-        </div>
-
-        <div className="timeline">
-          {experiences.map((item, index) => (
-            <motion.article
-              key={item.role}
-              className="timeline-item glass-card"
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-            >
-              <span className="timeline-period">{item.period}</span>
-              <h3>{item.role}</h3>
-              <p className="timeline-company">{item.company}</p>
-              <p>{item.description}</p>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-block" id="projects">
-        <div className="section-heading">
-          <span className="section-label">Selected Work</span>
-        </div>
-
-        <div className="project-grid">
-          {featuredProjects.map((project, index) => (
-            <motion.a
-              key={project.id}
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className="project-card glass-card"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
-            >
-              <div className="project-upper">
-                <span className="project-number">{project.number}</span>
-                <span className="project-category">{project.category}</span>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4">
+              <div className="retro-card">
+                <p className="text-2xl font-black text-primary">4+</p>
+                <p className="text-xs font-bold uppercase">Years in Service</p>
               </div>
+              <div className="retro-card">
+                <p className="text-2xl font-black text-secondary">15+</p>
+                <p className="text-xs font-bold uppercase">Projects</p>
+              </div>
+              <div className="retro-card">
+                <p className="text-2xl font-black text-accent">99%</p>
+                <p className="text-xs font-bold uppercase">Accuracy</p>
+              </div>
+            </div>
+          </div>
 
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
+          {/* Hero Visual */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="retro-card-accent aspect-square flex items-center justify-center text-8xl font-black">
+              RR
+            </div>
+            <div className="absolute -bottom-4 -right-4 retro-card bg-secondary text-secondary-foreground">
+              <p className="font-bold">Available for Work</p>
+              <p className="text-sm">Based in Jakarta</p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
 
-              <div className="project-tech">
-                {project.techstack.map((tech, i) => (
-                  <span key={`${project.id}-${i}`} className="tech-pill">
-                    {tech.replace('/techstack/', '').replace('.svg', '')}
+      {/* About Section */}
+      <section id="about" className="retro-container py-16 sm:py-24">
+        <div className="mb-12">
+          <h2 className="font-display text-4xl font-bold uppercase">About Me</h2>
+          <div className="retro-divider" />
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          <div className="retro-card">
+            <p className="mb-4 text-lg leading-relaxed">
+              My background is rooted in hospitality, service, and operational excellence. I enjoy
+              creating systems that are efficient, human-centered, and measurable. Over time, I
+              developed a strong interest in building practical digital experiences.
+            </p>
+            <p className="text-lg leading-relaxed">
+              I study Information Management and work on operational support and web development
+              projects, balancing customer-facing experience with data discipline and technical
+              execution.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="retro-card-accent">
+              <h3 className="mb-3 font-bold uppercase">Core Competencies</h3>
+              <ul className="space-y-2 text-sm font-bold uppercase">
+                <li>✓ Front Office Excellence</li>
+                <li>✓ Operations Optimization</li>
+                <li>✓ Customer Experience Design</li>
+                <li>✓ Data Accuracy & Reporting</li>
+                <li>✓ Team Leadership & Training</li>
+                <li>✓ Full-Stack Web Development</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="bg-muted py-16 sm:py-24">
+        <div className="retro-container">
+          <div className="mb-12">
+            <h2 className="font-display text-4xl font-bold uppercase">Skillset</h2>
+            <div className="retro-divider" />
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {/* Operations */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="retro-card"
+            >
+              <h3 className="mb-4 font-display text-2xl font-bold uppercase text-primary">
+                Operations & Service
+              </h3>
+              <p className="mb-4 text-sm text-muted-foreground">
+                Guest experience, service quality, upselling, and team leadership
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {skills.operations.map((skill) => (
+                  <span key={skill} className="retro-badge-secondary text-sm">
+                    {skill}
                   </span>
                 ))}
               </div>
-            </motion.a>
+            </motion.div>
+
+            {/* Tech */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="retro-card"
+            >
+              <h3 className="mb-4 font-display text-2xl font-bold uppercase text-secondary">
+                Tech & Development
+              </h3>
+              <p className="mb-4 text-sm text-muted-foreground">
+                Full-stack development, data processing, and modern web frameworks
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {skills.tech.map((skill) => (
+                  <span key={skill} className="retro-badge-accent text-sm">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="retro-container py-16 sm:py-24">
+        <div className="mb-12">
+          <h2 className="font-display text-4xl font-bold uppercase">Experience</h2>
+          <div className="retro-divider" />
+        </div>
+
+        <div className="space-y-6">
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={exp.role}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="retro-card"
+            >
+              <div className="mb-2 flex items-center justify-between gap-4">
+                <span className="retro-badge">{exp.period}</span>
+                <span className="text-xs font-bold uppercase text-muted-foreground">
+                  {exp.location}
+                </span>
+              </div>
+              <h3 className="mb-1 font-display text-xl font-bold uppercase">{exp.role}</h3>
+              <p className="mb-3 font-bold text-primary">{exp.company}</p>
+              <p className="leading-relaxed text-muted-foreground">{exp.desc}</p>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="section-block contact-section">
-        <div className="glass-card contact-card">
-          <div>
-            <p className="eyebrow alt">Let’s build something useful</p>
-            <h2>Open to opportunities, collaborations, and meaningful projects.</h2>
+      {/* Projects Section */}
+      <section id="work" className="bg-muted py-16 sm:py-24">
+        <div className="retro-container">
+          <div className="mb-12">
+            <h2 className="font-display text-4xl font-bold uppercase">Selected Work</h2>
+            <div className="retro-divider" />
           </div>
 
-          <div className="contact-actions">
-            <a href="https://wa.me/6285119512611" className="primary-btn" target="_blank" rel="noreferrer">
-              WhatsApp
-            </a>
-            <a href="https://www.linkedin.com/in/m-rizki-ramadhani" className="secondary-btn" target="_blank" rel="noreferrer">
-              LinkedIn
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredProjects.map((project, idx) => (
+              <motion.a
+                key={project.id}
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                className="group retro-card flex flex-col transition-all duration-300 hover:shadow-retro"
+              >
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="retro-badge">{project.number}</span>
+                  <span className="text-xs font-bold uppercase text-muted-foreground">
+                    {project.category}
+                  </span>
+                </div>
+                <h3 className="mb-2 font-bold uppercase group-hover:text-primary">
+                  {project.title}
+                </h3>
+                <p className="mb-4 flex-1 text-sm text-muted-foreground">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.techstack.slice(0, 2).map((tech, i) => (
+                    <span key={i} className="text-xs font-bold uppercase text-muted-foreground">
+                      {tech.replace('/techstack/', '').replace('.svg', '')}
+                    </span>
+                  ))}
+                  {project.techstack.length > 2 && (
+                    <span className="text-xs font-bold uppercase text-muted-foreground">
+                      +{project.techstack.length - 2}
+                    </span>
+                  )}
+                </div>
+              </motion.a>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <a href="https://github.com/RizkiRamadhani561?tab=repositories" target="_blank" rel="noreferrer" className="retro-button">
+              View All Projects →
             </a>
           </div>
         </div>
       </section>
-    </main>
+
+      {/* Contact Section */}
+      <section id="contact" className="retro-container border-t-4 border-black py-16 sm:py-24">
+        <div className="grid gap-12 md:grid-cols-2 md:items-center">
+          <div>
+            <h2 className="mb-4 font-display text-4xl font-bold uppercase">Let's Work Together</h2>
+            <p className="mb-8 text-lg text-muted-foreground">
+              I'm always interested in hearing about new projects and opportunities.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a href="mailto:ramscool98@gmail.com" className="retro-button bg-primary text-primary-foreground">
+                Email Me
+              </a>
+              <a
+                href="https://www.linkedin.com/in/m-rizki-ramadhani"
+                target="_blank"
+                rel="noreferrer"
+                className="retro-button bg-secondary text-secondary-foreground"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex gap-6">
+            <a
+              href="https://github.com/RizkiRamadhani561"
+              target="_blank"
+              rel="noreferrer"
+              className="retro-social-icon bg-foreground text-background hover:bg-primary hover:text-white"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/m-rizki-ramadhani"
+              target="_blank"
+              rel="noreferrer"
+              className="retro-social-icon bg-secondary"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a
+              href="mailto:ramscool98@gmail.com"
+              className="retro-social-icon bg-primary"
+              aria-label="Email"
+            >
+              <Mail className="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t-4 border-black bg-foreground text-background py-8">
+        <div className="retro-container">
+          <div className="grid gap-8 sm:grid-cols-3">
+            <div>
+              <p className="font-display font-bold uppercase">Rizki Ramadhani</p>
+              <p className="text-sm font-bold uppercase">Full-Stack Developer & Operations Specialist</p>
+            </div>
+            <div>
+              <p className="mb-2 font-bold uppercase text-accent">Quick Links</p>
+              <ul className="space-y-1 text-sm font-bold uppercase">
+                <li>
+                  <a href="#about" className="hover:text-accent">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#skills" className="hover:text-accent">
+                    Skills
+                  </a>
+                </li>
+                <li>
+                  <a href="#work" className="hover:text-accent">
+                    Work
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p className="mb-2 font-bold uppercase text-secondary">Connect</p>
+              <ul className="space-y-1 text-sm font-bold uppercase">
+                <li>
+                  <a href="https://github.com/RizkiRamadhani561" target="_blank" rel="noreferrer" className="hover:text-secondary">
+                    GitHub
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/in/m-rizki-ramadhani" target="_blank" rel="noreferrer" className="hover:text-secondary">
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:ramscool98@gmail.com" className="hover:text-secondary">
+                    Email
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="retro-divider mt-8" />
+          <p className="mt-6 text-center text-sm font-bold uppercase">
+            © 2026 M Rizki Ramadhani. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </>
   );
 }
