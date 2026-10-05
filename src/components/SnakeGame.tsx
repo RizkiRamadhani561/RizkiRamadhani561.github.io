@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FaArrowRotateRight, FaChevronDown, FaChevronLeft, FaChevronRight, FaChevronUp, FaKeyboard, FaTrophy } from 'react-icons/fa6';
 
@@ -47,8 +47,7 @@ function samePoint(a: Point, b: Point) {
 export function SnakeGame() {
   const [snake, setSnake] = useState<Point[]>(START_SNAKE);
   const [food, setFood] = useState<Point>(() => getRandomFood(START_SNAKE));
-  const [direction, setDirection] = useState<Direction>('right');
-  const [queuedDirection, setQueuedDirection] = useState<Direction>('right');
+    const [queuedDirection, setQueuedDirection] = useState<Direction>('right');
   const [running, setRunning] = useState(true);
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
@@ -99,8 +98,6 @@ export function SnakeGame() {
     const timer = window.setInterval(() => {
       setSnake((current) => {
         const nextDirection = directionRef.current;
-        setDirection(nextDirection);
-
         const head = current[0];
         const delta = DIR_VECTOR[nextDirection];
         const nextHead = { x: head.x + delta.x, y: head.y + delta.y };
@@ -148,7 +145,6 @@ export function SnakeGame() {
     setSnake(fresh);
     setFood(getRandomFood(fresh));
     setScore(0);
-    setDirection('right');
     setQueuedDirection('right');
     directionRef.current = 'right';
     setFlash(false);
