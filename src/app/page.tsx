@@ -201,14 +201,17 @@ export default function Home() {
             </div>
             <div className="skills-grid">
               {[
-                ['01', 'BUILD', skills.build, 'orange'],
-                ['02', 'DATA', skills.data, 'cyan'],
-                ['03', 'PRODUCT', skills.product, 'lime'],
-              ].map(([num, title, items, tone]) => (
-                <article className={`skill-card ${tone}`} key={title}>
-                  <div className="skill-head"><span>{num}</span><h3>{title}</h3></div>
+                { num: '01', title: 'BUILD', items: skills.build, tone: 'orange' },
+                { num: '02', title: 'DATA', items: skills.data, tone: 'cyan' },
+                { num: '03', title: 'PRODUCT', items: skills.product, tone: 'lime' },
+              ].map((skillGroup) => (
+                <article
+                  className={`skill-card ${skillGroup.tone}`}
+                  key={skillGroup.title}
+                >
+                  <div className="skill-head"><span>{skillGroup.num}</span><h3>{skillGroup.title}</h3></div>
                   <div className="tag-list">
-                    {(items as string[]).map((item) => <span key={item}>{item}</span>)}
+                    {skillGroup.items.map((item) => <span key={item}>{item}</span>)}
                   </div>
                 </article>
               ))}
