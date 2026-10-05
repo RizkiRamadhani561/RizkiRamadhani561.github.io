@@ -4025,3 +4025,438 @@ html {
     transform: rotate(-12deg) scale(.76);
   }
 }
+
+
+/* Dark mode text pass */
+.dark .hero h1,
+.dark .section-heading h2,
+.dark .heading-light h2 {
+  color: #ffffff;
+}
+
+.dark .hero h1 span,
+.dark .hero-accent,
+.dark .snake-copy h2 span {
+  color: #ff4dca;
+}
+
+.dark .contact-card h2 span {
+  color: #7c2d12;
+  text-shadow: 3px 3px 0 rgba(255,255,255,.45);
+}
+
+.dark .hero-lead,
+.dark .hero-lead strong {
+  color: #f7f4ff;
+}
+
+.dark .panel-dark,
+.dark .about-main {
+  background: #171329;
+  color: #ffffff;
+}
+
+.dark .panel-dark .panel-label,
+.dark .about-main .panel-label {
+  color: #c9ff3b;
+}
+
+.dark .about-main .big-copy {
+  color: #ffffff;
+}
+
+.dark .about-main .big-copy em {
+  color: #ff9d00;
+}
+
+.dark .about-main p {
+  color: #f2efff;
+}
+
+.dark .accent-panel,
+.dark .cyan-panel,
+.dark .white-panel {
+  color: #161129;
+}
+
+.dark .accent-panel h3,
+.dark .accent-panel p,
+.dark .cyan-panel h3,
+.dark .cyan-panel p,
+.dark .white-panel h3,
+.dark .white-panel p {
+  color: #161129;
+}
+
+.dark .skill-card.orange {
+  color: #ffffff;
+}
+
+.dark .skill-card.orange .skill-head h3,
+.dark .skill-card.orange .skill-head span {
+  color: #ffffff;
+}
+
+.dark .skill-card.cyan,
+.dark .skill-card.lime {
+  color: #161129;
+}
+
+.dark .skill-card.cyan .skill-head h3,
+.dark .skill-card.cyan .skill-head span,
+.dark .skill-card.lime .skill-head h3,
+.dark .skill-card.lime .skill-head span,
+.dark .skill-card.cyan .tag-list span,
+.dark .skill-card.lime .tag-list span {
+  color: #161129;
+}
+
+.dark .tag-list span {
+  color: #161129;
+  background: rgba(255,255,255,.92);
+}
+
+.dark .timeline-card {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .timeline-card h3 {
+  color: #3b176f !important;
+}
+
+.dark .timeline-card p,
+.dark .timeline-tools {
+  color: #2f2846 !important;
+}
+
+.dark .timeline-company {
+  color: #6b21a8 !important;
+}
+
+.dark .timeline-result {
+  color: #2f2846 !important;
+}
+
+.dark .timeline-result strong {
+  color: #9a3412 !important;
+}
+
+.dark .workflow-card,
+.dark .code-card {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .workflow-card *,
+.dark .code-card-head h3,
+.dark .code-tab {
+  color: #161129;
+}
+
+.dark .workflow-main-card {
+  background: #c9ff3b;
+  color: #161129;
+}
+
+.dark .workflow-main-copy h3,
+.dark .workflow-main-copy p {
+  color: #161129;
+}
+
+.dark .workflow-chip {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .workflow-chip.active,
+.dark .workflow-chip:hover {
+  background: #ff4dca;
+  color: #ffffff;
+}
+
+.dark .code-screen,
+.dark .code-screen code {
+  background: #120d22;
+  color: #ffffff;
+}
+
+.dark .code-card .code-card-head .workflow-label {
+  color: #3b176f;
+}
+
+.dark .github-pulse {
+  background: #22ddff;
+  color: #161129;
+}
+
+.dark .github-pulse h3,
+.dark .github-pulse p,
+.dark .github-pulse .section-index,
+.dark .github-pulse .github-stats strong,
+.dark .github-pulse .github-stats span {
+  color: #161129;
+}
+
+.dark .github-story {
+  background: #120d22;
+  color: #ffffff;
+}
+
+.dark .github-story h3,
+.dark .github-story p,
+.dark .github-story .signal-row {
+  color: #ffffff;
+}
+
+.dark .github-story .workflow-label {
+  color: #c9ff3b;
+}
+
+.dark .mini-link {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .section-dark {
+  color: #ffffff;
+}
+
+.dark .section-dark .section-index {
+  color: #c9ff3b;
+  background: #120d22;
+  border-color: #c9ff3b;
+}
+
+.dark .filter {
+  background: #120d22;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.dark .project-card {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .project-card .project-top,
+.dark .project-card h3,
+.dark .project-card p,
+.dark .project-card .project-category,
+.dark .project-card .project-tech span {
+  color: #161129;
+}
+
+.dark .project-card .project-category {
+  color: #5b21b6;
+}
+
+.dark .faq-item {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .faq-item button,
+.dark .faq-item button strong {
+  color: #161129;
+}
+
+.dark .faq-item button span {
+  color: #9a3412;
+}
+
+.dark .faq-item.open,
+.dark .faq-item.open button,
+.dark .faq-item.open .faq-answer,
+.dark .faq-item.open .faq-answer p {
+  background: #22ddff;
+  color: #161129;
+}
+
+.dark .contact-card {
+  background: #c9ff3b;
+  color: #161129;
+}
+
+.dark .contact-card h2,
+.dark .contact-card p {
+  color: #161129;
+}
+
+.dark .contact-links a {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .contact-links a:hover {
+  background: #ff4dca;
+  color: #ffffff;
+}
+
+.dark .footer {
+  background: #0a061b;
+  color: #ffffff;
+}
+
+.dark .footer p,
+.dark .footer span {
+  color: #ffffff;
+}
+
+.dark .footer a,
+.dark .footer-links a {
+  color: #c9ff3b;
+}
+
+.dark .route-title-card {
+  background: #171329;
+  color: #ffffff;
+}
+
+.dark .route-title-card h1 {
+  color: #ffffff;
+}
+
+.dark .route-title-card h1 span {
+  color: #ff4dca;
+}
+
+.dark .route-title-card p {
+  color: #f1edff;
+}
+
+.dark .route-info-card {
+  background: #22ddff;
+  color: #161129;
+}
+
+.dark .route-form-card {
+  background: #c9ff3b;
+  color: #161129;
+}
+
+.dark .route-info-card *,
+.dark .route-form-card label span,
+.dark .route-form-card p {
+  color: #161129;
+}
+
+.dark .route-contact-row {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .route-contact-row small {
+  color: #5b21b6;
+}
+
+.dark .route-socials a {
+  color: #ffffff;
+}
+
+.dark .route-submit {
+  color: #ffffff;
+}
+
+.dark .archive-card {
+  background: #ffffff;
+  color: #161129;
+}
+
+.dark .archive-card h2,
+.dark .archive-card > p,
+.dark .archive-card > small,
+.dark .archive-card .archive-tech span,
+.dark .archive-card .archive-card-top {
+  color: #161129;
+}
+
+.dark .archive-card > small {
+  color: #5b21b6;
+}
+
+.dark .archive-filter,
+.dark .archive-github {
+  color: #161129;
+  background: #ffffff;
+}
+
+.dark .archive-filter:nth-child(2) {
+  background: #22ddff;
+}
+
+.dark .archive-filter:nth-child(3) {
+  background: #c9ff3b;
+}
+
+.dark .archive-filter:nth-child(4) {
+  background: #ff4dca;
+  color: #ffffff;
+}
+
+.dark .archive-filter:nth-child(5) {
+  background: #a98cff;
+  color: #161129;
+}
+
+.dark .archive-github {
+  background: #ff4dca;
+  color: #ffffff;
+}
+
+.dark .theme-button {
+  background: #ff4dca;
+  color: #ffffff;
+}
+
+.dark .global-menu {
+  background: #22ddff;
+  color: #161129;
+}
+
+.dark .back-top {
+  background: #ff4dca;
+  color: #ffffff;
+}
+
+.dark .snake-section {
+  color: #ffffff;
+}
+
+.dark .snake-copy h2 {
+  color: #ffffff;
+}
+
+.dark .snake-copy > p {
+  color: #f2efff;
+}
+
+.dark .snake-console {
+  background: #c9ff3b;
+  color: #161129;
+}
+
+.dark .snake-console * {
+  color: #161129;
+}
+
+.dark .snake-reset {
+  background: #ff4dca;
+  color: #ffffff;
+}
+
+.dark .snake-machine,
+.dark .snake-gameboy {
+  color: #29312b;
+}
+
+.dark .gameboy-top,
+.dark .gameboy-led-row,
+.dark .gameboy-toggle-row,
+.dark .snake-status {
+  color: #29312b;
+}
+
+.dark .gameboy-menu button {
+  color: #f2f6ea;
+}
