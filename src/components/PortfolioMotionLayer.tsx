@@ -28,6 +28,36 @@ export function PortfolioMotionLayer() {
   }, [reduceMotion]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+
+    const forceTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    forceTop();
+    const firstFrame = window.requestAnimationFrame(forceTop);
+    const afterPaint = window.setTimeout(forceTop, 40);
+    const afterLoad = window.setTimeout(forceTop, 180);
+
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) forceTop();
+    };
+
+    window.addEventListener('pageshow', onPageShow);
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.clearTimeout(afterPaint);
+      window.clearTimeout(afterLoad);
+      window.removeEventListener('pageshow', onPageShow);
+      window.history.scrollRestoration = previous;
+    };
+  }, []);
+
+  useEffect(() => {
     if (reduceMotion) return;
     const lenis = new Lenis({
       duration: 1.05,
