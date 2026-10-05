@@ -185,56 +185,99 @@ export function SnakeGame() {
         </div>
       </div>
 
-      <div className={flash ? 'snake-machine crash' : 'snake-machine'}>
-        <div className="snake-machine-head">
-          <span>RIZKI://SNAKE_ENGINE</span>
-          <div><i /><i /><i /></div>
+      <div className={flash ? 'snake-gameboy shake' : 'snake-gameboy'}>
+        <div className="gameboy-top">
+          <span className="gameboy-brand">RIZKI BOY</span>
+          <span className="gameboy-model">DMG-01 // RR</span>
         </div>
 
-        <div className="snake-board-wrap">
-          <div className="snake-board" aria-label="Snake game board">
-            {cells.map((cell) => {
-              const snakeIndex = snake.findIndex((segment) => samePoint(segment, cell));
-              const isHead = snakeIndex === 0;
-              const isFood = samePoint(food, cell);
+        <div className="gameboy-screen-frame">
+          <div className="gameboy-screen">
+            <div className="gameboy-screen-header">
+              <span>SNAKE</span>
+              <span>{String(score).padStart(2, '0')}</span>
+            </div>
+            <div className="snake-board" aria-label="Snake game board">
+              {cells.map((cell) => {
+                const snakeIndex = snake.findIndex((segment) => samePoint(segment, cell));
+                const isHead = snakeIndex === 0;
+                const isFood = samePoint(food, cell);
 
-              return (
-                <div className="snake-cell" key={cell.y * SIZE + cell.x}>
-                  {isFood && (
-                    <motion.span
-                      className="snake-food"
-                      animate={{ scale: [1, 1.55, 1], rotate: [0, 90, 180] }}
-                      transition={{ duration: 0.75, repeat: Infinity, ease: 'easeInOut' }}
-                    />
-                  )}
+                return (
+                  <div className="snake-cell" key={cell.y * SIZE + cell.x}>
+                    {isFood && (
+                      <motion.span
+                        className="snake-food"
+                        animate={{ scale: [1, 1.45, 1] }}
+                        transition={{ duration: 0.7, repeat: Infinity, ease: 'easeInOut' }}
+                      />
+                    )}
 
-                  {snakeIndex >= 0 && (
-                    <motion.span
-                      layout
-                      className={isHead ? 'snake-segment snake-head' : 'snake-segment'}
-                      transition={{ layout: { duration: 0.09 } }}
-                    >
-                      {isHead && <span className="snake-eyes">••</span>}
-                    </motion.span>
-                  )}
-                </div>
-              );
-            })}
+                    {snakeIndex >= 0 && (
+                      <motion.span
+                        layout
+                        className={isHead ? 'snake-segment snake-head' : 'snake-segment'}
+                        transition={{ layout: { duration: 0.08 } }}
+                      >
+                        {isHead && <span className="snake-eyes">••</span>}
+                      </motion.span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
+        </div>
+
+        <div className="gameboy-led-row">
+          <span className={running ? 'led-on' : 'led-off'} />
+          <small>{running ? 'POWER ON' : 'GAME OVER'}</small>
+        </div>
+
+        <div className="gameboy-controls">
+          <div className="dpad" aria-label="Directional pad">
+            <button className="dpad-up" onClick={() => { changeDirection('up'); setRunning(true); }} aria-label="Move up"><FaChevronUp /></button>
+            <button className="dpad-left" onClick={() => { changeDirection('left'); setRunning(true); }} aria-label="Move left"><FaChevronLeft /></button>
+            <button className="dpad-center" aria-hidden="true" tabIndex={-1} />
+            <button className="dpad-right" onClick={() => { changeDirection('right'); setRunning(true); }} aria-label="Move right"><FaChevronRight /></button>
+            <button className="dpad-down" onClick={() => { changeDirection('down'); setRunning(true); }} aria-label="Move down"><FaChevronDown /></button>
+          </div>
+
+          <div className="gameboy-action-area">
+            <button className="gb-button gb-b" onClick={reset} aria-label="B button: restart">
+              B
+            </button>
+            <button className="gb-button gb-a" onClick={() => setRunning(true)} aria-label="A button: resume">
+              A
+            </button>
+          </div>
+        </div>
+
+        <div className="gameboy-menu">
+          <button onClick={reset} data-cursor>SELECT</button>
+          <button onClick={() => setRunning((value) => !value)} data-cursor>{running ? 'PAUSE' : 'START'}</button>
+        </div>
+
+        <div className="gameboy-speaker" aria-hidden="true">
+          <i /><i /><i /><i /><i /><i /><i /><i />
+        </div>
+
+        <div className="gameboy-toggle-row">
+          <span>POWER</span>
+          <button
+            className={running ? 'power-toggle on' : 'power-toggle'}
+            onClick={() => setRunning((value) => !value)}
+            data-cursor
+            aria-label={running ? 'Turn game off' : 'Turn game on'}
+          >
+            <span />
+          </button>
+          <span>{running ? 'ON' : 'OFF'}</span>
         </div>
 
         <div className="snake-status">
           <span className={running ? 'led-on' : 'led-off'} />
-          {running ? 'SYSTEM RUNNING' : 'SYSTEM CRASHED — HIT RESTART'}
-        </div>
-      </div>
-
-      <div className="snake-controls" aria-label="Snake controls">
-        <button onClick={() => changeDirection('up')} aria-label="Move up"><FaChevronUp /></button>
-        <div>
-          <button onClick={() => changeDirection('left')} aria-label="Move left"><FaChevronLeft /></button>
-          <button onClick={() => changeDirection('down')} aria-label="Move down"><FaChevronDown /></button>
-          <button onClick={() => changeDirection('right')} aria-label="Move right"><FaChevronRight /></button>
+          {running ? 'SYSTEM RUNNING' : 'SYSTEM PAUSED / CRASHED'}
         </div>
       </div>
     </section>
