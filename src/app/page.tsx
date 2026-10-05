@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   FaArrowRight,
   FaCode,
+  FaDownload,
   FaEnvelope,
   FaGithub,
   FaLinkedin,
@@ -320,6 +321,9 @@ export default function Home() {
             </p>
             <div className="hero-actions">
               <a href="#work" className="button button-primary" data-cursor>Explore my work <FaArrowRight /></a>
+              <a href="/CV_M_Rizki_Ramadhani.pdf" className="button button-light" download="CV_M_Rizki_Ramadhani.pdf" data-cursor>
+                Download CV <FaDownload />
+              </a>
               <a href="#contact" className="button button-light" data-cursor>Start a conversation</a>
             </div>
             <div className="micro-stats">
