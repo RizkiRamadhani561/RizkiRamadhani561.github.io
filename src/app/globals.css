@@ -3758,3 +3758,270 @@ html {
     height: 41px;
   }
 }
+
+
+/* Final contrast cleanup — unused dock is gone, so keep lower UI minimal */
+.floating-dock {
+  display: none !important;
+}
+
+.social-rail {
+  bottom: 18px;
+}
+
+.back-top {
+  top: 96px;
+}
+
+/* Dark mode: no accidental dark-on-dark text */
+.dark .panel,
+.dark .skill-card,
+.dark .workflow-card,
+.dark .code-card,
+.dark .timeline-card,
+.dark .github-pulse,
+.dark .project-card,
+.dark .faq-item,
+.dark .contact-card,
+.dark .route-info-card,
+.dark .route-form-card,
+.dark .snake-section {
+  text-rendering: optimizeLegibility;
+}
+
+.dark .hero-window,
+.dark .github-story,
+.dark .code-screen,
+.dark .section-dark {
+  color: #ffffff;
+}
+
+.dark .hero-window p,
+.dark .hero-window h2,
+.dark .terminal-body p,
+.dark .terminal-status {
+  color: #ffffff;
+}
+
+.dark .section-dark .project-card p,
+.dark .section-dark .project-card h3,
+.dark .section-dark .project-category,
+.dark .section-dark .project-tech span,
+.dark .section-dark .project-top {
+  color: #161129;
+}
+
+.dark .metric-label {
+  color: #161129;
+}
+
+.dark .about-main .metric-label,
+.dark .about-main .metric-value {
+  color: #ffffff;
+}
+
+.dark .github-story .workflow-label,
+.dark .github-story .section-index {
+  color: var(--lime);
+  background: transparent;
+  border-left: 0;
+}
+
+.dark .footer-links a,
+.dark .footer a {
+  color: var(--lime);
+}
+
+.dark .route-submit,
+.dark .snake-reset {
+  background: var(--purple);
+  color: #ffffff;
+}
+
+.dark .route-socials a {
+  background: var(--pink);
+  color: #ffffff;
+}
+
+.dark .route-socials a:hover,
+.dark .route-submit:hover,
+.dark .snake-reset:hover {
+  background: var(--orange);
+  color: #ffffff;
+}
+
+/* Game Boy sizing contract */
+.snake-section {
+  overflow: clip;
+}
+
+.snake-gameboy {
+  box-sizing: border-box;
+  isolation: isolate;
+}
+
+.gameboy-screen-frame,
+.gameboy-screen {
+  box-sizing: border-box;
+}
+
+.gameboy-screen .snake-board {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+.gameboy-controls,
+.gameboy-menu,
+.gameboy-speaker,
+.gameboy-toggle-row {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dpad button,
+.gb-button,
+.gameboy-menu button,
+.power-toggle {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 640px) {
+  .snake-section {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .snake-gameboy {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .gameboy-screen-frame {
+    max-width: 100%;
+    padding: clamp(7px, 2vw, 11px);
+  }
+
+  .gameboy-screen {
+    max-width: 100%;
+  }
+
+  .gameboy-screen-header {
+    min-height: 17px;
+    align-items: center;
+  }
+
+  .gameboy-controls {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    column-gap: clamp(3px, 2vw, 10px);
+    min-height: clamp(122px, 34vw, 150px);
+  }
+
+  .dpad {
+    width: clamp(92px, 30vw, 112px);
+    height: clamp(92px, 30vw, 112px);
+  }
+
+  .dpad button {
+    width: clamp(30px, 9.4vw, 35px);
+    height: clamp(30px, 9.4vw, 35px);
+  }
+
+  .dpad-up,
+  .dpad-center,
+  .dpad-down {
+    left: clamp(30px, 9.4vw, 35px);
+  }
+
+  .dpad-left,
+  .dpad-right {
+    top: clamp(30px, 9.4vw, 35px);
+  }
+
+  .gameboy-action-area {
+    gap: clamp(7px, 2.2vw, 13px);
+    margin-right: 0;
+    transform: rotate(-12deg) scale(clamp(.74, 21vw / 100, .92));
+    justify-self: center;
+  }
+
+  .gb-button {
+    width: clamp(41px, 13.5vw, 52px);
+    height: clamp(41px, 13.5vw, 52px);
+    font-size: clamp(.9rem, 4vw, 1.15rem);
+  }
+
+  .gameboy-menu {
+    margin-top: 2px;
+    gap: clamp(7px, 2.7vw, 13px);
+  }
+
+  .gameboy-menu button {
+    padding: 5px clamp(7px, 2vw, 11px);
+    font-size: clamp(.32rem, 1.5vw, .42rem);
+  }
+
+  .gameboy-speaker {
+    grid-template-columns: repeat(8, clamp(5px, 1.8vw, 7px));
+    gap: clamp(3px, 1.4vw, 5px);
+  }
+
+  .gameboy-speaker i {
+    width: clamp(5px, 1.8vw, 7px);
+    height: clamp(5px, 1.8vw, 7px);
+  }
+
+  .gameboy-toggle-row {
+    font-size: clamp(.34rem, 1.55vw, .46rem);
+  }
+
+  .power-toggle {
+    width: clamp(39px, 13vw, 45px);
+    height: clamp(18px, 5.4vw, 21px);
+  }
+
+  .power-toggle span {
+    width: clamp(10px, 3.5vw, 13px);
+    height: clamp(10px, 3.5vw, 13px);
+  }
+}
+
+@media (max-width: 380px) {
+  .global-navbar-inner {
+    gap: 4px;
+  }
+
+  .global-brand-name {
+    max-width: 92px;
+    font-size: .65rem;
+  }
+
+  .global-brand-mark {
+    width: 37px;
+    height: 37px;
+  }
+
+  .global-actions {
+    gap: 3px;
+  }
+
+  .snake-section {
+    padding-inline: 7px;
+  }
+
+  .snake-gameboy {
+    border-width: 4px;
+    padding: 11px 8px 14px;
+  }
+
+  .gameboy-controls {
+    min-height: 117px;
+  }
+
+  .gameboy-action-area {
+    transform: rotate(-12deg) scale(.76);
+  }
+}
