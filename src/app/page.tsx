@@ -10,7 +10,6 @@ import {
   FaEnvelope,
   FaGithub,
   FaLinkedin,
-  FaMoon,
   FaTerminal,
   FaXmark,
 } from 'react-icons/fa6';
