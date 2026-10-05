@@ -4460,3 +4460,81 @@ html {
 .dark .gameboy-menu button {
   color: #f2f6ea;
 }
+
+
+/* Readable display type */
+.hero h1,
+.section-heading h2,
+.contact-card h2,
+.snake-copy h2,
+.route-title-card h1 {
+  font-family: var(--font-space-grotesk), Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: .94;
+  font-synthesis: none;
+}
+
+.hero h1 {
+  font-size: clamp(3.1rem, 7.2vw, 6.8rem);
+}
+
+.section-heading h2 {
+  font-size: clamp(2.5rem, 5.8vw, 4.8rem);
+}
+
+.contact-card h2 {
+  font-size: clamp(2.55rem, 6vw, 5.1rem);
+}
+
+.snake-copy h2 {
+  font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+}
+
+.route-title-card h1 {
+  font-size: clamp(2.9rem, 7vw, 6.2rem);
+}
+
+.hero h1 span,
+.hero h1 .hero-accent,
+.contact-card h2 span,
+.snake-copy h2 span,
+.route-title-card h1 span {
+  font-weight: 700;
+}
+
+.dark .hero h1,
+.dark .section-heading h2,
+.dark .contact-card h2,
+.dark .snake-copy h2,
+.dark .route-title-card h1 {
+  color: #ffffff;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.55);
+}
+
+.dark .hero h1 span,
+.dark .hero h1 .hero-accent,
+.dark .snake-copy h2 span,
+.dark .route-title-card h1 span {
+  color: #ff4dca;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.55);
+}
+
+@media (max-width: 640px) {
+  .hero h1 {
+    font-size: clamp(2.7rem, 13.5vw, 4.6rem);
+  }
+
+  .section-heading h2 {
+    font-size: clamp(2.2rem, 10.8vw, 3.7rem);
+  }
+
+  .contact-card h2,
+  .snake-copy h2 {
+    font-size: clamp(2.25rem, 10.5vw, 3.7rem);
+  }
+
+  .route-title-card h1 {
+    font-size: clamp(2.35rem, 12vw, 3.8rem);
+  }
+}
