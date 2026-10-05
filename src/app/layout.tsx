@@ -104,13 +104,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `(() => {
               try {
+                const key = 'rizki-theme';
+                const stored = localStorage.getItem(key);
+                const dark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                document.documentElement.classList.toggle('dark', dark);
+                document.documentElement.dataset.theme = dark ? 'dark' : 'light';
                 const nav = performance.getEntriesByType('navigation')[0];
                 if (nav && nav.type === 'reload' && window.location.hash) {
-                  window.history.replaceState(
-                    null,
-                    document.title,
-                    window.location.pathname + window.location.search
-                  );
+                  window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
                 }
                 window.scrollTo(0, 0);
               } catch (_) {}
