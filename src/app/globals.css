@@ -4538,3 +4538,253 @@ html {
     font-size: clamp(2.35rem, 12vw, 3.8rem);
   }
 }
+
+
+/* Final theme and typography override */
+html.dark,
+body.dark {
+  --bg: #0c0820 !important;
+  --paper: #171329 !important;
+  --ink: #ffffff !important;
+  --muted: #eee9ff !important;
+}
+
+html.dark body,
+body.dark {
+  background:
+    radial-gradient(circle at 8% 7%, rgba(255,106,0,.16), transparent 20rem),
+    radial-gradient(circle at 92% 11%, rgba(34,221,255,.14), transparent 22rem),
+    radial-gradient(circle at 75% 78%, rgba(255,77,202,.10), transparent 20rem),
+    #0c0820 !important;
+  color: #ffffff !important;
+}
+
+html.dark .site-shell,
+body.dark .site-shell {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+html.dark .hero h1,
+html.dark .section-heading h2,
+html.dark .contact-card h2,
+html.dark .snake-copy h2,
+html.dark .route-title-card h1,
+body.dark .hero h1,
+body.dark .section-heading h2,
+body.dark .contact-card h2,
+body.dark .snake-copy h2,
+body.dark .route-title-card h1 {
+  font-family: var(--font-space-grotesk), Arial, sans-serif !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+html.dark .hero h1 span,
+html.dark .hero h1 .hero-accent,
+html.dark .snake-copy h2 span,
+html.dark .route-title-card h1 span,
+body.dark .hero h1 span,
+body.dark .hero h1 .hero-accent,
+body.dark .snake-copy h2 span,
+body.dark .route-title-card h1 span {
+  color: #ff4dca !important;
+  -webkit-text-fill-color: #ff4dca !important;
+  text-shadow: none !important;
+}
+
+html.dark .hero-lead,
+html.dark .section p,
+html.dark .hero .kicker,
+html.dark .panel p,
+html.dark .skill-card,
+html.dark .timeline-card,
+html.dark .workflow-card,
+html.dark .code-card,
+html.dark .github-story,
+html.dark .project-card,
+html.dark .faq-item,
+html.dark .contact-card,
+html.dark .footer,
+body.dark .hero-lead,
+body.dark .section p,
+body.dark .hero .kicker,
+body.dark .panel p,
+body.dark .skill-card,
+body.dark .timeline-card,
+body.dark .workflow-card,
+body.dark .code-card,
+body.dark .github-story,
+body.dark .project-card,
+body.dark .faq-item,
+body.dark .contact-card,
+body.dark .footer {
+  text-shadow: none !important;
+}
+
+html.dark .hero-lead,
+body.dark .hero-lead {
+  color: #f7f4ff !important;
+}
+
+html.dark .section-heading .section-index,
+body.dark .section-heading .section-index {
+  color: #6d28d9 !important;
+  background: #ffffff !important;
+  border-color: #6d28d9 !important;
+}
+
+html.dark .hero .kicker,
+body.dark .hero .kicker {
+  color: #c4b5fd !important;
+  background: #171329 !important;
+  border-color: #a78bfa !important;
+}
+
+html.dark .panel-dark,
+body.dark .panel-dark {
+  background: #171329 !important;
+  color: #ffffff !important;
+}
+
+html.dark .panel-dark p,
+body.dark .panel-dark p {
+  color: #f7f4ff !important;
+}
+
+html.dark .github-story,
+body.dark .github-story {
+  background: #120d22 !important;
+  color: #ffffff !important;
+}
+
+html.dark .github-story p,
+html.dark .github-story h3,
+html.dark .github-story .signal-row,
+body.dark .github-story p,
+body.dark .github-story h3,
+body.dark .github-story .signal-row {
+  color: #ffffff !important;
+}
+
+html.dark .timeline-card,
+html.dark .project-card,
+html.dark .faq-item,
+body.dark .timeline-card,
+body.dark .project-card,
+body.dark .faq-item {
+  background: #ffffff !important;
+  color: #161129 !important;
+}
+
+html.dark .timeline-card *,
+html.dark .project-card *,
+html.dark .faq-item *,
+body.dark .timeline-card *,
+body.dark .project-card *,
+body.dark .faq-item * {
+  color: #161129 !important;
+}
+
+html.dark .timeline-company,
+html.dark .project-category,
+body.dark .timeline-company,
+body.dark .project-category {
+  color: #5b21b6 !important;
+}
+
+html.dark .timeline-result strong,
+body.dark .timeline-result strong {
+  color: #9a3412 !important;
+}
+
+html.dark .workflow-card,
+html.dark .code-card,
+body.dark .workflow-card,
+body.dark .code-card {
+  background: #ffffff !important;
+  color: #161129 !important;
+}
+
+html.dark .workflow-card *,
+html.dark .code-card *,
+body.dark .workflow-card *,
+body.dark .code-card * {
+  color: #161129 !important;
+}
+
+html.dark .workflow-main-card,
+body.dark .workflow-main-card {
+  background: #c9ff3b !important;
+  color: #161129 !important;
+}
+
+html.dark .code-screen,
+html.dark .code-screen code,
+body.dark .code-screen,
+body.dark .code-screen code {
+  background: #100b1c !important;
+  color: #ffffff !important;
+}
+
+html.dark .github-pulse,
+body.dark .github-pulse {
+  background: #22ddff !important;
+  color: #161129 !important;
+}
+
+html.dark .github-pulse *,
+body.dark .github-pulse * {
+  color: #161129 !important;
+}
+
+html.dark .filter,
+body.dark .filter {
+  background: #100b1c !important;
+  color: #ffffff !important;
+}
+
+html.dark .filter.active,
+html.dark .filter:hover,
+body.dark .filter.active,
+body.dark .filter:hover {
+  background: #c9ff3b !important;
+  color: #161129 !important;
+}
+
+html.dark .contact-card,
+body.dark .contact-card {
+  background: #c9ff3b !important;
+  color: #161129 !important;
+}
+
+html.dark .contact-card *,
+body.dark .contact-card * {
+  color: #161129 !important;
+}
+
+html.dark .contact-links a,
+body.dark .contact-links a {
+  background: #ffffff !important;
+  color: #161129 !important;
+}
+
+html.dark .footer,
+body.dark .footer {
+  background: #090611 !important;
+  color: #ffffff !important;
+}
+
+html.dark .footer *,
+body.dark .footer * {
+  color: #ffffff !important;
+}
+
+@media (max-width: 640px) {
+  html.dark .section-heading h2,
+  body.dark .section-heading h2 {
+    font-size: clamp(2.15rem, 10.5vw, 3.7rem) !important;
+    line-height: .98 !important;
+  }
+}
