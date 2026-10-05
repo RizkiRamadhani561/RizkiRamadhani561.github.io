@@ -5,26 +5,15 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   FaArrowRight,
-  FaBars,
   FaCode,
   FaEnvelope,
   FaGithub,
   FaLinkedin,
   FaTerminal,
-  FaXmark,
 } from 'react-icons/fa6';
 import projects from '@/data/projects';
-import { PortfolioMotionLayer, ThemeToggleButton } from '@/components/PortfolioMotionLayer';
+import { PortfolioMotionLayer } from '@/components/PortfolioMotionLayer';
 import { SnakeGame } from '@/components/SnakeGame';
-
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Toolkit', href: '#skills' },
-  { label: 'Journey', href: '#journey' },
-  { label: 'Work', href: '#work' },
-  { label: 'Contact', href: '#contact' },
-];
 
 const skills = {
   build: ['TypeScript', 'React', 'Next.js', 'Node.js', 'PHP', 'REST API'],
@@ -255,7 +244,6 @@ function GithubPulse() {
 
 export default function Home() {
   const reduceMotion = useReducedMotion();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState('All');
   const [workflowIndex, setWorkflowIndex] = useState(0);
   const [snippetTab, setSnippetTab] = useState<keyof typeof snippets>('frontend');
@@ -304,44 +292,6 @@ export default function Home() {
   return (
     <div className="site-shell">
       <PortfolioMotionLayer />
-
-      <header className="topbar">
-        <div className="container topbar-inner">
-          <Link href="#home" className="brand" onClick={() => setMenuOpen(false)} data-cursor>
-            <span className="brand-mark">RR</span>
-            <span>Rizki Ramadhani</span>
-          </Link>
-
-          <nav className="desktop-nav">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href} data-cursor>{item.label}</a>
-            ))}
-          </nav>
-
-          <div className="top-actions">
-            <ThemeToggleButton />
-            <a className="top-cta" href="#contact" data-cursor>Let&apos;s talk <FaArrowRight /></a>
-            <button className="menu-toggle" onClick={() => setMenuOpen((v) => !v)} aria-label="Toggle menu">
-              {menuOpen ? <FaXmark /> : <FaBars />}
-            </button>
-          </div>
-        </div>
-
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              className="mobile-nav"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-            >
-              {navItems.map((item) => (
-                <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
 
       <main>
         <section id="home" className="container hero" data-reveal>
