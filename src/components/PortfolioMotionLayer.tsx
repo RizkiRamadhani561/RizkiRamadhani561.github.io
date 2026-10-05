@@ -3,7 +3,7 @@
 import Lenis from 'lenis';
 import { motion, useMotionValue, useScroll, useSpring, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { FaMoon, FaSun, FaArrowUp, FaHouse, FaFolderOpen, FaUser, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa6';
+import { FaMoon, FaSun, FaArrowUp, FaGithub, FaLinkedin } from 'react-icons/fa6';
 
 export function PortfolioMotionLayer() {
   const reduceMotion = useReducedMotion();
@@ -30,20 +30,29 @@ export function PortfolioMotionLayer() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+    const isReload = navigationEntry?.type === 'reload';
+
     const previous = window.history.scrollRestoration;
     window.history.scrollRestoration = 'manual';
 
-    const forceTop = () => {
-      window.scrollTo(0, 0);
-    };
+    if (isReload && window.location.hash) {
+      window.history.replaceState(
+        null,
+        document.title,
+        window.location.pathname + window.location.search,
+      );
+    }
+
+    const forceTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 
     forceTop();
     const firstFrame = window.requestAnimationFrame(forceTop);
-    const afterPaint = window.setTimeout(forceTop, 40);
-    const afterLoad = window.setTimeout(forceTop, 180);
+    const afterPaint = window.setTimeout(forceTop, 30);
+    const afterLoad = window.setTimeout(forceTop, 140);
 
     const onPageShow = (event: PageTransitionEvent) => {
-      if (event.persisted) forceTop();
+      if (event.persisted || isReload) forceTop();
     };
 
     window.addEventListener('pageshow', onPageShow);
@@ -165,13 +174,6 @@ export function PortfolioMotionLayer() {
       )}
 
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} aria-hidden="true" />
-
-      <div className="floating-dock" aria-label="Quick navigation">
-        <a href="#home" data-cursor aria-label="Home"><FaHouse /></a>
-        <a href="#work" data-cursor aria-label="Work"><FaFolderOpen /></a>
-        <a href="#about" data-cursor aria-label="About"><FaUser /></a>
-        <a href="#contact" data-cursor aria-label="Contact"><FaEnvelope /></a>
-      </div>
 
       <div className="social-rail" aria-label="Social links">
         <a href="https://github.com/RizkiRamadhani561" target="_blank" rel="noreferrer" data-cursor aria-label="GitHub"><FaGithub /></a>
