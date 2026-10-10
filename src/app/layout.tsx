@@ -3,6 +3,7 @@ import { Bungee, Press_Start_2P, Space_Grotesk } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import { GlobalNavbar } from "@/components/GlobalNavbar";
+import { GoatCounter } from "@/components/GoatCounter";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
