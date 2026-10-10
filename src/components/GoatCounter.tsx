@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import styles from "./VisitorCount.module.css";
 
 declare global {
   interface Window {
@@ -97,8 +98,20 @@ export function VisitorCount() {
   }, []);
 
   return (
-    <span className="visitor-count" aria-live="polite" title="Jumlah kunjungan seluruh portfolio">
-      <span aria-hidden="true">↗</span> VISITS: {count ?? "—"}
+    <span
+      className={styles.visitorPill}
+      aria-live="polite"
+      title="Jumlah kunjungan seluruh portfolio"
+    >
+      <span className={styles.iconWrap} aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" />
+          <circle cx="12" cy="12" r="2.6" />
+        </svg>
+      </span>
+      <span className={styles.label}>VISITORS</span>
+      <span className={styles.count}>{count ?? "—"}</span>
+      <span className={styles.note}>ALL TIME</span>
     </span>
   );
 }
