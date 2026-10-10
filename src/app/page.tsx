@@ -319,6 +319,21 @@ export default function Home() {
               I&apos;m <strong>M. Rizki Ramadhani</strong> — an Information Management student combining
               web development, data discipline, and real-world service experience to create practical digital products.
             </p>
+            <motion.div
+              className="arch-btw"
+              aria-label="i use arch btw"
+              initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -2 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: [0, -4, 0], rotate: [-1.5, 1.5, -1.5] }}
+              transition={reduceMotion ? undefined : {
+                opacity: { duration: 0.45, delay: 0.7 },
+                y: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' },
+                rotate: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+              }}
+            >
+              <span className="arch-prompt" aria-hidden="true">~/</span>
+              <span>i use arch btw</span>
+              <span className="arch-spark" aria-hidden="true">✳</span>
+            </motion.div>
             <div className="hero-actions">
               <a href="#work" className="button button-primary" data-cursor>Explore my work <FaArrowRight /></a>
               <a href="/CV_M_Rizki_Ramadhani.pdf" className="button button-light" download="CV_M_Rizki_Ramadhani.pdf" data-cursor>
