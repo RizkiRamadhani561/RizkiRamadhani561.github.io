@@ -298,7 +298,7 @@ export default function Home() {
         <section id="home" className="container hero" data-reveal>
           <div className="hero-copy">
             <div className="eyebrow"><span className="status-dot" /> Available for selected opportunities</div>
-            <p className="kicker">FULL-STACK DEVELOPER / OPERATIONS</p>
+            <p className="kicker">WEB DEVELOPMENT / IT SUPPORT / DATA OPERATIONS</p>
             <h1>
               <span className="hero-line">Build useful things.</span>
               <span className="hero-line hero-accent">
@@ -316,8 +316,9 @@ export default function Home() {
               </span>
             </h1>
             <p className="hero-lead">
-              I&apos;m <strong>M. Rizki Ramadhani</strong> — an Information Management student combining
-              web development, data discipline, and real-world service experience to create practical digital products.
+              I&apos;m <strong>M. Rizki Ramadhani</strong>, an Information Management student in Jakarta, Indonesia.
+              I build practical web applications and bring experience in IT support, computer networking,
+              SQL and spreadsheet workflows, and day-to-day operations.
             </p>
             <motion.div
               className="arch-meme"
