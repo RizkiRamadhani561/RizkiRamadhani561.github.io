@@ -3,7 +3,38 @@ export const SOCIAL_CARD_SIZE = {
   height: 630,
 } as const;
 
-export function PortfolioSocialCard() {
+type SocialCardVariant = "home" | "projects" | "contact";
+
+const VARIANT_COPY: Record<
+  SocialCardVariant,
+  { eyebrow: string; firstLine: string; secondLine: string; description: string }
+> = {
+  home: {
+    eyebrow: "PORTFOLIO / JAKARTA, INDONESIA",
+    firstLine: "M. RIZKI",
+    secondLine: "RAMADHANI.",
+    description: "Web Development · IT Support · Networking · Data Operations",
+  },
+  projects: {
+    eyebrow: "PROJECT ARCHIVE / SELECTED WORK",
+    firstLine: "WEB & SOFTWARE",
+    secondLine: "PROJECT ARCHIVE.",
+    description: "React · Next.js · TypeScript · PHP · MySQL · Practical Systems",
+  },
+  contact: {
+    eyebrow: "CONTACT / COLLABORATION",
+    firstLine: "LET'S BUILD",
+    secondLine: "SOMETHING USEFUL.",
+    description: "Web Development · IT Support · Data Workflows",
+  },
+};
+
+export function PortfolioSocialCard({
+  variant = "home",
+}: {
+  variant?: SocialCardVariant;
+} = {}) {
+  const copy = VARIANT_COPY[variant];
   return (
     <div
       style={{
@@ -108,7 +139,7 @@ export function PortfolioSocialCard() {
               backgroundColor: "#d9ff57",
             }}
           />
-          PORTFOLIO / JAKARTA, INDONESIA
+          {copy.eyebrow}
         </div>
         <div
           style={{
@@ -121,8 +152,8 @@ export function PortfolioSocialCard() {
             lineHeight: 1.02,
           }}
         >
-          <span>M. RIZKI</span>
-          <span style={{ color: "#d9ff57" }}>RAMADHANI.</span>
+          <span>{copy.firstLine}</span>
+          <span style={{ color: "#d9ff57" }}>{copy.secondLine}</span>
         </div>
         <div
           style={{
@@ -135,7 +166,7 @@ export function PortfolioSocialCard() {
             lineHeight: 1.4,
           }}
         >
-          Web Development · IT Support · Networking · Data Operations
+          {copy.description}
         </div>
         <div
           style={{
