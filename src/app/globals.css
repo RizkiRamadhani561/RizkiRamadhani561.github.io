@@ -4951,3 +4951,414 @@ body.dark .footer * {
     height: 37px;
   }
 }
+
+
+/* Pocket arcade: three playable modes + a terminal-flavoured Arch meme */
+.arch-meme {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 390px);
+  max-width: 100%;
+  margin: 14px 0 24px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: #151124;
+  color: #f7f4ff;
+  box-shadow: 5px 5px 0 var(--ink);
+  transform-origin: left center;
+}
+.arch-meme-titlebar {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 11px;
+  border-bottom: 1px solid rgba(255,255,255,.13);
+  background: #252039;
+}
+.arch-window-dots {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+}
+.arch-window-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+.arch-window-dots i:nth-child(2) { background: #febc2e; }
+.arch-window-dots i:nth-child(3) { background: #28c840; }
+.arch-terminal-title {
+  min-width: 0;
+  overflow: hidden;
+  color: #d5cbee;
+  font-family: var(--font-press-start), monospace;
+  font-size: .43rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.arch-meme-tag {
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 4px 6px;
+  background: var(--pink);
+  color: #171329;
+  font-family: var(--font-press-start), monospace;
+  font-size: .38rem;
+  font-weight: 900;
+  transform: rotate(2deg);
+}
+.arch-meme-content {
+  padding: 13px 15px 12px;
+}
+.arch-cli-line {
+  color: #d7ff7a;
+  font-family: var(--font-press-start), monospace;
+  font-size: .53rem;
+  letter-spacing: .01em;
+}
+.arch-cli-line span { color: #b39bff; }
+.arch-detected {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 13px;
+  color: #c7bedf;
+  font-family: var(--font-press-start), monospace;
+  font-size: .43rem;
+  letter-spacing: .04em;
+}
+.arch-detected span {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 1px solid #9e87ff;
+  border-radius: 5px;
+  color: #d5c9ff;
+  font-family: sans-serif;
+  font-size: 1rem;
+}
+.arch-claim {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-top: 9px;
+  color: #d9ff57;
+  font-family: var(--font-bungee), system-ui, sans-serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.65rem);
+  line-height: 1.2;
+  letter-spacing: -.035em;
+  text-shadow: 2px 2px 0 #7048d8;
+  overflow-wrap: anywhere;
+}
+.arch-claim em {
+  color: #fff;
+  font-style: normal;
+}
+.arch-claim span {
+  color: #ff75d9;
+  font-family: sans-serif;
+  font-size: .75em;
+  text-shadow: none;
+}
+.arch-meme-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 12px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255,255,255,.22);
+  color: #c6bed8;
+  font-family: var(--font-press-start), monospace;
+  font-size: .4rem;
+  line-height: 1.7;
+}
+.arch-meme-footer span:first-child {
+  opacity: .7;
+  text-decoration: line-through;
+}
+.arch-meme-footer span:last-child { color: #ff8fe2; }
+
+.arcade-section {
+  grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr);
+  gap: clamp(20px, 3vw, 36px);
+}
+.arcade-section .snake-copy,
+.arcade-section .snake-gameboy {
+  min-width: 0;
+}
+.arcade-console-note {
+  margin: -4px 0 18px;
+  color: #302a47;
+  font-family: var(--font-press-start), monospace;
+  font-size: .48rem;
+  line-height: 1.8;
+}
+.arcade-controls-hint {
+  margin-top: 15px;
+  font-family: var(--font-press-start), monospace;
+  font-size: .5rem;
+  line-height: 1.9;
+  letter-spacing: -.02em;
+}
+.gameboy-library {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  padding: 12px 4px 14px;
+}
+.gameboy-game-tab {
+  display: flex;
+  min-width: 0;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 5px;
+  border: 2px solid #171329;
+  border-radius: 5px;
+  background: #ded9c8;
+  color: #171329;
+  box-shadow: 0 3px 0 rgba(23,19,41,.25);
+  cursor: pointer;
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(.36rem, .65vw, .48rem);
+  line-height: 1.5;
+  white-space: nowrap;
+  transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.gameboy-game-tab:hover {
+  transform: translateY(-1px);
+}
+.gameboy-game-tab.is-active {
+  border-color: #171329;
+  background: #d8ff4a;
+  box-shadow: 0 3px 0 #171329;
+  transform: translateY(-2px);
+}
+.game-tab-icon {
+  color: #5a3da4;
+  font-family: sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.gameboy-game-tab:focus-visible,
+.gameboy-menu button:focus-visible,
+.gb-button:focus-visible,
+.dpad button:focus-visible,
+.snake-reset:focus-visible {
+  outline: 3px solid #00a6d9;
+  outline-offset: 3px;
+}
+.gameboy-screen {
+  position: relative;
+  overflow: hidden;
+}
+.gameboy-screen .snake-board {
+  position: relative;
+}
+.arcade-board-wrap {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 270px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #9bbc0f;
+}
+.tetris-board {
+  display: grid;
+  width: min(100%, 145px);
+  aspect-ratio: 10 / 18;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-rows: repeat(18, minmax(0, 1fr));
+  gap: 1px;
+  padding: 3px;
+  border: 2px solid #17340c;
+  background: #9bbc0f;
+  box-sizing: border-box;
+}
+.tetris-cell {
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid rgba(48,98,48,.12);
+  background: rgba(155,188,15,.22);
+  box-sizing: border-box;
+}
+.tetris-cell.filled {
+  border: 1px solid #17340c;
+  background: #306230;
+  box-shadow: inset 2px 2px 0 rgba(255,255,255,.12);
+}
+.tetris-cell.tetris-color-1 { background: #17340c; }
+.tetris-cell.tetris-color-2 { background: #306230; }
+.tetris-cell.tetris-color-3 { background: #426f2e; }
+.tetris-cell.tetris-color-4 { background: #214d27; }
+.tetris-cell.tetris-color-5 { background: #5b7c2a; }
+.tetris-cell.tetris-color-6 { background: #315b3a; }
+.tetris-cell.tetris-color-7 { background: #486b30; }
+
+.breakout-board {
+  display: grid;
+  width: min(100%, 230px);
+  aspect-ratio: 14 / 16;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  grid-template-rows: repeat(16, minmax(0, 1fr));
+  gap: 2px;
+  padding: 5px;
+  border: 2px solid #17340c;
+  background:
+    linear-gradient(rgba(48,98,48,.05) 1px, transparent 1px),
+    #9bbc0f;
+  background-size: 100% 8px;
+  box-sizing: border-box;
+}
+.breakout-cell {
+  min-width: 0;
+  min-height: 0;
+  background: rgba(48,98,48,.08);
+  border-radius: 1px;
+}
+.breakout-cell.brick {
+  border: 1px solid #17340c;
+  border-radius: 2px;
+  background: #306230;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.22);
+}
+.breakout-cell.brick-color-2 { background: #426f2e; }
+.breakout-cell.brick-color-3 { background: #17340c; }
+.breakout-cell.brick-color-4 { background: #668b34; }
+.breakout-cell.ball {
+  border-radius: 50%;
+  border: 1px solid #17340c;
+  background: #0f380f;
+  box-shadow: 0 0 0 1px rgba(15,56,15,.18);
+}
+.breakout-cell.paddle {
+  border: 1px solid #17340c;
+  border-radius: 2px;
+  background: #214d27;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.18);
+}
+.arcade-board-overlay {
+  position: absolute;
+  z-index: 4;
+  inset: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px;
+  border: 2px solid #17340c;
+  background: rgba(20, 47, 19, .91);
+  color: #d8ff4a;
+  text-align: center;
+  font-family: var(--font-press-start), monospace;
+}
+.arcade-board-overlay strong {
+  font-size: clamp(.54rem, 1.3vw, .8rem);
+  line-height: 1.7;
+}
+.arcade-board-overlay span {
+  color: #f0f5db;
+  font-size: clamp(.38rem, .85vw, .5rem);
+  line-height: 1.8;
+}
+.arcade-board-overlay button {
+  border: 1px solid #d8ff4a;
+  padding: 8px 10px;
+  background: #d8ff4a;
+  color: #17340c;
+  font-family: inherit;
+  font-size: .4rem;
+}
+.gameboy-menu button {
+  touch-action: manipulation;
+}
+
+@media (max-width: 900px) {
+  .arcade-section {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    gap: 20px;
+    padding: 22px;
+  }
+  .gameboy-library {
+    gap: 5px;
+    padding: 10px 2px 12px;
+  }
+  .gameboy-game-tab {
+    gap: 4px;
+    font-size: .39rem;
+  }
+  .game-tab-icon {
+    font-size: 1rem;
+  }
+  .arcade-board-wrap {
+    min-height: 250px;
+  }
+}
+@media (max-width: 640px) {
+  .arch-meme {
+    width: min(100%, 420px);
+    margin: 12px 0 22px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .arch-meme-titlebar {
+    gap: 7px;
+    padding: 8px 9px;
+  }
+  .arch-terminal-title { font-size: .38rem; }
+  .arch-meme-tag { font-size: .34rem; padding: 4px 5px; }
+  .arch-meme-content { padding: 12px 12px 11px; }
+  .arch-claim { font-size: clamp(1.05rem, 6.1vw, 1.5rem); }
+  .arch-meme-footer { font-size: .36rem; }
+  .arcade-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding: 18px 14px;
+  }
+  .arcade-section .snake-copy {
+    width: 100%;
+  }
+  .arcade-section .snake-gameboy {
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+  .gameboy-library {
+    gap: 6px;
+    padding: 10px 0 13px;
+  }
+  .gameboy-game-tab {
+    min-height: 39px;
+    gap: 4px;
+    padding: 6px 4px;
+    font-size: .4rem;
+  }
+  .game-tab-icon { font-size: 1rem; }
+  .arcade-board-wrap { min-height: 266px; }
+  .tetris-board { width: min(100%, 145px); }
+  .breakout-board { width: min(100%, 226px); }
+  .arcade-controls-hint { font-size: .44rem; }
+}
+@media (max-width: 380px) {
+  .gameboy-game-tab {
+    gap: 3px;
+    font-size: .35rem;
+  }
+  .game-tab-icon { font-size: .9rem; }
+  .gameboy-library { gap: 4px; }
+  .arch-meme-tag { display: none; }
+  .arch-claim { font-size: 1.03rem; }
+  .arcade-console-note { font-size: .43rem; }
+}
