@@ -338,7 +338,7 @@ export default function Home() {
               <div className="arch-meme-content">
                 <div className="arch-cli-line"><span>$</span> fastfetch</div>
                 <div className="arch-detected"><span aria-hidden="true">λ</span> LINUX USER DETECTED</div>
-                <div className="arch-claim" aria-label="i use arch btw">
+                <div className="arch-claim" role="img" aria-label="i use arch btw">
                   <span className="arch-plain-word" aria-hidden="true">i use</span>
                   <span className="arch-spin-word" aria-hidden="true">
                     {Array.from('arch').map((letter, index) => (
