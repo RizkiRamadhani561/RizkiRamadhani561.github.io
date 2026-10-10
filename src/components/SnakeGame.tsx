@@ -262,7 +262,7 @@ function stepBreakout(state: BreakoutState): BreakoutState {
 export function SnakeGame() {
   const [mode, setMode] = useState<GameMode>('snake');
   const [snake, setSnake] = useState<Point[]>(START_SNAKE);
-  const [food, setFood] = useState<Point>(() => getRandomFood(START_SNAKE));
+  const [food, setFood] = useState<Point>({ x: 12, y: 4 });
   const [queuedDirection, setQueuedDirection] = useState<Direction>('right');
   const [running, setRunning] = useState(true);
   const [snakeOver, setSnakeOver] = useState(false);
@@ -274,6 +274,11 @@ export function SnakeGame() {
   const [breakoutBest, setBreakoutBest] = useState(0);
   const [flash, setFlash] = useState(false);
   const directionRef = useRef<Direction>('right');
+
+  useEffect(() => {
+    // Keep server-rendered and first client-rendered markup identical, then randomize after hydration.
+    setFood(getRandomFood(START_SNAKE));
+  }, []);
 
   useEffect(() => {
     const storedSnake = Number(window.localStorage.getItem('rizki-snake-best') ?? '0');
