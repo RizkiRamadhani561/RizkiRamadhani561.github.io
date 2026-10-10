@@ -5362,3 +5362,108 @@ body.dark .footer * {
   .arch-claim { font-size: 1.03rem; }
   .arcade-console-note { font-size: .43rem; }
 }
+
+
+/* Final polish: individually spinning Arch lettering */
+.arch-claim {
+  align-items: center;
+  gap: .25em;
+  perspective: 700px;
+}
+.arch-plain-word {
+  display: inline-block;
+  flex: 0 0 auto;
+  color: #d9ff57;
+  white-space: nowrap;
+}
+.arch-spin-word {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  flex: 0 0 auto;
+  gap: 0;
+  padding: 0 .08em;
+  color: #fff;
+  perspective: 420px;
+  transform-style: preserve-3d;
+  isolation: isolate;
+}
+.arch-spin-word::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -.08em -.15em -.02em;
+  border: 1px dashed rgba(180, 153, 255, .8);
+  border-radius: 8px;
+  transform: rotate(-3deg);
+  transform-origin: center;
+  animation: archOrbitFrame 5.5s linear infinite;
+  pointer-events: none;
+}
+.arch-spin-word::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: .24em;
+  height: .24em;
+  top: -.17em;
+  right: -.14em;
+  border-radius: 50%;
+  background: #d9ff57;
+  box-shadow: 0 0 9px rgba(217,255,87,.85);
+  pointer-events: none;
+}
+.arch-spin-letter {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  min-width: .47em;
+  color: #fff;
+  text-align: center;
+  transform-origin: center 58%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+  text-shadow: 2px 2px 0 #7048d8, 0 0 10px rgba(158,135,255,.28);
+}
+.arch-spin-letter:nth-child(2n) { color: #f6f0ff; }
+.arch-claim-arrow {
+  display: inline-block;
+  margin-left: .04em;
+  color: #ff75d9;
+  font-family: sans-serif;
+  font-size: .75em;
+  text-shadow: none;
+  transform-origin: center;
+  animation: archArrowNudge 2.4s ease-in-out infinite;
+}
+@keyframes archOrbitFrame {
+  0% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg) scale(1.04); }
+  100% { transform: rotate(-3deg); }
+}
+@keyframes archArrowNudge {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  50% { transform: translate(2px, -2px) rotate(7deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arch-spin-word::before,
+  .arch-claim-arrow {
+    animation: none !important;
+  }
+  .arch-spin-letter {
+    will-change: auto;
+  }
+}
+@media (max-width: 640px) {
+  .arch-claim {
+    gap: .21em;
+  }
+  .arch-spin-word {
+    padding-inline: .05em;
+  }
+  .arch-spin-letter {
+    min-width: .43em;
+  }
+}
