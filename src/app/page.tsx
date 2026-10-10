@@ -1,5 +1,6 @@
-import { VisitorCount } from "@/components/GoatCounter";
 'use client';
+
+import { VisitorCount } from "@/components/GoatCounter";
 
 import { AnimatePresence, motion, animate, useInView, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
