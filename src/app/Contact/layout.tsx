@@ -17,20 +17,11 @@ export const metadata: Metadata = {
     siteName: "M. Rizki Ramadhani Portfolio",
     type: "website",
     locale: "en_ID",
-    images: [
-      {
-        url: "https://rizkiramadhani561.github.io/opengraph-image.png",
-        width: 1200,
-        height: 630,
-        alt: "M. Rizki Ramadhani — Web Development, IT Support, and Data Operations",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: ["https://rizkiramadhani561.github.io/twitter-image.png"],
   },
 };
 
