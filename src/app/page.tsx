@@ -198,43 +198,18 @@ function TypeSnippet({ text }: { text: string }) {
 }
 
 function GithubPulse() {
-  const [stats, setStats] = useState({ repos: 0, stars: 0, followers: 0, loading: true });
-
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const [profileRes, reposRes] = await Promise.all([
-          fetch('https://api.github.com/users/RizkiRamadhani561'),
-          fetch('https://api.github.com/users/RizkiRamadhani561/repos?per_page=100&sort=updated'),
-        ]);
-        if (!profileRes.ok || !reposRes.ok) throw new Error('GitHub unavailable');
-        const profile = (await profileRes.json()) as { followers?: number };
-        const repos = (await reposRes.json()) as Array<{ stargazers_count?: number }>;
-        setStats({
-          repos: repos.length,
-          stars: repos.reduce((sum, repo) => sum + (repo.stargazers_count ?? 0), 0),
-          followers: profile.followers ?? 0,
-          loading: false,
-        });
-      } catch {
-        setStats((current) => ({ ...current, loading: false }));
-      }
-    };
-    load();
-  }, []);
-
   return (
     <div className="github-pulse">
       <div className="github-pulse-head">
-        <span className="section-index">LIVE SIGNAL</span>
+        <span className="section-index">PUBLIC CODE</span>
         <span className="pulse-led" />
       </div>
-      <h3>GitHub Pulse</h3>
-      <p>Repository activity pulled from the public GitHub profile.</p>
+      <h3>GitHub Workbench</h3>
+      <p>Explore public repositories and inspect the source code behind selected projects.</p>
       <div className="github-stats">
-        <div><strong>{stats.loading ? '—' : stats.repos}</strong><span>Repositories</span></div>
-        <div><strong>{stats.loading ? '—' : stats.stars}</strong><span>Total stars</span></div>
-        <div><strong>{stats.loading ? '—' : stats.followers}</strong><span>Followers</span></div>
+        <div><strong>6</strong><span>Featured projects</span></div>
+        <div><strong>Open</strong><span>Public source code</span></div>
+        <div><strong>Live</strong><span>GitHub profile</span></div>
       </div>
       <a className="mini-link" href="https://github.com/RizkiRamadhani561" target="_blank" rel="noreferrer">
         Open GitHub <FaArrowRight />
