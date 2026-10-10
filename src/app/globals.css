@@ -5467,3 +5467,58 @@ body.dark .footer * {
     min-width: .43em;
   }
 }
+
+
+/* Specificity guard: preserve the typography of each animated meme layer */
+.arch-claim .arch-plain-word {
+  color: #d9ff57;
+  font-family: var(--font-bungee), system-ui, sans-serif;
+  font-size: 1em;
+  text-shadow: 2px 2px 0 #7048d8;
+}
+.arch-claim .arch-spin-word {
+  color: #fff;
+  font-family: var(--font-bungee), system-ui, sans-serif;
+  font-size: 1em;
+  text-shadow: none;
+}
+.arch-claim .arch-spin-letter {
+  color: #fff;
+  font-family: var(--font-bungee), system-ui, sans-serif;
+  font-size: 1em;
+  text-shadow: 2px 2px 0 #7048d8, 0 0 10px rgba(158,135,255,.28);
+}
+.arch-claim .arch-spin-letter:nth-child(2n) {
+  color: #f6f0ff;
+}
+.arch-claim .arch-claim-arrow {
+  color: #ff75d9;
+  font-family: sans-serif;
+  font-size: .75em;
+  text-shadow: none;
+}
+.arch-claim .arch-orbit-dot {
+  position: absolute;
+  top: -.62em;
+  right: -.62em;
+  z-index: 2;
+  display: inline-block;
+  color: #ff75d9;
+  font-family: sans-serif;
+  font-size: .42em;
+  line-height: 1;
+  text-shadow: 0 0 7px rgba(255,117,217,.85);
+  transform-origin: center;
+  animation: archStarSpin 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes archStarSpin {
+  from { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.25); }
+  to { transform: rotate(360deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arch-claim .arch-orbit-dot {
+    animation: none !important;
+  }
+}
