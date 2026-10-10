@@ -211,6 +211,7 @@ export default function RootLayout({
       >
         <Suspense fallback={shellFallback}>
           <div className="app-frame">
+            <GoatCounter />
             <GlobalNavbar />
             <div className="flex-1">{children}</div>
           </div>
