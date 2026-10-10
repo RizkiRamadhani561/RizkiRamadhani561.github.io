@@ -593,11 +593,10 @@ export function SnakeGame() {
           <span className="gameboy-model">DMG-01 // RR</span>
         </div>
 
-        <div className="gameboy-library" role="tablist" aria-label="Choose a Game Boy game">
+        <div className="gameboy-library" role="group" aria-label="Choose a Game Boy game">
           <button
             className={mode === 'snake' ? 'gameboy-game-tab is-active' : 'gameboy-game-tab'}
-            role="tab"
-            aria-selected={mode === 'snake'}
+            aria-pressed={mode === 'snake'}
             onClick={() => chooseMode('snake')}
           >
             <span className="game-tab-icon" aria-hidden="true">↝</span>
@@ -605,8 +604,7 @@ export function SnakeGame() {
           </button>
           <button
             className={mode === 'tetris' ? 'gameboy-game-tab is-active' : 'gameboy-game-tab'}
-            role="tab"
-            aria-selected={mode === 'tetris'}
+            aria-pressed={mode === 'tetris'}
             onClick={() => chooseMode('tetris')}
           >
             <span className="game-tab-icon" aria-hidden="true">▦</span>
@@ -614,8 +612,7 @@ export function SnakeGame() {
           </button>
           <button
             className={mode === 'breakout' ? 'gameboy-game-tab is-active' : 'gameboy-game-tab'}
-            role="tab"
-            aria-selected={mode === 'breakout'}
+            aria-pressed={mode === 'breakout'}
             onClick={() => chooseMode('breakout')}
           >
             <span className="game-tab-icon" aria-hidden="true">▤</span>
