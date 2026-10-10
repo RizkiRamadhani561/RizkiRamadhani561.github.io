@@ -99,19 +99,16 @@ export function VisitorCount() {
 
   return (
     <span
-      className={styles.visitorPill}
+      className={styles.visitorMeta}
       aria-live="polite"
       title="Jumlah kunjungan seluruh portfolio"
     >
-      <span className={styles.iconWrap} aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" />
-          <circle cx="12" cy="12" r="2.6" />
-        </svg>
-      </span>
-      <span className={styles.label}>VISITORS</span>
+      <svg className={styles.eyeIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" />
+        <circle cx="12" cy="12" r="2.6" />
+      </svg>
+      <span className={styles.label}>VISITS</span>
       <span className={styles.count}>{count ?? "—"}</span>
-      <span className={styles.note}>ALL TIME</span>
     </span>
   );
 }
