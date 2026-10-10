@@ -1,3 +1,4 @@
+import { VisitorCount } from "@/components/GoatCounter";
 'use client';
 
 import { AnimatePresence, motion, animate, useInView, useReducedMotion } from 'framer-motion';
@@ -743,6 +744,7 @@ export default function Home() {
       <footer className="footer">
         <div className="container footer-inner">
           <span>© 2026 M. Rizki Ramadhani</span>
+          <VisitorCount />
           <span>DESIGNED & BUILT WITH PURPOSE</span>
           <div className="footer-links">
             <Link href="/Archive">Archive</Link>
