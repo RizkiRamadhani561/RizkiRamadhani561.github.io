@@ -24,45 +24,134 @@ const bungee = Bungee({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rizkiramadhani561.github.io"),
+  metadataBase: new URL("https://rizkiramadhani561.github.io/"),
   title: {
-    default:
-      "M Rizki Ramadhani | Front Office, Full-Stack Developer & Operations Specialist",
-    template: "%s | Rizki Ramadhani",
+    default: "M. Rizki Ramadhani | Web Development & IT Support",
+    template: "%s | M. Rizki Ramadhani",
   },
   description:
-    "Portfolio of M Rizki Ramadhani — Full-Stack Developer, Front Office Enthusiast, and Data-Driven Operations Professional. Specialized in service excellence, operational efficiency, and modern web development.",
-  keywords: [
-    "M Rizki Ramadhani",
-    "Full Stack Developer",
-    "Front Office",
-    "Operations Specialist",
-    "TypeScript",
-    "Next.js",
-    "React",
-    "PHP",
-    "Portfolio",
-    "Jakarta",
+    "Portfolio of M. Rizki Ramadhani, an Information Management student in Jakarta, Indonesia. Explore web development projects, IT support, networking, SQL, Excel, and data operations.",
+  applicationName: "M. Rizki Ramadhani Portfolio",
+  authors: [
+    {
+      name: "M. Rizki Ramadhani",
+      url: "https://rizkiramadhani561.github.io/",
+    },
   ],
-  creator: "M Rizki Ramadhani",
+  creator: "M. Rizki Ramadhani",
+  publisher: "M. Rizki Ramadhani",
+  category: "technology",
+  keywords: [
+    "M. Rizki Ramadhani",
+    "Rizki Ramadhani portfolio",
+    "web development portfolio Indonesia",
+    "IT support Jakarta",
+    "network support",
+    "computer networking",
+    "Information Management student",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "PHP",
+    "MySQL",
+    "SQL",
+    "Microsoft Excel",
+    "data entry",
+    "data operations",
+    "administrative support",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
-    title: "M Rizki Ramadhani | Full-Stack Developer & Operations Specialist",
+    title: "M. Rizki Ramadhani | Web Development & IT Support",
     description:
-      "Modern portfolio showcasing expertise in web development, operations management, and customer service excellence.",
-    url: "https://rizkiramadhani561.github.io",
-    siteName: "Rizki Ramadhani",
+      "Explore M. Rizki Ramadhani's portfolio of web applications, IT support experience, networking, SQL, Excel, and data operations.",
+    url: "https://rizkiramadhani561.github.io/",
+    siteName: "M. Rizki Ramadhani Portfolio",
     type: "website",
-    locale: "en_US",
+    locale: "en_ID",
   },
   twitter: {
     card: "summary_large_image",
-    title: "M Rizki Ramadhani",
-    description: "Full-Stack Developer & Operations Specialist",
+    title: "M. Rizki Ramadhani | Web Development & IT Support",
+    description:
+      "Web projects, IT support, networking, SQL, Excel, and data operations by M. Rizki Ramadhani in Jakarta, Indonesia.",
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://rizkiramadhani561.github.io/#website",
+      url: "https://rizkiramadhani561.github.io/",
+      name: "M. Rizki Ramadhani Portfolio",
+      description:
+        "Personal portfolio covering web development, IT support, networking, data workflows, and operations.",
+      inLanguage: "en",
+      publisher: { "@id": "https://rizkiramadhani561.github.io/#person" },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://rizkiramadhani561.github.io/#profile",
+      url: "https://rizkiramadhani561.github.io/",
+      name: "M. Rizki Ramadhani | Web Development & IT Support",
+      isPartOf: { "@id": "https://rizkiramadhani561.github.io/#website" },
+      mainEntity: { "@id": "https://rizkiramadhani561.github.io/#person" },
+      inLanguage: "en",
+    },
+    {
+      "@type": "Person",
+      "@id": "https://rizkiramadhani561.github.io/#person",
+      name: "M. Rizki Ramadhani",
+      alternateName: "Rizki Ramadhani",
+      url: "https://rizkiramadhani561.github.io/",
+      description:
+        "Information Management student in Jakarta, Indonesia, building practical web applications and developing skills in IT support, networking, SQL, spreadsheet workflows, and operations.",
+      sameAs: [
+        "https://github.com/RizkiRamadhani561",
+        "https://www.linkedin.com/in/m-rizki-ramadhani",
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Jakarta Barat",
+        addressRegion: "DKI Jakarta",
+        addressCountry: "ID",
+      },
+      knowsAbout: [
+        "Web development",
+        "IT support",
+        "Computer networking",
+        "Information management",
+        "SQL and MySQL",
+        "Microsoft Excel",
+        "Data entry and data quality",
+        "Administrative operations",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "PHP",
+      ],
+    },
+  ],
 };
 
 export function generateViewport(): Viewport {
@@ -99,7 +188,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(() => {
@@ -109,11 +201,6 @@ export default function RootLayout({
                 const dark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
                 document.documentElement.classList.toggle('dark', dark);
                 document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-                const nav = performance.getEntriesByType('navigation')[0];
-                if (nav && nav.type === 'reload' && window.location.hash) {
-                  window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
-                }
-                window.scrollTo(0, 0);
               } catch (_) {}
             })()`,
           }}
