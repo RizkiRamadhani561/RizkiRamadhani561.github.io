@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+
+export const dynamic = "force-static";
 import {
   PortfolioSocialCard,
   SOCIAL_CARD_SIZE,
