@@ -338,7 +338,36 @@ export default function Home() {
               <div className="arch-meme-content">
                 <div className="arch-cli-line"><span>$</span> fastfetch</div>
                 <div className="arch-detected"><span aria-hidden="true">λ</span> LINUX USER DETECTED</div>
-                <div className="arch-claim">i use <em>arch</em> btw<span aria-hidden="true">↗</span></div>
+                <div className="arch-claim" aria-label="i use arch btw">
+                  <span className="arch-plain-word" aria-hidden="true">i use</span>
+                  <span className="arch-spin-word" aria-hidden="true">
+                    {Array.from('arch').map((letter, index) => (
+                      <motion.span
+                        key={letter}
+                        className="arch-spin-letter"
+                        initial={reduceMotion ? false : { opacity: 0, rotateY: -90, y: 5 }}
+                        animate={reduceMotion ? undefined : {
+                          opacity: 1,
+                          rotateY: [0, 360],
+                          rotateZ: [0, index % 2 === 0 ? 8 : -8, 0],
+                          y: [0, -3, 0],
+                        }}
+                        transition={reduceMotion ? undefined : {
+                          opacity: { duration: 0.35, delay: 0.12 + index * 0.12 },
+                          rotateY: { duration: 1.05, delay: 0.12 + index * 0.14, repeat: Infinity, repeatDelay: 3.4, ease: 'easeInOut' },
+                          rotateZ: { duration: 1.05, delay: 0.12 + index * 0.14, repeat: Infinity, repeatDelay: 3.4, ease: 'easeInOut' },
+                          y: { duration: 1.05, delay: 0.12 + index * 0.14, repeat: Infinity, repeatDelay: 3.4, ease: 'easeInOut' },
+                        }}
+                        style={{ transformPerspective: 420 }}
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                    <span className="arch-orbit-dot" aria-hidden="true">✳</span>
+                  </span>
+                  <span className="arch-plain-word" aria-hidden="true">btw</span>
+                  <span className="arch-claim-arrow" aria-hidden="true">↗</span>
+                </div>
                 <div className="arch-meme-footer">
                   <span>nobody asked</span>
                   <span>still mentioned it.</span>
