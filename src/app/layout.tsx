@@ -1,4 +1,3 @@
-import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { Bungee, Press_Start_2P, Space_Grotesk } from "next/font/google";
 import { Suspense } from "react";
@@ -215,7 +214,6 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
           </div>
         </Suspense>
-        <Analytics />
       </body>
     </html>
   );
