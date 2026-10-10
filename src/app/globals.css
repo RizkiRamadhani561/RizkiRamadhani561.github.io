@@ -4710,3 +4710,244 @@ body.dark .footer * {
     line-height: .98 !important;
   }
 }
+
+
+/* Portfolio polish: balanced actions, responsive Game Boy, and Arch BTW easter egg */
+.arch-btw {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 2px 0 22px;
+  padding: 10px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: var(--lime);
+  color: #171329;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-press-start), monospace;
+  font-size: clamp(.56rem, 1.05vw, .72rem);
+  line-height: 1.7;
+  letter-spacing: -.025em;
+  transform-origin: center;
+}
+.arch-prompt {
+  color: #5b21b6;
+  font-weight: 900;
+}
+.arch-spark {
+  color: #e63946;
+  font-size: 1.15em;
+}
+.hero-actions {
+  align-items: stretch;
+  gap: 14px;
+}
+.hero-actions .button {
+  min-height: 52px;
+  min-width: 0;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+}
+.snake-section {
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: clamp(20px, 3vw, 36px);
+  overflow: visible;
+}
+.snake-copy, .snake-gameboy {
+  min-width: 0;
+}
+.snake-gameboy {
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+  margin-inline: auto;
+  padding: clamp(12px, 2.2vw, 20px) clamp(12px, 2.2vw, 20px) 24px;
+}
+.gameboy-screen-frame {
+  min-width: 0;
+  padding: clamp(8px, 1.8vw, 16px);
+}
+.gameboy-screen {
+  min-width: 0;
+  padding: clamp(5px, 1vw, 10px);
+}
+.gameboy-controls {
+  min-height: clamp(130px, 18vw, 180px);
+  padding-inline: clamp(4px, 2vw, 24px);
+  gap: clamp(8px, 2vw, 20px);
+}
+.dpad {
+  flex: 0 1 132px;
+  width: min(132px, 42%);
+  aspect-ratio: 1;
+  height: auto;
+}
+.dpad button {
+  width: 33.333%;
+  height: 33.333%;
+}
+.dpad-up { left: 33.333%; top: 0; }
+.dpad-left { left: 0; top: 33.333%; }
+.dpad-center { left: 33.333%; top: 33.333%; }
+.dpad-right { right: 0; top: 33.333%; }
+.dpad-down { left: 33.333%; bottom: 0; }
+.gameboy-action-area {
+  gap: clamp(8px, 1.6vw, 18px);
+  margin-right: 0;
+}
+.gb-button {
+  width: clamp(42px, 5.2vw, 56px);
+  height: clamp(42px, 5.2vw, 56px);
+}
+.gameboy-model {
+  text-align: right;
+  line-height: 1.7;
+}
+.gameboy-menu {
+  flex-wrap: wrap;
+  gap: 14px;
+  transform: none;
+  margin: 8px 0;
+}
+.gameboy-menu button {
+  min-width: 84px;
+  min-height: 30px;
+}
+.gameboy-speaker {
+  gap: 5px;
+}
+@media (max-width: 900px) {
+  .snake-section {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding: 22px;
+  }
+  .snake-gameboy {
+    max-width: 460px;
+  }
+  .gameboy-controls {
+    min-height: 140px;
+  }
+  .gameboy-brand {
+    font-size: clamp(1rem, 2.4vw, 1.4rem);
+  }
+  .gameboy-model {
+    font-size: .4rem;
+  }
+}
+@media (max-width: 640px) {
+  .hero-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .hero-actions .button {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 14px;
+  }
+  .arch-btw {
+    margin-bottom: 20px;
+    padding: 9px 10px;
+    gap: 7px;
+    font-size: clamp(.48rem, 2.55vw, .65rem);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .snake-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding: 18px 14px;
+    margin-inline: 5px;
+    box-shadow: 7px 7px 0 var(--ink);
+  }
+  .snake-copy h2 {
+    font-size: clamp(2rem, 10vw, 3.25rem);
+  }
+  .snake-console-row {
+    flex-wrap: wrap;
+    line-height: 1.8;
+    font-size: .46rem;
+  }
+  .snake-gameboy {
+    max-width: 430px;
+    padding: 14px 12px 20px;
+    border-width: 4px;
+    border-radius: 16px 16px 26px 26px;
+    box-shadow: 0 9px 0 #7e8a76, 7px 12px 0 var(--ink), inset 0 0 0 3px rgba(255,255,255,.4);
+  }
+  .gameboy-top {
+    gap: 8px;
+  }
+  .gameboy-brand {
+    font-size: clamp(.95rem, 5vw, 1.25rem);
+  }
+  .gameboy-model {
+    font-size: clamp(.32rem, 1.7vw, .42rem);
+  }
+  .gameboy-screen-frame {
+    padding: 8px;
+    border-width: 4px;
+  }
+  .gameboy-screen-header {
+    font-size: .4rem;
+  }
+  .gameboy-controls {
+    min-height: 126px;
+    padding: 10px 2px 0;
+  }
+  .dpad {
+    width: min(116px, 43%);
+  }
+  .gameboy-action-area {
+    gap: 9px;
+    transform: rotate(-10deg);
+  }
+  .gb-button {
+    width: clamp(40px, 11vw, 48px);
+    height: clamp(40px, 11vw, 48px);
+    font-size: 1.1rem;
+    border-width: 3px;
+  }
+  .gameboy-menu button {
+    min-width: 76px;
+    padding: 5px 8px;
+    font-size: .38rem;
+  }
+  .gameboy-speaker {
+    grid-template-columns: repeat(4, 7px);
+    gap: 5px;
+  }
+  .gameboy-speaker i {
+    width: 7px;
+    height: 7px;
+  }
+  .gameboy-toggle-row {
+    font-size: .38rem;
+  }
+}
+@media (max-width: 360px) {
+  .snake-section {
+    padding: 14px 10px;
+  }
+  .snake-gameboy {
+    padding-inline: 9px;
+  }
+  .gameboy-screen-frame {
+    padding: 6px;
+  }
+  .gameboy-controls {
+    min-height: 112px;
+  }
+  .dpad {
+    width: min(100px, 42%);
+  }
+  .gameboy-action-area {
+    gap: 7px;
+  }
+  .gb-button {
+    width: 37px;
+    height: 37px;
+  }
+}
