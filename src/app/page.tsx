@@ -320,19 +320,30 @@ export default function Home() {
               web development, data discipline, and real-world service experience to create practical digital products.
             </p>
             <motion.div
-              className="arch-btw"
-              aria-label="i use arch btw"
+              className="arch-meme"
+              aria-label="Linux meme: I use Arch btw. Nobody asked, but the fact has been announced."
               initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -2 }}
-              animate={reduceMotion ? undefined : { opacity: 1, y: [0, -4, 0], rotate: [-1.5, 1.5, -1.5] }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: [0, -3, 0], rotate: [-1, 0.7, -1] }}
               transition={reduceMotion ? undefined : {
                 opacity: { duration: 0.45, delay: 0.7 },
-                y: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' },
-                rotate: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                y: { duration: 3.2, repeat: Infinity, ease: 'easeInOut' },
+                rotate: { duration: 4.5, repeat: Infinity, ease: 'easeInOut' },
               }}
             >
-              <span className="arch-prompt" aria-hidden="true">~/</span>
-              <span>i use arch btw</span>
-              <span className="arch-spark" aria-hidden="true">✳</span>
+              <div className="arch-meme-titlebar">
+                <span className="arch-window-dots" aria-hidden="true"><i /><i /><i /></span>
+                <span className="arch-terminal-title">arch-linux@rizki:~</span>
+                <span className="arch-meme-tag">BTW MODE</span>
+              </div>
+              <div className="arch-meme-content">
+                <div className="arch-cli-line"><span>$</span> fastfetch</div>
+                <div className="arch-detected"><span aria-hidden="true">λ</span> LINUX USER DETECTED</div>
+                <div className="arch-claim">i use <em>arch</em> btw<span aria-hidden="true">↗</span></div>
+                <div className="arch-meme-footer">
+                  <span>nobody asked</span>
+                  <span>still mentioned it.</span>
+                </div>
+              </div>
             </motion.div>
             <div className="hero-actions">
               <a href="#work" className="button button-primary" data-cursor>Explore my work <FaArrowRight /></a>
