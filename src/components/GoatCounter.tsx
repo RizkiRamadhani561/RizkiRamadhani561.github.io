@@ -80,7 +80,7 @@ export function VisitorCount() {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch("https://rizki-ramadhani.goatcounter.com/counter//.json", {
+    fetch("https://rizki-ramadhani.goatcounter.com/counter/TOTAL.json", {
       signal: controller.signal,
       cache: "no-store",
     })
@@ -97,7 +97,7 @@ export function VisitorCount() {
   }, []);
 
   return (
-    <span className="visitor-count" aria-live="polite" title="Jumlah kunjungan halaman utama">
+    <span className="visitor-count" aria-live="polite" title="Jumlah kunjungan seluruh portfolio">
       <span aria-hidden="true">↗</span> VISITS: {count ?? "—"}
     </span>
   );
