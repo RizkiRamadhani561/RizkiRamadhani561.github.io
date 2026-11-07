@@ -5648,10 +5648,10 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   margin-top: 13px;
-  border: 3px solid var(--ink);
+  border: 3px solid #161129;
   background: var(--lime);
-  color: var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
+  color: #161129;
+  box-shadow: 3px 3px 0 #161129;
   font-family: var(--font-press-start), monospace;
   font-size: .52rem;
   line-height: 1;
@@ -5857,3 +5857,10 @@ button:disabled {
     transform: none;
   }
 }
+
+
+.global-mobile-nav a:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
