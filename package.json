@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run test:unit",
+    "test:unit": "node --test tests/unit/active-section.test.cjs",
+    "test:e2e": "npm exec --yes --package=playwright -- node --test tests/e2e/portfolio.e2e.test.cjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.3.0",
