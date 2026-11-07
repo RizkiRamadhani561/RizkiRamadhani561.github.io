@@ -104,6 +104,7 @@ beforeEach(async () => {
   });
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
   await page.locator('#home h1').waitFor({ state: 'visible' });
+  await page.locator('.loader-screen').waitFor({ state: 'detached', timeout: 5000 });
 });
 
 afterEach(async () => {
@@ -168,8 +169,15 @@ test('mobile menu opens with the keyboard and closes after choosing a section', 
   assert.equal(await menuButton.isVisible(), true);
 
   await menuButton.focus();
-  await page.keyboard.press('Enter');
-  assert.equal(await menuButton.getAttribute('aria-expanded'), 'true');
+  assert.equal(
+    await menuButton.evaluate((element) => document.activeElement === element),
+    true,
+    'The mobile menu button should receive keyboard focus',
+  );
+  await menuButton.press('Enter');
+  await page.waitForFunction(
+    () => document.querySelector('.global-menu')?.getAttribute('aria-expanded') === 'true',
+  );
 
   const mobileNavigation = page.getByRole('navigation', { name: 'Mobile navigation' });
   assert.equal(await mobileNavigation.isVisible(), true);
@@ -186,6 +194,7 @@ test('theme toggle updates the document theme and persists the selection', async
   await page.emulateMedia({ colorScheme: 'light' });
   await page.evaluate(() => localStorage.setItem('rizki-theme', 'light'));
   await page.reload({ waitUntil: 'domcontentloaded' });
+  await page.locator('.loader-screen').waitFor({ state: 'detached', timeout: 5000 });
 
   const themeButton = page.getByRole('button', { name: 'Toggle color theme' });
   await themeButton.click();
