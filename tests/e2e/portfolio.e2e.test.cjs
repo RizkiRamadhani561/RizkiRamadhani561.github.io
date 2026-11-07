@@ -142,7 +142,7 @@ test('renders all primary portfolio sections and desktop navigation links', asyn
 test('desktop active navigation follows the section visible in the viewport', async () => {
   await page.locator('#journey').evaluate((section) => {
     const top = section.getBoundingClientRect().top + window.scrollY - 100;
-    window.scrollTo({ top, left: 0, behavior: 'instant' });
+    window.scrollTo({ top, left: 0, behavior: 'auto' });
   });
 
   await page.waitForFunction(
@@ -150,6 +150,7 @@ test('desktop active navigation follows the section visible in the viewport', as
       document
         .querySelector('.global-desktop-nav a[href="/#journey"]')
         ?.getAttribute('aria-current') === 'location',
+    undefined,
     { timeout: 5000 },
   );
 
