@@ -26,7 +26,6 @@ const skills = {
 
 const experiences = [
   {
-    period: 'Jan 2025 — Now',
     role: 'Spesialis Entri Data',
     company: 'Dukungan Lepas / Jarak Jauh',
     location: 'Indonesia',
@@ -35,7 +34,6 @@ const experiences = [
     result: 'Otomasi dengan Excel lanjutan dan SQL memangkas waktu rekap lebih dari 60%.',
   },
   {
-    period: 'Okt 2025 — Mei 2026',
     role: 'Staf Dukungan IT',
     company: 'Kejaksaan Negeri Jakarta Barat',
     location: 'Jakarta Barat, Indonesia',
@@ -44,7 +42,6 @@ const experiences = [
     result: 'Membangun sistem inventaris perangkat agar aset dan jadwal perawatan mudah ditelusuri.',
   },
   {
-    period: 'Jan 2025 — Jun 2025',
     role: 'Petugas Administrasi & Dukungan',
     company: 'J&T Express',
     location: 'Indonesia',
@@ -53,7 +50,6 @@ const experiences = [
     result: 'Menjadi penghubung antara tim kantor, driver, dan manajemen agar informasi tersampaikan tepat waktu.',
   },
   {
-    period: 'Jul 2024 — Des 2024',
     role: 'Magang Sumber Daya Manusia',
     company: 'Solid Gold',
     location: 'Jakarta, Indonesia',
@@ -62,7 +58,6 @@ const experiences = [
     result: 'Mendukung penempatan mahasiswa magang dari komunikasi, seleksi, hingga penempatan akhir dan membantu mediasi perselisihan.',
   },
   {
-    period: 'Jan 2024 — Jun 2024',
     role: 'Konsultan Layanan & Penjualan',
     company: 'WAKI Indonesia',
     location: 'Tangerang, Banten',
@@ -614,15 +609,19 @@ export default function Home() {
           <div className="timeline">
             {experiences.map((item, i) => (
               <motion.article
-                key={`${item.company}-${item.role}`}
+                key={item.company + '-' + item.role}
                 className="timeline-item"
-                initial={{ opacity: 0, x: -18 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  delay: reduceMotion ? 0 : i * 0.06,
+                  duration: reduceMotion ? 0 : 0.42,
+                  ease: 'easeOut',
+                }}
               >
-                <div className="timeline-year">{item.period}</div>
-                <div className="timeline-dot" />
+                <div className="timeline-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
+                <div className="timeline-dot" aria-hidden="true" />
                 <div className="timeline-card">
                   <p className="timeline-company">{item.company} · {item.location}</p>
                   <h3>{item.role}</h3>

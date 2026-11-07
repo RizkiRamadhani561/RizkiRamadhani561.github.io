@@ -28,39 +28,30 @@ export function PortfolioMotionLayer() {
   }, [reduceMotion]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
-    const isReload = navigationEntry?.type === 'reload';
-
     const previous = window.history.scrollRestoration;
     window.history.scrollRestoration = 'manual';
 
-    if (isReload && window.location.hash) {
-      window.history.replaceState(
-        null,
-        document.title,
-        window.location.pathname + window.location.search,
-      );
-    }
+    const restoreInitialPosition = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const targetId = decodeURIComponent(hash.slice(1));
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'auto', block: 'start' });
+          return;
+        }
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    };
 
-    const forceTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-
-    forceTop();
-    const firstFrame = window.requestAnimationFrame(forceTop);
-    const afterPaint = window.setTimeout(forceTop, 30);
-    const afterLoad = window.setTimeout(forceTop, 140);
-
+    const frame = window.requestAnimationFrame(restoreInitialPosition);
     const onPageShow = (event: PageTransitionEvent) => {
-      if (event.persisted || isReload) forceTop();
+      if (event.persisted) restoreInitialPosition();
     };
 
     window.addEventListener('pageshow', onPageShow);
-
     return () => {
-      window.cancelAnimationFrame(firstFrame);
-      window.clearTimeout(afterPaint);
-      window.clearTimeout(afterLoad);
+      window.cancelAnimationFrame(frame);
       window.removeEventListener('pageshow', onPageShow);
       window.history.scrollRestoration = previous;
     };
@@ -69,8 +60,9 @@ export function PortfolioMotionLayer() {
   useEffect(() => {
     if (reduceMotion) return;
     const lenis = new Lenis({
-      duration: 1.05,
+      duration: 0.82,
       smoothWheel: true,
+      anchors: true,
       wheelMultiplier: 0.9,
       touchMultiplier: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

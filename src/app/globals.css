@@ -5522,3 +5522,345 @@ body.dark .footer * {
     animation: none !important;
   }
 }
+
+
+/* Navigation, timeline and interaction polish — November 2026 */
+html {
+  scroll-padding-top: 104px;
+}
+
+section[id] {
+  scroll-margin-top: 104px;
+}
+
+.global-desktop-nav a,
+.global-mobile-nav a,
+.global-menu,
+.global-cta {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.global-desktop-nav a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+}
+
+.global-desktop-nav a:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--ink);
+  background: var(--orange);
+  color: #fff;
+}
+
+.global-desktop-nav a.active {
+  transform: none;
+  box-shadow: 3px 3px 0 var(--ink);
+  background: var(--orange);
+  color: #fff;
+}
+
+.global-mobile-nav a {
+  min-width: 0;
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+
+.global-mobile-nav a svg {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.global-mobile-nav a:hover,
+.global-mobile-nav a:focus-visible {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+  filter: saturate(1.08);
+}
+
+.global-mobile-nav a.active {
+  outline: 2px solid var(--ink);
+  outline-offset: -6px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.global-menu {
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+}
+
+.global-menu:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+  background: var(--lime);
+}
+
+.global-menu:active,
+.global-cta:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.global-desktop-nav a:focus-visible,
+.global-mobile-nav a:focus-visible,
+.global-menu:focus-visible,
+.global-cta:focus-visible,
+.global-brand:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.global-desktop-nav a.active:focus-visible {
+  outline-color: var(--pink);
+}
+
+.dark .global-desktop-nav a.active {
+  background: var(--pink);
+  color: #fff;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.dark .global-desktop-nav a:hover {
+  background: var(--pink);
+  color: #fff;
+}
+
+.timeline {
+  margin-left: clamp(0px, 6vw, 72px);
+  padding-left: 0;
+}
+
+.timeline-item {
+  grid-template-columns: 66px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+  padding-left: 30px;
+}
+
+.timeline-index {
+  display: inline-flex;
+  width: 46px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 13px;
+  border: 3px solid #161129;
+  background: var(--lime);
+  color: #161129;
+  box-shadow: 3px 3px 0 #161129;
+  font-family: var(--font-press-start), monospace;
+  font-size: .52rem;
+  line-height: 1;
+}
+
+.timeline-dot {
+  top: 22px;
+}
+
+.timeline-card {
+  min-width: 0;
+  padding: clamp(18px, 2.2vw, 24px);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.timeline-item:hover .timeline-card {
+  transform: translate(2px, -2px);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.timeline-card h3 {
+  overflow-wrap: anywhere;
+  line-height: 1.18;
+}
+
+.timeline-company {
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.timeline-tools {
+  margin: 0 0 12px;
+  color: #625b52;
+  font-size: .78rem;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.timeline-result {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 2px dashed rgba(9, 9, 9, .24);
+}
+
+button:not(:disabled) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled):active {
+  filter: brightness(.94);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .62;
+}
+
+@media (max-width: 900px) {
+  .global-navbar-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+  }
+
+  .global-actions {
+    gap: 8px;
+  }
+
+  .timeline {
+    margin-left: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 82px;
+  }
+
+  section[id] {
+    scroll-margin-top: 82px;
+  }
+
+  .global-navbar-inner {
+    gap: 8px;
+  }
+
+  .global-brand {
+    gap: 8px;
+  }
+
+  .global-brand-name {
+    max-width: 138px;
+    font-size: .74rem;
+  }
+
+  .global-brand-mark {
+    width: 39px;
+    height: 39px;
+  }
+
+  .global-actions {
+    gap: 6px;
+  }
+
+  .global-mobile-nav-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding-block: 12px 16px;
+  }
+
+  .global-mobile-nav a {
+    min-height: 44px;
+    padding: 9px 10px;
+    font-size: .62rem;
+  }
+
+  .timeline {
+    margin-left: 13px;
+    border-left-width: 3px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 11px;
+    margin-bottom: 22px;
+    padding-left: 15px;
+  }
+
+  .timeline-index {
+    width: 34px;
+    min-height: 31px;
+    margin-top: 12px;
+    font-size: .43rem;
+  }
+
+  .timeline-dot {
+    left: -10px;
+    top: 20px;
+    width: 17px;
+    height: 17px;
+  }
+
+  .timeline-card {
+    padding: 16px 15px;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+
+  .timeline-card h3 {
+    font-size: clamp(1.05rem, 5vw, 1.35rem);
+  }
+
+  .timeline-card p {
+    font-size: .9rem;
+    line-height: 1.6;
+  }
+
+  .timeline-tools {
+    font-size: .72rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .global-brand-name {
+    max-width: 112px;
+    font-size: .68rem;
+  }
+
+  .global-mobile-nav-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .global-mobile-nav a {
+    min-height: 42px;
+    font-size: .66rem;
+  }
+
+  .timeline-item {
+    grid-template-columns: 31px minmax(0, 1fr);
+    gap: 9px;
+    padding-left: 12px;
+  }
+
+  .timeline-index {
+    width: 29px;
+    min-height: 29px;
+    font-size: .38rem;
+  }
+
+  .timeline-card {
+    padding: 14px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-desktop-nav a,
+  .global-mobile-nav a,
+  .global-menu,
+  .global-cta,
+  .timeline-card {
+    transition: none !important;
+  }
+
+  .timeline-item:hover .timeline-card {
+    transform: none;
+  }
+}
+
+
+.global-mobile-nav a:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
