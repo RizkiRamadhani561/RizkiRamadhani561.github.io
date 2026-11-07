@@ -1,26 +1,86 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { FaArrowRight, FaBars, FaHouse, FaXmark } from 'react-icons/fa6';
+import { useEffect, useState } from 'react';
+import {
+  FaArrowRight,
+  FaBars,
+  FaBriefcase,
+  FaEnvelope,
+  FaHouse,
+  FaRoute,
+  FaToolbox,
+  FaUser,
+  FaXmark,
+} from 'react-icons/fa6';
 import { ThemeToggleButton } from '@/components/PortfolioMotionLayer';
 
 const items = [
-  { label: 'Home', href: '/#home' },
-  { label: 'About', href: '/#about' },
-  { label: 'Toolkit', href: '/#skills' },
-  { label: 'Journey', href: '/#journey' },
-  { label: 'Work', href: '/#work' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Home', href: '/#home', icon: FaHouse },
+  { label: 'About', href: '/#about', icon: FaUser },
+  { label: 'Toolkit', href: '/#skills', icon: FaToolbox },
+  { label: 'Journey', href: '/#journey', icon: FaRoute },
+  { label: 'Work', href: '/#work', icon: FaBriefcase },
+  { label: 'Contact', href: '/#contact', icon: FaEnvelope },
 ];
 
 export function GlobalNavbar() {
   const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
-
+  const [activeSection, setActiveSection] = useState('home');
   const isHome = pathname === '/';
+
+  useEffect(() => {
+    setOpen(false);
+
+    if (!isHome) {
+      setActiveSection('');
+      return;
+    }
+
+    const sections = items
+      .map((item) => document.getElementById(item.href.split('#')[1]))
+      .filter((section): section is HTMLElement => section instanceof HTMLElement);
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible[0]) setActiveSection(visible[0].target.id);
+      },
+      { rootMargin: '-28% 0px -58% 0px', threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [isHome, pathname]);
+
+  const renderNavLink = (item: (typeof items)[number], mobile = false) => {
+    const Icon = item.icon;
+    const sectionId = item.href.split('#')[1];
+    const isActive = isHome && activeSection === sectionId;
+
+    return (
+      <Link
+        key={item.href}
+        href={item.href}
+        className={isActive ? 'active' : undefined}
+        aria-current={isActive ? 'location' : undefined}
+        onClick={mobile ? () => setOpen(false) : undefined}
+        data-cursor
+      >
+        {mobile && <Icon aria-hidden="true" />}
+        {item.label}
+      </Link>
+    );
+  };
 
   return (
     <header className="global-navbar">
@@ -37,22 +97,13 @@ export function GlobalNavbar() {
         </Link>
 
         <nav className="global-desktop-nav" aria-label="Primary navigation">
-          {items.map((item, index) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={pathname === '/' && index === 0 ? 'active' : ''}
-              data-cursor
-            >
-              {item.label}
-            </Link>
-          ))}
+          {items.map((item) => renderNavLink(item))}
         </nav>
 
         <div className="global-actions">
           <ThemeToggleButton />
           <Link className="global-cta" href={isHome ? '#contact' : '/#contact'} data-cursor>
-            Let&apos;s talk <FaArrowRight />
+            Let&apos;s talk <FaArrowRight aria-hidden="true" />
           </Link>
           <button
             className="global-menu"
@@ -60,9 +111,9 @@ export function GlobalNavbar() {
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-controls="global-mobile-menu"
-            aria-label="Toggle navigation menu"
+            aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
           >
-            {open ? <FaXmark /> : <FaBars />}
+            {open ? <FaXmark aria-hidden="true" /> : <FaBars aria-hidden="true" />}
           </button>
         </div>
       </div>
@@ -75,27 +126,19 @@ export function GlobalNavbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.22, ease: 'easeInOut' }}
           >
-            <div className="container global-mobile-nav-inner">
-              {items.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  data-cursor
-                >
-                  <FaHouse /> {item.label}
-                </Link>
-              ))}
+            <nav className="container global-mobile-nav-inner" aria-label="Mobile navigation">
+              {items.map((item) => renderNavLink(item, true))}
               <Link
                 href="/Contact"
                 onClick={() => setOpen(false)}
                 className="mobile-profile-link"
                 data-cursor
               >
-                Open full profile
+                Open full profile <FaArrowRight aria-hidden="true" />
               </Link>
-            </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>
