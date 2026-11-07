@@ -108,6 +108,12 @@ export function GlobalNavbar() {
             className="global-menu"
             type="button"
             onClick={() => setOpen((value) => !value)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                setOpen((value) => !value);
+              }
+            }}
             aria-expanded={open}
             aria-controls="global-mobile-menu"
             aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
