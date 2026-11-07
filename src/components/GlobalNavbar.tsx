@@ -16,6 +16,7 @@ import {
   FaXmark,
 } from 'react-icons/fa6';
 import { ThemeToggleButton } from '@/components/PortfolioMotionLayer';
+import { selectActiveSection } from '@/lib/active-section';
 
 const items = [
   { label: 'Home', href: '/#home', icon: FaHouse },
@@ -49,11 +50,9 @@ export function GlobalNavbar() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        const nextSection = selectActiveSection(entries);
 
-        if (visible[0]) setActiveSection(visible[0].target.id);
+        if (nextSection) setActiveSection(nextSection);
       },
       { rootMargin: '-28% 0px -58% 0px', threshold: 0 },
     );
