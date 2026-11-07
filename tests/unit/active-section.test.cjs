@@ -1,7 +1,11 @@
 const assert = require('node:assert/strict');
-const test = require('node:test');
+const { before, test } = require('node:test');
 
-const { selectActiveSection } = await import('../../src/lib/active-section.js');
+let selectActiveSection;
+
+before(async () => {
+  ({ selectActiveSection } = await import('../../src/lib/active-section.mjs'));
+});
 
 function observerEntry(id, top, isIntersecting = true) {
   return {
