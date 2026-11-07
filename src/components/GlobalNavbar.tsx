@@ -16,7 +16,7 @@ import {
   FaXmark,
 } from 'react-icons/fa6';
 import { ThemeToggleButton } from '@/components/PortfolioMotionLayer';
-import { selectActiveSection } from '@/lib/active-section';
+import { selectActiveSection } from '@/lib/active-section.mjs';
 
 const items = [
   { label: 'Home', href: '/#home', icon: FaHouse },
