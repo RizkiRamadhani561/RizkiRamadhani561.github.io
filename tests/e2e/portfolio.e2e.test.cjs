@@ -177,6 +177,8 @@ test('mobile menu opens with the keyboard and closes after choosing a section', 
   await menuButton.press('Enter');
   await page.waitForFunction(
     () => document.querySelector('.global-menu')?.getAttribute('aria-expanded') === 'true',
+    undefined,
+    { timeout: 5000 },
   );
 
   const mobileNavigation = page.getByRole('navigation', { name: 'Mobile navigation' });
@@ -187,6 +189,26 @@ test('mobile menu opens with the keyboard and closes after choosing a section', 
 
   await page.waitForFunction(
     () => document.querySelector('.global-menu')?.getAttribute('aria-expanded') === 'false',
+  );
+});
+
+
+test('mobile menu also supports Space key activation', async () => {
+  await page.setViewportSize({ width: 390, height: 844 });
+
+  const menuButton = page.locator('.global-menu');
+  await menuButton.press('Space');
+  await page.waitForFunction(
+    () => document.querySelector('.global-menu')?.getAttribute('aria-expanded') === 'true',
+    undefined,
+    { timeout: 5000 },
+  );
+
+  await menuButton.press('Space');
+  await page.waitForFunction(
+    () => document.querySelector('.global-menu')?.getAttribute('aria-expanded') === 'false',
+    undefined,
+    { timeout: 5000 },
   );
 });
 
